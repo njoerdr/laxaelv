@@ -26,16 +26,16 @@
 
   $("img").click(function() {
     console.log(this.id);
-  })
+  });
 
   $("figure").mouseenter(function() {
     $("button", this).fadeIn();
     $("figcaption", this).fadeIn();
-  })
+  });
 
   $("figure").mouseleave(function() {
-    $("button", this).fadeOut();
-    $("figcaption", this).fadeOut();
-  })
+    $("button", this).fadeOut(0);
+    $("figcaption", this).fadeOut(0);
+  });
 
-})()
+})();
