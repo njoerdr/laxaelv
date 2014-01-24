@@ -21,6 +21,12 @@
 
   var db = new DB();
 
+  console.log(db.getTags("00049-dali.jpg"));
+  db.addTag("00049-dali.jpg", "dali");
+  db.addTag("00049-dali.jpg", "photo");
+  console.log(db.getTags("00049-dali.jpg"));
+
+
   $("figure>button").fadeOut();
   $("figure>figcaption").fadeOut();
 

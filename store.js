@@ -2,28 +2,36 @@
 function DB(key) {
 
 
-  var imageToTagIndex = store;
+  var imageToTagIndex = {};
   var tagToImageIndex = {};
 
-  store.map(function(element){
-    for(var i in element.tags){
-        var tag = element.tags[i];
-        if(tagToImageIndex[tag]===undefined) tagToImageIndex[tag] = [];
-        console.log(element.name);
-        tagToImageIndex[tag] = tagToImageIndex[tag].push(element.name);
+
+  for(var item in store) {
+    // Create mapping from image to tags
+    imageToTagIndex[JSON.stringify(store[item].name)] = store[item].tags;
+
+    // Create mapping from tag to images
+    var tags = store[item].tags
+    for(var i in tags) {
+      var tag = JSON.stringify(tags[i]);
+      if(tagToImageIndex[tag] === undefined) tagToImageIndex[tag] = [];
+      tagToImageIndex[tag].push(store[item].name);
     }
+  }
 
-  });
-
+  console.log(imageToTagIndex);
   console.log(tagToImageIndex);
 
   return {
-    get: function() {
-      return JSON.parse(store[key] || '{}');
+    getTags: function(name) {
+      return imageToTagIndex[JSON.stringify(name)];
     },
 
-    put: function(data) {
-      store[key] = JSON.stringify(data);
+    addTag: function(name, tag) {
+      // but image needs to be added to tag as well!
+      // test for existance of image
+      var array = imageToTagIndex[JSON.stringify(name)];
+      if(array.indexOf(tag) === -1) array.push(tag);
     }
   };
 }
