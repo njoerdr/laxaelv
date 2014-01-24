@@ -15,9 +15,11 @@
   var resultview = $("#resultview");
 
   for(var i = 0; i != store.length; i++) {
-    var item = {id: i+1, name: store[i]};
+    var item = {id: i+1, name: store[i].name};
     var el = $($.render(template, item)).appendTo(resultview);
   }
+
+  var db = new DB();
 
   $("figure>button").fadeOut();
   $("figure>figcaption").fadeOut();
