@@ -35,3 +35,47 @@ function DB(key) {
     }
   };
 }
+
+var Index = function() {
+  var index = {};
+
+  return {
+    /**
+     * returns the list of all entries for the specified key.
+     */
+    lookup: function(key) {
+      return index[JSON.stringify(key)];
+    },
+    /**
+     * Adds a value to the specified key in the index.
+     * Ensures that no duplicate entries of a value will be added.
+     * If the key does not exist it will be created.
+     */
+    add: function(key, value) {
+      var keystring = JSON.stringify(key);
+      if(index[keystring] === undefined) index[keystring] = [];
+      var array = index[keystring];
+      if(array.indexOf(valus) === -1) array.push(valus);
+      return;
+    },
+    /**
+     * If only a key is passed the hole entry for the key will be removed.
+     * If a second value parameter if passed only the value for the specified key will be removed.
+     */
+    remove: function(key, value) {
+      if(!value) {
+        delete index[JSON.stringify(key)];
+        return;
+      }
+      var array = index[JSON.stringify(key)];
+      array.splice(array.indexOf(value),1);
+      return;
+    },
+    /**
+     * returns a list of all keys in the index.
+     */
+    list: function() {
+      return Object.keys(index);
+    }
+  };
+};
