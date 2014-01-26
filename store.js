@@ -1,41 +1,4 @@
 
-function DB(key) {
-
-
-  var imageToTagIndex = {};
-  var tagToImageIndex = {};
-
-
-  for(var item in store) {
-    // Create mapping from image to tags
-    imageToTagIndex[JSON.stringify(store[item].name)] = store[item].tags;
-
-    // Create mapping from tag to images
-    var tags = store[item].tags
-    for(var i in tags) {
-      var tag = JSON.stringify(tags[i]);
-      if(tagToImageIndex[tag] === undefined) tagToImageIndex[tag] = [];
-      tagToImageIndex[tag].push(store[item].name);
-    }
-  }
-
-  console.log(imageToTagIndex);
-  console.log(tagToImageIndex);
-
-  return {
-    getTags: function(name) {
-      return imageToTagIndex[JSON.stringify(name)];
-    },
-
-    addTag: function(name, tag) {
-      // but image needs to be added to tag as well!
-      // test for existance of image
-      var array = imageToTagIndex[JSON.stringify(name)];
-      if(array.indexOf(tag) === -1) array.push(tag);
-    }
-  };
-}
-
 var Index = function() {
   var index = {};
 
@@ -55,7 +18,7 @@ var Index = function() {
       var keystring = JSON.stringify(key);
       if(index[keystring] === undefined) index[keystring] = [];
       var array = index[keystring];
-      if(array.indexOf(valus) === -1) array.push(valus);
+      if(array.indexOf(value) === -1) array.push(value);
       return;
     },
     /**
@@ -76,6 +39,89 @@ var Index = function() {
      */
     list: function() {
       return Object.keys(index);
+    },
+    print: function() {
+      console.log(index);
     }
+  };
+};
+
+
+var DataBase = function() {
+
+  var image2tagIndex = new Index();
+  var tag2imageIndex = new Index();
+
+  var init = function() {
+    for(var item in store) {
+      var key = store[item].name;
+      var tags = store[item].tags
+      for(var i in tags) {
+        image2tagIndex.add(key, tags[i]);
+        tag2imageIndex.add(tags[i], key);
+      }
+    }
+  }();
+  // for debugging purpose only
+  image2tagIndex.print();
+  tag2imageIndex.print();
+
+  // private method for intersection of multiple lists
+  var intersect = function(listOfLists) {
+    return listOfLists.shift().filter(function(v) {
+        return listOfLists.every(function(a) {
+            return a.indexOf(v) !== -1;
+        });
+    });
+  };
+
+  var difference = function(listOne, listTwo) {
+    return listOne.filter(function(v){
+        return listTwo.indexOf(v) === -1;
+    });
+  };
+
+  return {
+    // Images for query passed as list
+    getImages: function(query) {
+      // trivial cases
+      if(!query) return image2tagIndex.list();
+      if(query.length === 1) return tag2imageIndex.lookup(query[0]);
+
+      // preparation for intersection
+      var arrays = [];
+      for(var i in query) {
+        arrays.push(tag2imageIndex.lookup(query[i]));
+      }
+      // intersection
+      return intersect(arrays);
+    },
+    getCommonTags: function(selection) {
+      // trivial cases
+      if(!selection) return tag2imageIndex.list();
+      if(selection.length === 1) return image2tagIndex.lookup(selection[0]);
+
+      // preparation for intersection
+      var arrays = [];
+      for(var i in selection) {
+        arrays.push(image2tagIndex.lookup(selection[i]));
+      }
+      // intersection
+      return intersect(arrays);
+    },
+    getTagCount: function(tag) {
+      return tag2imageIndex.lookup(tag).length;
+    },
+    add: function() {
+
+    }
+    /** Stuff needed:
+      * Difference of two or more sets of tags, e.g. tags not assignd.
+      * Count of occurence of a tag...length of list, easy.
+      * Common tags minus query tags
+      * All tags minus selection common tags
+    */
+
+
   };
 };

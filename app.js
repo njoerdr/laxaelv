@@ -19,12 +19,12 @@
     var el = $($.render(template, item)).appendTo(resultview);
   }
 
-  var db = new DB();
+  var db = new DataBase();
 
-  console.log(db.getTags("00049-dali.jpg"));
-  db.addTag("00049-dali.jpg", "dali");
-  db.addTag("00049-dali.jpg", "photo");
-  console.log(db.getTags("00049-dali.jpg"));
+  console.log(db.getImages(["house","pool"]));
+  console.log(db.getCommonTags(["00044-konigsberg.jpg"]));
+  console.log(db.getCommonTags(["00044-konigsberg.jpg","00045-poolhouse.jpg"]));
+  console.log(db.getCommonTags(["00044-konigsberg.jpg","00045-poolhouse.jpg","00046-poolhouse.jpg"]));
 
 
   $("figure>button").fadeOut();
