@@ -38,7 +38,9 @@ var Index = function() {
      * returns a list of all keys in the index.
      */
     list: function() {
-      return Object.keys(index);
+      return Object.keys(index).map(function(element){
+        return JSON.parse(element);
+      });
     },
     print: function() {
       console.log(index);
@@ -75,6 +77,22 @@ var DataBase = function() {
     });
   };
 
+
+  // private method for union of multiple lists
+  var union = function(listOfLists) {
+
+    var result = [];
+
+
+    listOfLists.forEach(function(a) {
+        a.forEach(function(b){
+          if(result.indexOf(b) === -1) result.push(b);
+        });
+    });
+
+    return result;
+  };
+
   return {
     // Images for query passed as list
     getImages: function(/*array or nothing*/ query) {
@@ -102,11 +120,11 @@ var DataBase = function() {
         arrays.push(image2tagIndex.lookup(selection[i]));
       }
       // intersection
-      return intersect(arrays);
+      return union(arrays);
     },
     getReferenceCountForTag: function(tag) {
 
-      return tag2imageIndex.lookup(JSON.parse(tag)).length;
+      return tag2imageIndex.lookup(tag).length;
     },
     getTotalImageCount: function() {
       return image2tagIndex.list().length;

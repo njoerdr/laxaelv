@@ -92,6 +92,7 @@ img.thumb {
 }
 
 #querybox{
+	float:left;
 	min-height:30px;
 	width:100%;
 	position:relative;

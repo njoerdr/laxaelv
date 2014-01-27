@@ -10,22 +10,34 @@
   */
 
   var renderImages = function(){
+    $("#resultview figure").remove("figure");
     var images = lax.getImages();
-    console.log(images);
     images.forEach(function(element){
-      element = JSON.parse(element);
+      //element = JSON.parse(element);
       var item = {id: element, name: element};
       $($.render(imagetemplate, item)).appendTo(resultview);
     });
   };
 
   var renderTags = function(){
+    $("#tagcloud").empty();
+    $("#query").empty();
+
     var tags = lax.getTags();
-    console.log(tags)
     tags.forEach(function(element){
-      var item = {size: element.weight, tag: JSON.parse(element.tag)};
+      var item = {size: element.weight, tag: element.tag};
       $($.render(tagtemplate, item)).appendTo(tagcloudview);
     });
+
+    lax.getQueryTags().forEach(function(element){
+      var item = {size: "small", tag: element};
+      $($.render(tagtemplate, item)).appendTo(querybox);
+    });
+
+    $("#tagcloud .tag").click(function(e){
+    lax.addTagToQuery($(this).text());
+  });
+
   };
 
 
@@ -37,6 +49,7 @@
 
   var resultview = $("#resultview");
   var tagcloudview = $("#tagcloud");
+  var querybox = $("#query");
 
   lax.on("change", function() {
     console.log("change event!");
@@ -67,9 +80,11 @@
     $("figcaption", this).fadeOut(0);
   });
 
-  $(".tag").click(function(e){
-    lax.addTagToQuery($(this).text());
+  $("#querybox button").click(function(){
+    lax.resetQuery();
   });
+
+
 
 
 

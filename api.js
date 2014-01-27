@@ -8,6 +8,7 @@ function Laxaelv() {
 
 
   var query = [];
+  var imagesInView = [];
   var selection = [];
 
   var db;
@@ -44,16 +45,28 @@ function Laxaelv() {
 
 
   self.getImages = function(){
-    return db.getImages(query);
+    imagesInView = db.getImages(query);
+    return imagesInView;
   };
 
   self.getTags = function(){
-    return weights(db.getCommonTags(selection));
+    var tags = db.getCommonTags(imagesInView);
+    if(query.length > 0) tags = db.difference(tags, query);
+    return weights(tags);
+  };
+
+  self.getQueryTags = function(){
+    return query;
   };
 
   self.addTagToQuery = function(tag){
-    console.log(tag);
     query.push(tag);
+    self.trigger("change");
+  };
+
+
+  self.resetQuery = function(){
+    query = [];
     self.trigger("change");
   };
 
