@@ -1,6 +1,7 @@
 body {
 	margin:0;
 	padding:0;
+	font-family: Helvetica, Arial, sans-serif;
 }
 
 figure {
@@ -53,9 +54,9 @@ img.thumb {
 	left:0px;
 	right:401px;
 	border: thin solid black;
-	/* Scroll resultview 
+	/* Scroll resultview
 	height:90%;
-	overflow-y: scroll; */	
+	overflow-y: scroll; */
 }
 
 #filter {
@@ -64,3 +65,36 @@ img.thumb {
 	width:400px;
 	border: thin solid black;
 }
+
+#tagcloud{
+
+	line-height: 20pt;
+}
+
+.tag{
+	float: left;
+	margin: 2px;
+	background-color: #e4e4e4;
+	border-radius:3px;
+	padding: 3px;
+}
+
+.small{
+	font-size: 12pt;
+}
+
+.medium{
+	font-size: 14pt;
+}
+
+.large{
+	font-size: 20pt;
+}
+
+#querybox{
+	min-height:30px;
+	width:100%;
+	position:relative;
+	border: thin solid black;
+}
+

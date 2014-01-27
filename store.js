@@ -55,7 +55,7 @@ var DataBase = function() {
   var init = function() {
     for(var item in store) {
       var key = store[item].name;
-      var tags = store[item].tags
+      var tags = store[item].tags;
       for(var i in tags) {
         image2tagIndex.add(key, tags[i]);
         tag2imageIndex.add(tags[i], key);
@@ -79,7 +79,7 @@ var DataBase = function() {
     // Images for query passed as list
     getImages: function(/*array or nothing*/ query) {
       // trivial cases
-      if(!query) return image2tagIndex.list();
+      if(!query || query.length === 0) return image2tagIndex.list();
       if(query.length === 1) return tag2imageIndex.lookup(query[0]);
 
       // preparation for intersection
@@ -93,7 +93,7 @@ var DataBase = function() {
     // Tags for selection passed as list
     getCommonTags: function(/*array or nothing*/ selection) {
       // trivial cases
-      if(!selection) return tag2imageIndex.list();
+      if(!selection || selection.length === 0) return tag2imageIndex.list();
       if(selection.length === 1) return image2tagIndex.lookup(selection[0]);
 
       // preparation for intersection
@@ -104,8 +104,12 @@ var DataBase = function() {
       // intersection
       return intersect(arrays);
     },
-    getTotalTagCount: function(tag) {
-      return tag2imageIndex.lookup(tag).length;
+    getReferenceCountForTag: function(tag) {
+
+      return tag2imageIndex.lookup(JSON.parse(tag)).length;
+    },
+    getTotalImageCount: function() {
+      return image2tagIndex.list().length;
     },
     // Adds a new images name to the index and its tags passed as list
     addImage: function(name, /*array*/ tags) {
@@ -114,7 +118,7 @@ var DataBase = function() {
         tag2imageIndex.add(value, name);
       });
     },
-    // Adds a new tag to the index and its associated images passed as list 
+    // Adds a new tag to the index and its associated images passed as list
     addTag: function(tag, /*array*/ names) {
       tags.forEach(function(value, index, array) {
         tag2imageIndex.add(tag, value);

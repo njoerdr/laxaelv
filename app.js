@@ -8,23 +8,44 @@
 
     todo.add("My task");
   */
-  /*window.lax = new Lax();*/
+
+  var renderImages = function(){
+    var images = lax.getImages();
+    console.log(images);
+    images.forEach(function(element){
+      element = JSON.parse(element);
+      var item = {id: element, name: element};
+      $($.render(imagetemplate, item)).appendTo(resultview);
+    });
+  };
+
+  var renderTags = function(){
+    var tags = lax.getTags();
+    console.log(tags)
+    tags.forEach(function(element){
+      var item = {size: element.weight, tag: JSON.parse(element.tag)};
+      $($.render(tagtemplate, item)).appendTo(tagcloudview);
+    });
+  };
+
+
+  window.lax = new Laxaelv();
 
   // HTML for a single todo item
-  var template = $("[type='html/tumb']").html();
+  var imagetemplate = $("[type='html/tumb']").html();
+  var tagtemplate = $("[type='html/tag']").html();
+
   var resultview = $("#resultview");
+  var tagcloudview = $("#tagcloud");
 
-  for(var i = 0; i != store.length; i++) {
-    var item = {id: i+1, name: store[i].name};
-    var el = $($.render(template, item)).appendTo(resultview);
-  }
+  lax.on("change", function() {
+    console.log("change event!");
+    renderImages();
+    renderTags();
+  });
 
-  var db = new DataBase();
+  lax.initDB();
 
-  console.log(db.getImages(["house","pool"]));
-  console.log(db.getCommonTags(["00044-konigsberg.jpg"]));
-  console.log(db.getCommonTags(["00044-konigsberg.jpg","00045-poolhouse.jpg"]));
-  console.log(db.getCommonTags(["00044-konigsberg.jpg","00045-poolhouse.jpg","00046-poolhouse.jpg"]));
 
 
   $("figure>button").fadeOut();
@@ -45,5 +66,13 @@
     $("button", this).fadeOut(0);
     $("figcaption", this).fadeOut(0);
   });
+
+  $(".tag").click(function(e){
+    lax.addTagToQuery($(this).text());
+  });
+
+
+
+
 
 })();

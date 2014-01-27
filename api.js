@@ -1,50 +1,60 @@
 
 /* The model */
 
-function Lax() {
+function Laxaelv() {
 
   var self = $.observable(this);
-  var photo = store;
 
-  
 
-  self.add = function(name) {
-    var item = { id: "_" + ("" + Math.random()).slice(2), name: name }
-    items[item.id] = item;
-    self.trigger("add", item);
-  }
 
-  self.edit = function(item) {
-    items[item.id] = item;
-    self.trigger("edit", item);
-  }
+  var query = [];
+  var selection = [];
 
-  self.remove = function(filter) {
-    var els = self.items(filter);
-    $.each(els, function() {
-      delete items[this.id]
-    })
-    self.trigger("remove", els);
-  }
+  var db;
 
-  self.toggle = function(id) {
-    var item = items[id];
-    item.done = !item.done;
-    self.trigger("toggle", item);
-  }
+  var weights = function(taglist){
+    var imagecount = db.getTotalImageCount();
 
-  // @param filter: <empty>, id, "active", "completed"
-  self.items = function(filter) {
-    var ret = [];
-    $.each(items, function(id, item) {
-      if (!filter || filter == id || filter == (item.done ? "completed" : "active")) ret.push(item)
-    })
-    return ret;
-  }
+    var mapWeight = function(weight){
+      if(weight<0.2) return "small";
+      if(weight<0.5) return "medium";
+      if(weight>=0.5) return "large";
+    };
 
-  // sync database
-  self.on("add remove toggle edit", function() {
-    db.put(items);
-  })
+    taglist.forEach(function(element, index){
+      var refCount = db.getReferenceCountForTag(element);
+      var weight = refCount/imagecount;
+
+      var weightclass = mapWeight(weight);
+      taglist[index] = {tag:element, weight:weightclass};
+    });
+
+    return taglist;
+  };
+
+  self.initDB = function(){
+    db = new DataBase();
+    /*console.log(db.getImages(["house","pool"]));
+    console.log(db.getCommonTags(["00044-konigsberg.jpg"]));
+    console.log(db.getCommonTags(["00044-konigsberg.jpg","00045-poolhouse.jpg"]));*/
+    console.log(db.getCommonTags(["00044-konigsberg.jpg","00045-poolhouse.jpg","00046-poolhouse.jpg"]));
+
+    self.trigger("change");
+  };
+
+
+  self.getImages = function(){
+    return db.getImages(query);
+  };
+
+  self.getTags = function(){
+    return weights(db.getCommonTags(selection));
+  };
+
+  self.addTagToQuery = function(tag){
+    console.log(tag);
+    query.push(tag);
+    self.trigger("change");
+  };
 
 }
