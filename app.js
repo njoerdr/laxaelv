@@ -60,17 +60,9 @@
   lax.initDB();
 
 
-
-  $("figure>button").fadeOut();
-  $("figure>figcaption").fadeOut();
-
   /* Listen to user events */
 
-  $("img").click(function() {
-    console.log(this.id);
-  });
-
-  $("figure").mouseenter(function() {
+/*  $("figure").mouseenter(function() {
     $("button", this).fadeIn();
     $("figcaption", this).fadeIn();
   });
@@ -79,7 +71,7 @@
     $("button", this).fadeOut(0);
     $("figcaption", this).fadeOut(0);
   });
-
+*/
   $("#querybox button").click(function(){
     lax.resetQuery();
   });

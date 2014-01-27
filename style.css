@@ -37,6 +37,18 @@ img.thumb {
 	max-height: 100%;
 }
 
+figure button, figcaption{
+	opacity: 0;
+	transition: opacity .25s ease-in-out;
+}
+
+
+figure:hover button,
+figure:hover figcaption{
+	opacity: 1;
+   	transition: opacity .25s ease-in-out;
+}
+
 #upload {
 	background-image: url("plus.png");
 	background-repeat:  no-repeat;
