@@ -75,15 +75,9 @@ var DataBase = function() {
     });
   };
 
-  var difference = function(listOne, listTwo) {
-    return listOne.filter(function(v){
-        return listTwo.indexOf(v) === -1;
-    });
-  };
-
   return {
     // Images for query passed as list
-    getImages: function(query) {
+    getImages: function(/*array or nothing*/ query) {
       // trivial cases
       if(!query) return image2tagIndex.list();
       if(query.length === 1) return tag2imageIndex.lookup(query[0]);
@@ -96,7 +90,8 @@ var DataBase = function() {
       // intersection
       return intersect(arrays);
     },
-    getCommonTags: function(selection) {
+    // Tags for selection passed as list
+    getCommonTags: function(/*array or nothing*/ selection) {
       // trivial cases
       if(!selection) return tag2imageIndex.list();
       if(selection.length === 1) return image2tagIndex.lookup(selection[0]);
@@ -109,19 +104,32 @@ var DataBase = function() {
       // intersection
       return intersect(arrays);
     },
-    getTagCount: function(tag) {
+    getTotalTagCount: function(tag) {
       return tag2imageIndex.lookup(tag).length;
     },
-    add: function() {
-
+    // Adds a new images name to the index and its tags passed as list
+    addImage: function(name, /*array*/ tags) {
+      tags.forEach(function(value, index, array) {
+        image2tagIndex.add(name, value);
+        tag2imageIndex.add(value, name);
+      });
+    },
+    // Adds a new tag to the index and its associated images passed as list 
+    addTag: function(tag, /*array*/ names) {
+      tags.forEach(function(value, index, array) {
+        tag2imageIndex.add(tag, value);
+        image2tagIndex.add(value, tag);
+      });
+    },
+    difference: function(listOne, listTwo) {
+      return listOne.filter(function(v){
+          return listTwo.indexOf(v) === -1;
+      });
     }
     /** Stuff needed:
       * Difference of two or more sets of tags, e.g. tags not assignd.
-      * Count of occurence of a tag...length of list, easy.
       * Common tags minus query tags
       * All tags minus selection common tags
     */
-
-
   };
 };
