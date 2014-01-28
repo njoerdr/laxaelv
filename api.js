@@ -59,6 +59,14 @@ function Laxaelv() {
     return query;
   };
 
+  self.getSelectionCount = function(){
+    return selection.length;
+  };
+
+  self.getImagesInViewCount = function(){
+    return imagesInView.length;
+  };
+
   self.addTagToQuery = function(tag){
     query.push(tag);
     self.trigger("change");
@@ -69,10 +77,32 @@ function Laxaelv() {
     self.trigger("change");
   };
 
-
   self.resetQuery = function(){
     query = [];
     self.trigger("change");
+  };
+
+  self.selectImage = function(image){
+    selection.push(image);
+    self.trigger("selectchange");
+  };
+
+  self.deselectImage = function(image){
+    selection.splice(selection.indexOf(image), 1);
+    self.trigger("selectchange");
+  };
+
+  self.selectAll = function(){
+    selection = [];
+    for(var image in imagesInView)
+      selection.push(imagesInView[image]);
+    self.trigger("selectchange");
+  };
+
+
+  self.deselectAll = function(){
+    selection = [];
+    self.trigger("selectchange");
   };
 
 }

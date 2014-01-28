@@ -17,6 +17,17 @@
       var item = {id: element, name: element};
       $($.render(imagetemplate, item)).appendTo(resultview);
     });
+
+    $("figure button").click(function(){
+      $(this).parent().toggleClass("marked");
+      if($(this).parent().hasClass("marked")){
+        $(this).text("unflag");
+        lax.selectImage($(this).parent().children().first().attr("id"));
+      }else{
+        $(this).text("flag");
+        lax.deselectImage($(this).parent().children().first().attr("id"));
+      }
+    });
   };
 
   var renderTags = function(){
@@ -56,10 +67,28 @@
   var tagcloudview = $("#tagcloud");
   var querybox = $("#query");
 
+
+  $("footer#result button#deselect").click(function(){
+      $("figure").removeClass("marked");
+      $("figure button").text("flag");
+      lax.deselectAll();
+  });
+  $("footer#result button#select").click(function(){
+      $("figure").addClass("marked");
+      $("figure button").text("unflag");
+      lax.deselectAll();
+  });
+
+
   lax.on("change", function() {
     console.log("change event!");
     renderImages();
     renderTags();
+  });
+
+  lax.on("selectchange", function(){
+    console.log("selectchange event!");
+    $("#flagcount").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
   });
 
   lax.initDB();

@@ -50,8 +50,8 @@ figure:hover figcaption{
 }
 
 figure.marked {
-	border: 2px solid red;
-	margin:4px;
+	border: 5px solid red;
+	margin:1px;
 }
 
 #upload {
