@@ -26,6 +26,18 @@ button {
 	right:0;
 }
 
+footer#result button {
+	width:80px;
+}
+
+button#select {
+	right:100px;
+}
+
+button#deselect {
+	right:10px;
+}
+
 img.thumb {
 	position:absolute;
     top:0;
