@@ -64,6 +64,11 @@ function Laxaelv() {
     self.trigger("change");
   };
 
+  self.removeTagFromQuery = function(tag){
+    query.splice(query.indexOf(tag), 1);
+    self.trigger("change");
+  };
+
 
   self.resetQuery = function(){
     query = [];

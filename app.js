@@ -34,9 +34,14 @@
       $($.render(tagtemplate, item)).appendTo(querybox);
     });
 
-    $("#tagcloud .tag").click(function(e){
-    lax.addTagToQuery($(this).text());
-  });
+    $("#tagcloud .tag span").click(function(e){
+      lax.addTagToQuery($(this).text());
+    });
+
+
+    $(".tag button").click(function(e){
+      lax.removeTagFromQuery($(this).parent().children().first().text());
+    });
 
   };
 

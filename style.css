@@ -98,7 +98,20 @@ footer#filter {
 }
 
 #tagcloud{
-	line-height: 20pt;
+	line-height: 22pt;
+}
+
+#tagcloud button{
+	display: none;
+}
+
+#querybox button{
+	display: inline;
+
+}
+
+.tag button{
+	position: relative;
 }
 
 .tag{
@@ -108,6 +121,8 @@ footer#filter {
 	border-radius:3px;
 	padding: 3px;
 }
+
+
 
 .small{
 	font-size: 12pt;
