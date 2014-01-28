@@ -49,6 +49,11 @@ figure:hover figcaption{
    	transition: opacity .25s ease-in-out;
 }
 
+figure.marked {
+	border: 2px solid red;
+	margin:4px;
+}
+
 #upload {
 	background-image: url("plus.png");
 	background-repeat:  no-repeat;
