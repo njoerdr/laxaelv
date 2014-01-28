@@ -69,17 +69,35 @@ figure:hover figcaption{
 	/* Scroll resultview
 	height:90%;
 	overflow-y: scroll; */
+	padding-bottom: 20px;
 }
 
-#filter {
+footer#result {
+	position: fixed;
+	bottom: 0px;
+	height: 20px;
+	right:401px;
+	left:0;
+	background-color: #CCCCCC;
+}
+
+section#filter {
 	position: fixed; /* vs. absolute */
 	right:0px;
 	width:400px;
 	border: thin solid black;
 }
 
-#tagcloud{
+footer#filter {
+	position: fixed;
+	bottom: 0px;
+	height: 20px;
+	right:0px;
+	width:400px;
+	background-color: #CCCCCC;
+}
 
+#tagcloud{
 	line-height: 20pt;
 }
 

@@ -21,23 +21,29 @@
 
 	<body>
 		<section id="laxaelvapp">
+			<a name="up"></a>
 			<header id="header">
 				<h1>Laxälv</h1>
 			</header>
 			<section id="resultview">
 				<div id="upload"></div>
 			</section>
+			<footer id="result">
+				<a href="#up">up</a>
+				<button>flag all</button>
+			</footer>
 			<section id="filter">
 				<div id="querybox">
 					<div id="query"></div>
 					<button>clear</button>
 				</div>
 				<div id="tagcloud"></div>
+				<footer id="filter">
+					<span id="flagcount">0 of ?? flagged</span>
+					<button>edit</button>
+				</footer>
 			</section>
 		</section>
-		<footer id="footer">
-
-		</footer>
 
 		<script src="jquery-2.0.3.min.js"></script>
 		<script src="list-all.js"></script>
