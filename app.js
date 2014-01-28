@@ -9,6 +9,10 @@
     todo.add("My task");
   */
 
+  var updateCounter = function(){
+    $("#flagcount").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
+  };
+
   var renderImages = function(){
     $("#resultview figure").remove("figure");
     var images = lax.getImages();
@@ -76,7 +80,7 @@
   $("footer#result button#select").click(function(){
       $("figure").addClass("marked");
       $("figure button").text("unflag");
-      lax.deselectAll();
+      lax.selectAll();
   });
 
 
@@ -86,9 +90,8 @@
     renderTags();
   });
 
-  lax.on("selectchange", function(){
-    console.log("selectchange event!");
-    $("#flagcount").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
+  lax.on("selectchange change", function(){
+    updateCounter();
   });
 
   lax.initDB();
