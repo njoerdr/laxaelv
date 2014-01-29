@@ -30,6 +30,11 @@
       $($.render(imagetemplate, item)).appendTo(resultview);
     });
 
+    $("figure img").click(function(){
+      var image = $(this).attr("id");
+      lax.chooseImage(image);
+    });
+
     $("figure button").click(function(){
       $(this).parent().toggleClass("marked");
       if($(this).parent().hasClass("marked")){
@@ -40,6 +45,13 @@
         lax.deselectImage($(this).parent().children().first().attr("id"));
       }
     });
+  };
+
+  var renderDetailView = function(){
+    $("#resultview figure").remove("figure");
+    var image = lax.getDetailImage();
+    var item = {name: image};
+    $($.render(detailtemplate, item)).appendTo(resultview);
   };
 
   var renderBox = function(list, node){
@@ -117,6 +129,7 @@
   var tagtemplate = $("[type='html/tag']").html();
   var filtertemplate = $("[type='html/filter']").html();
   var edittemplate = $("[type='html/edit']").html();
+  var detailtemplate = $("[type='html/detail']").html();
 
   var rhsview = $("section#filter");
   var resultview = $("#resultview");
@@ -158,6 +171,10 @@
     renderRHS();
     updateCounter();
     updateButtonStatus();
+  });
+
+  lax.on("detailchange", function(){
+    renderDetailView();
   });
 
   lax.initDB();

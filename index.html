@@ -7,12 +7,21 @@
 	</head>
 
 	<script type="html/tumb">
-	<figure>
-		<img id="{id}" class="thumb" src="http://webis1.medien.uni-weimar.de/laxaelv/photos/{name}" />
-		<button>flag</button>
-		<figcaption>{name}<figcaption>
-	</figure>
+		<figure>
+			<img id="{id}" class="thumb" src="http://webis1.medien.uni-weimar.de/laxaelv/photos/{name}" />
+			<button>flag</button>
+			<figcaption>{name}<figcaption>
+		</figure>
 	</script>
+
+	<script type="html/detail">
+		<figure>
+			<img class="largeview" src="http://webis1.medien.uni-weimar.de/laxaelv/photos/{name}" />
+			<button id="next">></button>
+			<button id="previous"><</button>
+		</figure>
+	</script>
+
 
 	<script type="html/tag">
 		<span class="tag {size}"><span>{tag}</span><button>X</button></span>

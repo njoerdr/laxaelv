@@ -12,6 +12,8 @@ function Laxaelv() {
   var selection = [];
   var editTags = [];
 
+  var iterator = 0;
+
   var db;
 
   var weights = function(taglist){
@@ -44,6 +46,24 @@ function Laxaelv() {
     self.trigger("change");
   };
 
+  self.getDetailImage = function(){
+    return imagesInView[iterator];
+  };
+
+  self.nextImage = function(){
+    iterator += 1;
+    self.trigger("detailchange");
+  };
+
+  self.previousImage = function(){
+    iterator -=1;
+    self.trigger("detailchange");
+  };
+
+  self.chooseImage = function(image){
+    iterator = imagesInView.indexOf(image);
+    self.trigger("detailchange");
+  };
 
   self.getImages = function(){
     imagesInView = db.getImages(query);
