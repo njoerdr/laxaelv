@@ -139,6 +139,7 @@ footer#filter {
 	background-color: #e4e4e4;
 	border-radius:3px;
 	padding: 3px;
+	cursor: pointer;
 }
 
 #edit,

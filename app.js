@@ -9,10 +9,16 @@
     todo.add("My task");
   */
 
-  var edit = false;
-
   var updateCounter = function(){
     $("#flagcount").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
+  };
+
+
+  var updateButtonStatus = function(){
+    if(lax.isEditMode())
+      $("#select, #deselect, figure button").attr("disabled", "disabled");
+    else
+      $("#select, #deselect, figure button").removeAttr("disabled");
   };
 
   var renderImages = function(){
@@ -45,30 +51,30 @@
 
   var renderTags = function(){
     $("#tagcloud").empty();
-    if(edit) editbox.empty();
+    if(lax.isEditMode()) editbox.empty();
     else $("#query").empty();
 
     var tags = lax.getTags();
-    if(edit) tags = lax.getTagCloudForSelection();
+    if(lax.isEditMode()) tags = lax.getTagCloudForSelection();
     console.log(tags);
     tags.forEach(function(element){
       var item = {size: element.weight, tag: element.tag};
       $($.render(tagtemplate, item)).appendTo(tagcloudview);
     });
 
-    if(edit) renderBox(lax.getEditTags(), editbox);
+    if(lax.isEditMode()) renderBox(lax.getEditTags(), editbox);
     else renderBox(lax.getQueryTags(), querybox);
 
     $("#tagcloud .tag span").click(function(e){
       var tagtext = $(this).text();
-      if(edit) lax.addTagToEdit(tagtext);
+      if(lax.isEditMode()) lax.addTagToEdit(tagtext);
       else lax.addTagToQuery(tagtext);
     });
 
 
     $(".tag button").click(function(e){
       var tagtext = $(this).parent().children().first().text();
-      if(edit) lax.removeTagFromEdit(tagtext);
+      if(lax.isEditMode()) lax.removeTagFromEdit(tagtext);
       else lax.removeTagFromQuery(tagtext);
     });
 
@@ -76,26 +82,30 @@
 
   var renderRHS = function(){
     rhsview.empty();
-    if(edit){
+    if(lax.isEditMode()){
       $($.render(edittemplate)).appendTo(rhsview);
       editbox = $("#tagselection");
     } else {
       $($.render(filtertemplate)).appendTo(rhsview);
       querybox = $("#query");
+
+      $("#querybox button").click(function(){
+        lax.resetQuery();
+      });
     }
     tagcloudview = $("#tagcloud");
     renderTags();
 
     $("button#edit").click(function(){
-      edit = true;
-      lax.initEditTagsForSelection();
-      renderRHS();
-
+      lax.toggleEditMode();
     });
 
-     $("button#cancel").click(function(){
-      edit = false;
-      renderRHS();
+    $("button#cancel").click(function(){
+      lax.toggleEditMode();
+    });
+
+    $("button#save").click(function(){
+      lax.saveChanges();
     });
   };
 
@@ -144,6 +154,11 @@
     renderTags();
   });
 
+  lax.on("modechange", function(){
+    renderRHS();
+    updateCounter();
+    updateButtonStatus();
+  });
 
   lax.initDB();
 
@@ -165,11 +180,6 @@
   $("#querybox button").click(function(){
     lax.resetQuery();
   });
-
-
-
-
-
 
 
 })();

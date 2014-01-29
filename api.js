@@ -5,7 +5,7 @@ function Laxaelv() {
 
   var self = $.observable(this);
 
-
+  var editMode = false;
 
   var query = [];
   var imagesInView = [];
@@ -83,6 +83,24 @@ function Laxaelv() {
   self.getImagesInViewCount = function(){
     return imagesInView.length;
   };
+
+  self.toggleEditMode = function(){
+    editMode = !editMode;
+    if(editMode) self.initEditTagsForSelection();
+    self.trigger("modechange");
+  };
+
+  self.isEditMode = function(){
+    return editMode;
+  };
+
+  self.saveChanges = function(){
+    selection.forEach(function(image){
+      db.addImage(image, editTags);
+    });
+    self.toggleEditMode();
+  };
+
 
   self.addTagToEdit = function(tag){
     editTags.push(tag);
