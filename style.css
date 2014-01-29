@@ -115,7 +115,9 @@ footer#filter {
 }
 
 #tagcloud{
+	float:left;
 	line-height: 22pt;
+	background-color: pink;
 }
 
 #tagcloud button{
@@ -139,7 +141,12 @@ footer#filter {
 	padding: 3px;
 }
 
-
+#edit,
+#cancel,
+#save{
+	position: relative;
+	float:left;
+}
 
 .small{
 	font-size: 12pt;
