@@ -16,9 +16,9 @@
 
   var updateButtonStatus = function(){
     if(lax.isEditMode())
-      $("#select, #deselect, figure button").attr("disabled", "disabled");
+      $("#select, #deselect, #flagbutton").attr("disabled", "disabled");
     else
-      $("#select, #deselect, figure button").removeAttr("disabled");
+      $("#select, #deselect, #flagbutton").removeAttr("disabled");
   };
 
   var renderImages = function(){
@@ -61,6 +61,8 @@
 
     $("#close").click(function(){
       renderImages();
+      lax.deselectAll();
+      lax.deactivateEditMode();
     });
 
     $("#next").click(function(){
@@ -70,6 +72,10 @@
     $("#previous").click(function(){
       lax.previousImage();
     });
+
+    lax.deselectAll();
+    lax.selectImage(image);
+    lax.activateEditMode();
   };
 
   var renderBox = function(list, node){

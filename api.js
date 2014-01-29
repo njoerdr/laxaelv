@@ -113,6 +113,19 @@ function Laxaelv() {
     self.trigger("modechange");
   };
 
+  self.activateEditMode = function(){
+    editMode = true;
+    console.log("edit on");
+    self.initEditTagsForSelection();
+    self.trigger("modechange");
+  };
+
+  self.deactivateEditMode = function(){
+    editMode = false;
+    console.log("test");
+    self.trigger("modechange");
+  };
+
   self.isEditMode = function(){
     return editMode;
   };
