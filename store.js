@@ -54,6 +54,9 @@ var DataBase = function() {
   var image2tagIndex = new Index();
   var tag2imageIndex = new Index();
 
+  var tag2typeIndex = new Index();
+  var type2tagIndex = new Index();
+
   var init = function() {
     for(var item in store) {
       var key = store[item].name;
@@ -77,19 +80,16 @@ var DataBase = function() {
     });
   };
 
-
   // private method for union of multiple lists
   var union = function(listOfLists) {
 
     var result = [];
-
 
     listOfLists.forEach(function(a) {
         a.forEach(function(b){
           if(result.indexOf(b) === -1) result.push(b);
         });
     });
-
     return result;
   };
 
