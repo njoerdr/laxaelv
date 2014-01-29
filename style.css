@@ -17,7 +17,7 @@ h2{
 	width: 200px;
 	height:200px;
 	margin:5px;
-	border: thin solid black;
+	border: thin solid #e4e4e4;
 }
 
 
@@ -77,19 +77,21 @@ img.thumb {
 	max-height: 100%;
 }
 
-#resultview figure button, figcaption{
+#resultview figure button,
+#resultview figcaption{
 	opacity: 0;
 	transition: opacity .25s ease-in-out;
 }
 
 
-#resultview figure:hover button, figcaption{
+#resultview figure:hover button,
+#resultview figure:hover figcaption{
 	opacity: 1;
    	transition: opacity .25s ease-in-out;
 }
 
-figure.marked {
-	border: 5px solid red;
+#resultview figure.marked {
+	border: 5px solid #c05665;
 	margin:1px;
 }
 
@@ -102,7 +104,7 @@ figure.marked {
 	width: 200px;
 	height:200px;
 	margin:5px;
-	border: thin solid black;
+	border: thin solid #e4e4e4;
 }
 
 /*#resultview {
