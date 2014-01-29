@@ -1,7 +1,13 @@
 body {
 	margin:0;
 	padding:0;
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+h2{
+	color:#555;
+	font-size: 20pt;
+	font-weight: lighter;
 }
 
 #resultview figure {
@@ -26,11 +32,11 @@ figcaption {
 	position:absolute;
 	left:0px;
 	right:401px;
-	border: thin solid black;
+	/*border: thin solid black;*/
 
 	padding-bottom: 20px;
 	float:left;
-	height: 100%;
+
 }
 
 .largeview{
@@ -77,8 +83,7 @@ img.thumb {
 }
 
 
-figure:hover button,
-figure:hover figcaption{
+#resultview figure:hover button, figcaption{
 	opacity: 1;
    	transition: opacity .25s ease-in-out;
 }
@@ -122,7 +127,8 @@ section#filter {
 	position: fixed; /* vs. absolute */
 	right:0px;
 	width:400px;
-	border: thin solid black;
+	font-weight: lighter;
+	/*border: thin solid black;*/
 }
 
 footer#filter {
