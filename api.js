@@ -52,11 +52,13 @@ function Laxaelv() {
 
   self.nextImage = function(){
     iterator += 1;
+    iterator = Math.min(iterator, imagesInView.length);
     self.trigger("detailchange");
   };
 
   self.previousImage = function(){
     iterator -=1;
+    iterator = Math.max(iterator, 0);
     self.trigger("detailchange");
   };
 

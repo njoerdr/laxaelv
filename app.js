@@ -22,7 +22,12 @@
   };
 
   var renderImages = function(){
-    $("#resultview figure").remove("figure");
+    lhsview.empty();
+    $($.render(resulttemplate)).appendTo(lhsview);
+
+    var resultview = $("#resultview");
+
+    //$("#resultview figure").remove("figure");
     var images = lax.getImages();
     images.forEach(function(element){
       //element = JSON.parse(element);
@@ -48,10 +53,23 @@
   };
 
   var renderDetailView = function(){
+    lhsview.empty();
     $("#resultview figure").remove("figure");
     var image = lax.getDetailImage();
     var item = {name: image};
-    $($.render(detailtemplate, item)).appendTo(resultview);
+    $($.render(detailtemplate, item)).appendTo(lhsview);
+
+    $("#close").click(function(){
+      renderImages();
+    });
+
+    $("#next").click(function(){
+      lax.nextImage();
+    });
+
+    $("#previous").click(function(){
+      lax.previousImage();
+    });
   };
 
   var renderBox = function(list, node){
@@ -129,10 +147,11 @@
   var tagtemplate = $("[type='html/tag']").html();
   var filtertemplate = $("[type='html/filter']").html();
   var edittemplate = $("[type='html/edit']").html();
+  var resulttemplate = $("[type='html/result']").html();
   var detailtemplate = $("[type='html/detail']").html();
 
   var rhsview = $("section#filter");
-  var resultview = $("#resultview");
+  var lhsview = $("#lhsview");
   var tagcloudview = $("#tagcloud");
   var querybox = $("#query");
   var editbox = $("#tagselection");

@@ -4,7 +4,7 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
-figure {
+#resultview figure {
 	background-color: black;
 	position:relative;
 	float:left;
@@ -19,6 +19,27 @@ figcaption {
 	background-color: rgba(255,255,255,0.7);
 	bottom: 0;
 	width:100%;
+}
+
+#lhsview{
+	position:absolute;
+	left:0px;
+	right:401px;
+	border: thin solid black;
+
+	padding-bottom: 20px;
+	float:left;
+	height: 100%;
+}
+
+.largeview{
+	float: left;
+	max-height: 80%;
+	max-width: 90%;
+}
+
+#lhsview button{
+	position:relative;
 }
 
 button {
@@ -49,7 +70,7 @@ img.thumb {
 	max-height: 100%;
 }
 
-figure button, figcaption{
+#resultview figure button, figcaption{
 	opacity: 0;
 	transition: opacity .25s ease-in-out;
 }
@@ -78,16 +99,14 @@ figure.marked {
 	border: thin solid black;
 }
 
-#resultview {
+/*#resultview {
 	position:absolute;
 	left:0px;
 	right:401px;
 	border: thin solid black;
-	/* Scroll resultview
-	height:90%;
-	overflow-y: scroll; */
+
 	padding-bottom: 20px;
-}
+}*/
 
 footer#result {
 	position: fixed;
