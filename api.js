@@ -47,12 +47,13 @@ function Laxaelv() {
   };
 
   self.getDetailImage = function(){
+    console.log(iterator);
     return imagesInView[iterator];
   };
 
   self.nextImage = function(){
     iterator += 1;
-    iterator = Math.min(iterator, imagesInView.length);
+    iterator = Math.min(iterator, imagesInView.length-1);
     self.trigger("detailchange");
   };
 

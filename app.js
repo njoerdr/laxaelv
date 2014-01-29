@@ -169,6 +169,20 @@
     lax.selectAll();
   });
 
+  $(document).keydown(function( event ) {
+    event.preventDefault();
+    event.cancelBubble = true;
+    event.returnValue = false;
+    if(event.which == 39){
+      lax.nextImage();
+    }
+    if(event.which == 37){
+      lax.previousImage();
+    }
+
+  });
+
+
 
   lax.on("change", function() {
     console.log("change event!");
