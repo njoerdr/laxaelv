@@ -40,18 +40,29 @@ figcaption {
 }
 
 .largeview{
+	display: block;
 	float: left;
-	max-height: 80%;
-	max-width: 90%;
+	max-height: 90%;
+	max-width: 100%;
+}
+
+#detailview{
+	display:table-cell;
+	vertical-align:middle;
 }
 
 #lhsview button{
 	position:relative;
 }
 
+#controls{
+	float: left;
+}
+
 button {
 	position: absolute;
 	right:0;
+	border-style: none;
 }
 
 footer#result button {
