@@ -10,6 +10,7 @@ function Laxaelv() {
   var query = [];
   var imagesInView = [];
   var selection = [];
+  var editTags = [];
 
   var db;
 
@@ -50,9 +51,25 @@ function Laxaelv() {
   };
 
   self.getTags = function(){
+    console.log(imagesInView);
     var tags = db.getCommonTags(imagesInView);
     if(query.length > 0) tags = db.difference(tags, query);
     return weights(tags);
+  };
+
+  self.initEditTagsForSelection = function(){
+    editTags = db.getCommonTags(selection, "intersection");
+    //return editTags;
+  };
+
+  self.getEditTags = function(){
+    return editTags;
+  };
+
+  self.getTagCloudForSelection = function(){
+     var tags = db.getCommonTags();
+     console.log(editTags);
+     return weights(db.difference(tags, editTags));
   };
 
   self.getQueryTags = function(){
@@ -65,6 +82,16 @@ function Laxaelv() {
 
   self.getImagesInViewCount = function(){
     return imagesInView.length;
+  };
+
+  self.addTagToEdit = function(tag){
+    editTags.push(tag);
+    self.trigger("editchange");
+  };
+
+  self.removeTagFromEdit = function(tag){
+    editTags.splice(editTags.indexOf(tag), 1);
+    self.trigger("editchange");
   };
 
   self.addTagToQuery = function(tag){

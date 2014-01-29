@@ -109,7 +109,7 @@ var DataBase = function() {
       return intersect(arrays);
     },
     // Tags for selection passed as list
-    getCommonTags: function(/*array or nothing*/ selection) {
+    getCommonTags: function(/*array or nothing*/ selection, /*intersection or union=default*/ operation) {
       // trivial cases
       if(!selection || selection.length === 0) return tag2imageIndex.list();
       if(selection.length === 1) return image2tagIndex.lookup(selection[0]);
@@ -119,7 +119,8 @@ var DataBase = function() {
       for(var i in selection) {
         arrays.push(image2tagIndex.lookup(selection[i]));
       }
-      // intersection
+      if(operation==="intersection") return intersect(arrays);
+
       return union(arrays);
     },
     getReferenceCountForTag: function(tag) {
