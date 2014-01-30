@@ -176,7 +176,7 @@
   });
 
   $(document).keydown(function( event ) {
-    event.preventDefault();
+    //event.preventDefault();
     event.cancelBubble = true;
     event.returnValue = false;
     if(event.which == 39){

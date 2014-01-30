@@ -40,23 +40,25 @@ figcaption {
 }
 
 .largeview{
+	margin-left:auto;
+	margin-right:auto;
 	display: block;
-	float: left;
-	max-height: 90%;
+	vertical-align:middle;
+	max-height: 85%;
 	max-width: 100%;
 }
 
-#detailview{
-	display:table-cell;
-	vertical-align:middle;
-}
+
 
 #lhsview button{
 	position:relative;
 }
 
 #controls{
-	float: left;
+	max-width: 155px;
+	margin-top: 20px;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 button {
@@ -191,6 +193,7 @@ footer#filter {
 #cancel,
 #save{
 	position: relative;
+
 	float:left;
 }
 
