@@ -99,6 +99,11 @@ function Laxaelv() {
     return query;
   };
 
+  self.renameTag = function(oldTag, newTag){
+    db.rename(oldTag, newTag);
+    self.trigger("change");
+  };
+
   self.getSelectionCount = function(){
     return selection.length;
   };
@@ -122,7 +127,6 @@ function Laxaelv() {
 
   self.deactivateEditMode = function(){
     editMode = false;
-    console.log("test");
     self.trigger("modechange");
   };
 

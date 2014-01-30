@@ -21,6 +21,11 @@ var Index = function() {
       if(array.indexOf(value) === -1) array.push(value);
       return;
     },
+    set: function(key, values) {
+      var keystring = JSON.stringify(key);
+      index[keystring] = values;
+      return;
+    },
     /**
      * If only a key is passed the hole entry for the key will be removed.
      * If a second value parameter if passed only the value for the specified key will be removed.
@@ -70,6 +75,7 @@ var DataBase = function() {
   // for debugging purpose only
   image2tagIndex.print();
   tag2imageIndex.print();
+
 
   // private method for intersection of multiple lists
   var intersect = function(listOfLists) {
@@ -148,6 +154,24 @@ var DataBase = function() {
       return listOne.filter(function(v){
           return listTwo.indexOf(v) === -1;
       });
+    },
+    // Renames the tag with a new tagname
+    rename : function(oldTag, newTag){
+      console.log("rename");
+      for(var i in tag2imageIndex.lookup(oldTag) ){
+        tag2imageIndex.add(newTag, tag2imageIndex.lookup(oldTag)[i]);
+      }
+      tag2imageIndex.set(oldTag, []);
+      tag2imageIndex.print();
+      imagesToChange = tag2imageIndex.lookup(newTag);
+      for(var j in imagesToChange){
+        console.log(imagesToChange[j]);
+        tagsForImage = image2tagIndex.lookup(imagesToChange[j]);
+        var position = tagsForImage.indexOf(oldTag);
+        tagsForImage[position] = newTag;
+        image2tagIndex.set(imagesToChange[j],tagsForImage);
+      }
+      image2tagIndex.print();
     }
     /** Stuff needed:
       * Difference of two or more sets of tags, e.g. tags not assignd.

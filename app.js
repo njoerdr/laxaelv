@@ -217,7 +217,7 @@
   });
 
   lax.initDB();
-
+  //lax.renameTag("photo", "bubu");
 
 
 
