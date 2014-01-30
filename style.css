@@ -66,6 +66,7 @@ button {
 }
 
 footer#result button {
+
 	width:80px;
 }
 
@@ -133,7 +134,7 @@ footer#result {
 	height: 20px;
 	right:401px;
 	left:0;
-	background-color: #CCCCCC;
+	background-color: rgba(204,204,204,0.75);
 }
 
 section#filter {
@@ -150,7 +151,7 @@ footer#filter {
 	height: 20px;
 	right:0px;
 	width:400px;
-	background-color: #CCCCCC;
+	background-color: rgba(204,204,204,0.75);
 }
 
 #tagcloud{
