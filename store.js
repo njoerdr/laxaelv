@@ -71,10 +71,21 @@ var DataBase = function() {
         tag2imageIndex.add(tags[i], key);
       }
     }
+    for(var item in types) {
+      var type = types[item].type;
+      var tags = types[item].tags;
+      for(var i in tags) {
+        type2tagIndex.add(type, tags[i]);
+        tag2typeIndex.add(tags[i], type);
+      }
+    }
   }();
   // for debugging purpose only
   image2tagIndex.print();
   tag2imageIndex.print();
+
+  type2tagIndex.print();
+  tag2typeIndex.print();
 
 
   // private method for intersection of multiple lists
@@ -130,7 +141,6 @@ var DataBase = function() {
       return union(arrays);
     },
     getReferenceCountForTag: function(tag) {
-
       return tag2imageIndex.lookup(tag).length;
     },
     getTotalImageCount: function() {
