@@ -22,7 +22,7 @@ var Index = function() {
       return;
     },
     /**
-     * Renames the value given by oldValue 
+     * Renames the value given by oldValue
      * into newValue in the entry specified by key.
      */
     renameValue: function(key, oldValue, newValue) {
@@ -32,7 +32,7 @@ var Index = function() {
       return;
     },
     /**
-     * Renames the key of the entry oldKey into newKey. 
+     * Renames the key of the entry oldKey into newKey.
      * Returns undefined in case the newKey already exists.
      */
     renameKey: function(oldKey, newKey) {
@@ -216,7 +216,7 @@ var DataBase = function() {
       tag2imageIndex.set(oldTag, []);
       */
       tag2imageIndex.print();
-      if(!images) 
+      if(!images)
         return console.log("Can't rename, since key already exists.");
       images.forEach(function(name) {
         image2tagIndex.renameValue(name, oldTag, newTag);
