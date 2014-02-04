@@ -21,11 +21,37 @@ var Index = function() {
       if(array.indexOf(value) === -1) array.push(value);
       return;
     },
+    /**
+     * Renames the value given by oldValue 
+     * into newValue in the entry specified by key.
+     */
+    renameValue: function(key, oldValue, newValue) {
+      var keystring = JSON.stringify(key);
+      //index.splice(index[keystring].indexOf(oldValue),1,newValue);
+      index[keystring][index[keystring].indexOf(oldValue)] = newValue;
+      return;
+    },
+    /**
+     * Renames the key of the entry oldKey into newKey. 
+     * Returns undefined in case the newKey already exists.
+     */
+    renameKey: function(oldKey, newKey) {
+      var okeystr = JSON.stringify(oldKey);
+      var nkeystr = JSON.stringify(newKey);
+      if(index[nkeystr] === undefined) {
+        index[nkeystr] = index[okeystr];
+        delete index[okeystr];
+        return index[nkeystr];
+      }
+      return undefined;
+    },
+    /*
     set: function(key, values) {
       var keystring = JSON.stringify(key);
       index[keystring] = values;
       return;
     },
+    */
     /**
      * If only a key is passed the hole entry for the key will be removed.
      * If a second value parameter if passed only the value for the specified key will be removed.
@@ -63,18 +89,34 @@ var DataBase = function() {
   var type2tagIndex = new Index();
 
   var init = function() {
+    // building type index
+    for(var item in types) {
+      var type = types[item].type;
+      var tags = types[item].tags;
+      for(var i in tags) {
+        type2tagIndex.add(type, tags[i]);
+        tag2typeIndex.add(tags[i], type);
+      }
+    }
+    // building image index
     for(var item in store) {
       var key = store[item].name;
       var tags = store[item].tags;
       for(var i in tags) {
         image2tagIndex.add(key, tags[i]);
         tag2imageIndex.add(tags[i], key);
+        // taking care of untyped tags
+        if(!tag2typeIndex.lookup(tags[i]))
+          type2tagIndex.add("other", tags[i]);
       }
     }
   }();
   // for debugging purpose only
   image2tagIndex.print();
   tag2imageIndex.print();
+
+  type2tagIndex.print();
+  tag2typeIndex.print();
 
 
   // private method for intersection of multiple lists
@@ -130,11 +172,19 @@ var DataBase = function() {
       return union(arrays);
     },
     getReferenceCountForTag: function(tag) {
-
       return tag2imageIndex.lookup(tag).length;
     },
     getTotalImageCount: function() {
       return image2tagIndex.list().length;
+    },
+    getTagType: function(tag) {
+      var result = tag2typeIndex.lookup(tag);
+      if(!result) return "other";
+      return result[0];
+    },
+    getTagsForType: function(type) {
+      return type2tagIndex.lookup(type);
+
     },
     // Adds a new images name to the index and its tags passed as list
     addImage: function(name, /*array*/ tags) {
@@ -158,11 +208,20 @@ var DataBase = function() {
     // Renames the tag with a new tagname
     rename : function(oldTag, newTag){
       console.log("rename");
+      var images = tag2imageIndex.renameKey(oldTag, newTag);
+      /*
       for(var i in tag2imageIndex.lookup(oldTag) ){
         tag2imageIndex.add(newTag, tag2imageIndex.lookup(oldTag)[i]);
       }
       tag2imageIndex.set(oldTag, []);
+      */
       tag2imageIndex.print();
+      if(!images) 
+        return console.log("Can't rename, since key already exists.");
+      images.forEach(function(name) {
+        image2tagIndex.renameValue(name, oldTag, newTag);
+      });
+      /*
       imagesToChange = tag2imageIndex.lookup(newTag);
       for(var j in imagesToChange){
         console.log(imagesToChange[j]);
@@ -171,7 +230,9 @@ var DataBase = function() {
         tagsForImage[position] = newTag;
         image2tagIndex.set(imagesToChange[j],tagsForImage);
       }
+      */
       image2tagIndex.print();
+      return;
     }
     /** Stuff needed:
       * Difference of two or more sets of tags, e.g. tags not assignd.
