@@ -141,6 +141,12 @@ var DataBase = function() {
     return result;
   };
 
+  var tagType = function(tag) {
+  	var result = tag2typeIndex.lookup(tag);
+    if(!result) return "other";
+    return result[0];
+  };
+
   return {
     // Images for query passed as list
     getImages: function(/*array or nothing*/ query) {
@@ -178,12 +184,13 @@ var DataBase = function() {
       return image2tagIndex.list().length;
     },
     getTagType: function(tag) {
-      var result = tag2typeIndex.lookup(tag);
-      if(!result) return "other";
-      return result[0];
+      return tagType(tag);
     },
-    getTagsForType: function(type) {
-      return type2tagIndex.lookup(type);
+    getTagsOfType: function(type, /*array or nothing*/ tags) {
+      if(!tags || tags.length === 0) return type2tagIndex.lookup(type);
+      return tags.filter(function(element) {
+      	return tagType(element) === type;
+      });
 
     },
     // Adds a new images name to the index and its tags passed as list

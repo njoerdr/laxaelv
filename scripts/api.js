@@ -77,6 +77,8 @@ function Laxaelv() {
     console.log(imagesInView);
     var tags = db.getCommonTags(imagesInView);
     if(query.length > 0) tags = db.difference(tags, query);
+    // Testing type filtering
+    console.log(db.getTagsOfType('where',tags));
     return weights(tags);
   };
 
