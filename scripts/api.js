@@ -21,6 +21,7 @@ function Laxaelv() {
     var imagecount = db.getTotalImageCount();
 
     var mapWeight = function(weight){
+      if(taglist.length> 40 && weight<0.01) return "hidden";
       if(weight<0.2) return "small";
       if(weight<0.5) return "medium";
       if(weight>=0.5) return "large";
