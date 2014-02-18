@@ -5,7 +5,7 @@ var types = [
   },
   {
     type:"where",
-    tags:["estonia", "finland", "baltic sea", "nature", "weimar", "vesuv"]
+    tags:["estonia", "finland", "baltic sea", "nature", "weimar", "vesuv", "forest", "village", "coast", "ocean", "norway"]
   },
   {
     type:"what",

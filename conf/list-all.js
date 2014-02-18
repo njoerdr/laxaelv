@@ -333,11 +333,11 @@ var store = [
   },
   {
     name:"00084-Dali.jpg",
-    tags:["dali", "magnifier", "arts"]
+    tags:["dali", "magnifier", "art"]
   },
   {
     name:"00085-Dali.jpg",
-    tags:["dali", "arts", "telephone", "black and white", "desk"]
+    tags:["dali", "art", "telephone", "black and white", "desk"]
   },
   {
     name:"00086-Dog.jpg",
@@ -369,11 +369,11 @@ var store = [
   },
   {
     name:"00093-Dali.jpg",
-    tags:["dali", "jesus", "christ", "cross", "arts"]
+    tags:["dali", "jesus", "christ", "cross", "art"]
   },
   {
     name:"00094-Dali.jpg",
-    tags:["dali", "arts", "surreal"]
+    tags:["dali", "art", "surreal"]
   },
   {
     name:"00095-NorthernLight.jpg",
@@ -385,7 +385,7 @@ var store = [
   },
   {
     name:"00097-Animals.jpg",
-    tags:["finland", "winter", "forest", "dog sledge", "sami"]
+    tags:["finland", "winter", "forest", "dog sledge", "sami", "dog"]
   },
   {
     name:"00098-Animals.jpg",
@@ -413,7 +413,7 @@ var store = [
   },
   {
     name:"00104-Dogs.jpg",
-    tags:["animal", "dogs", "museum", "exhibition"]
+    tags:["animal", "dog", "museum", "exhibition"]
   },
   {
     name:"00105-House.jpg",
