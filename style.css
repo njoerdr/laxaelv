@@ -266,6 +266,10 @@ footer#filter {
 	border-color: #e4e4e4;
 }
 
+.hidden{
+	display:none;
+}
+
 #querybox,
 #tagselection{
 	float:left;

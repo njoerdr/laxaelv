@@ -6,6 +6,7 @@ function Laxaelv() {
   var self = $.observable(this);
 
   var editMode = false;
+  var typeMode = 'all';
 
   var query = [];
   var imagesInView = [];
@@ -75,12 +76,19 @@ function Laxaelv() {
   };
 
   self.getTags = function(){
-    console.log(imagesInView);
+    //console.log(imagesInView);
+    console.log("TypeMode:"+self.typeMode);
     var tags = db.getCommonTags(imagesInView);
     if(query.length > 0) tags = db.difference(tags, query);
     // Testing type filtering
     console.log(db.getTagsOfType('where',tags));
-    return weights(tags);
+    if(self.typeMode==="all" || !self.typeMode) return weights(tags);
+    return weights(db.getTagsOfType(self.typeMode,tags));
+  };
+
+  self.setTypeMode = function(type){
+    self.typeMode = type;
+    self.trigger("typechange");
   };
 
   self.initEditTagsForSelection = function(){

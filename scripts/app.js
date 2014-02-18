@@ -143,6 +143,15 @@
     $("button#save").click(function(){
       lax.saveChanges();
     });
+
+    $(".tab").click(function(){
+      var type = $(this).text();
+      //$("#tagcloud > span").addClass("hidden");
+      //$("#tagcloud > ."+type).removeClass("hidden");
+      lax.setTypeMode(type);
+
+      console.log(type);
+    });
   };
 
 
@@ -210,6 +219,11 @@
     renderRHS();
     updateCounter();
     updateButtonStatus();
+  });
+
+  lax.on("typechange", function(){
+    console.log("change event!");
+    renderRHS();
   });
 
   lax.on("detailchange", function(){
