@@ -33,7 +33,7 @@
 
 
 	<script type="html/tag">
-		<span class="tag {size}"><span>{tag}</span><button>X</button></span>
+		<span class="tag {size} {type}"><span>{tag}</span><button>X</button></span>
 	</script>
 
 	<script type="html/filter">
@@ -43,8 +43,16 @@
 			<button>clear</button>
 		</div>
 		<div id="tagcloud"></div>
+		<div id="tabs">
+			<button class="tab all ">all</button>
+			<button class="tab where active">where</button>
+			<button class="tab when">when</button>
+			<button class="tab what">what</button>
+			<button class="tab who">who</button>
+			<button class="tab other">other</button>
+		</div>
 		<button id="edit">edit</button>
-		<footer id="filter">
+		<footer class="tab" id="filter">
 			<span id="flagcount">0 of ?? flagged</span>
 		</footer>
 	</script>

@@ -65,6 +65,8 @@ button {
 	position: absolute;
 	right:0;
 	border-style: none;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	font-size:10pt;
 }
 
 footer#result button {
@@ -176,9 +178,10 @@ footer#filter {
 }
 
 .tag{
+	border: thin solid black;
 	float: left;
 	margin: 2px;
-	background-color: #eaeaea;
+	background-color: #fafafa;
 	border-radius:15px;
 	padding: 3px;
 	cursor: pointer;
@@ -187,6 +190,38 @@ footer#filter {
 
 .tag:hover{
 	color:black;
+}
+
+#tabs{
+	float: left;
+	width: 100%;
+}
+
+.tab{
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	font-size: 12pt;
+	text-align: center;
+	height: 35px;
+	width: 15%;
+	margin-left: 2px;
+
+	border-radius: 0 0 10px 10px;
+	border: 1px solid #a6a6a6;
+	border-top-width: 0px;
+
+	background-color:#ffffff;
+	float: left;
+	position: relative;
+	opacity: 0.7;
+}
+
+.active,
+.active:hover{
+	opacity: 1.0;
+}
+
+.tab:hover{
+	opacity: 0.5;
 }
 
 #edit,
@@ -207,6 +242,28 @@ footer#filter {
 
 .large{
 	font-size: 20pt;
+}
+
+.where{
+	border-color: #6ece55;
+	/*#e0f1cb;*/
+}
+
+.when{
+	border-color: #d8b35a;
+}
+
+.what{
+	border-color: #c13c3c;
+}
+
+.who{
+	border-color: #5c48d8;
+
+}
+
+.other{
+	border-color: #e4e4e4;
 }
 
 #querybox,

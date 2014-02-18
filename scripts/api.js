@@ -28,9 +28,10 @@ function Laxaelv() {
     taglist.forEach(function(element, index){
       var refCount = db.getReferenceCountForTag(element);
       var weight = refCount/imagecount;
+      var type = db.getTagType(element);
 
       var weightclass = mapWeight(weight);
-      taglist[index] = {tag:element, weight:weightclass};
+      taglist[index] = {tag:element, weight:weightclass, type:type};
     });
 
     return taglist;

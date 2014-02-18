@@ -94,7 +94,7 @@
     if(lax.isEditMode()) tags = lax.getTagCloudForSelection();
     console.log(tags);
     tags.forEach(function(element){
-      var item = {size: element.weight, tag: element.tag};
+      var item = {size: element.weight, tag: element.tag, type:element.type};
       $($.render(tagtemplate, item)).appendTo(tagcloudview);
     });
 
