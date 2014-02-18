@@ -92,6 +92,11 @@ function Laxaelv() {
     self.trigger("typechange");
   };
 
+  self.getTypeMode = function(){
+    if(!self.typeMode) return "all";
+    return self.typeMode;
+  };
+
   self.initEditTagsForSelection = function(){
     editTags = db.getCommonTags(selection, "intersection");
     //return editTags;

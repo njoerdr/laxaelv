@@ -101,6 +101,11 @@
     if(lax.isEditMode()) renderBox(lax.getEditTags(), editbox);
     else renderBox(lax.getQueryTags(), querybox);
 
+    $("#tabs button").removeClass("active");
+    console.log(lax.getTypeMode());
+    $("button."+lax.getTypeMode()).addClass("active");
+    //+lax.getTypeMode).addClass("active");
+
     $("#tagcloud .tag span").click(function(e){
       var tagtext = $(this).text();
       if(lax.isEditMode()) lax.addTagToEdit(tagtext);
