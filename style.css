@@ -216,8 +216,7 @@ footer#filter {
 	opacity: 0.7;
 }
 
-.active,
-.active:hover{
+.active{
 
 	border-top-width:0;
 	opacity: 1.0;
@@ -225,6 +224,10 @@ footer#filter {
 
 .tab:hover{
 	opacity: 0.5;
+}
+
+.active:hover{
+	opacity: 1.0;
 }
 
 #edit,
