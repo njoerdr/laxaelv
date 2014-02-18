@@ -163,6 +163,7 @@ footer#filter {
 	line-height: 22pt;
 	background-color: #ffffff;
 	min-height: 390px;
+	width:100%;
 	/*border: thin solid #a6a6a6;
 	z-index: -1;*/
 }
@@ -217,7 +218,6 @@ footer#filter {
 }
 
 .active{
-
 	border-top-width:0;
 	opacity: 1.0;
 }
