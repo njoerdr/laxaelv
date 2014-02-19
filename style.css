@@ -181,6 +181,17 @@ footer#filter {
 	position: relative;
 }
 
+#searchfield{
+	border:thin solid black;
+	float:left;
+	margin: 2px;
+	background-color: #fafafa;
+	border-radius:15px;
+	padding: 3px;
+	cursor: pointer;
+	color:#555;
+}
+
 .tag{
 	border: thin solid black;
 	float: left;

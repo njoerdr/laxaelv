@@ -7,6 +7,7 @@ function Laxaelv() {
 
   var editMode = false;
   var typeMode = 'all';
+  var searchstring = '';
 
   var query = [];
   var imagesInView = [];
@@ -14,6 +15,7 @@ function Laxaelv() {
   var editTags = [];
 
   var iterator = 0;
+  var tagcache;
 
   var db;
 
@@ -73,18 +75,33 @@ function Laxaelv() {
 
   self.getImages = function(){
     imagesInView = db.getImages(query);
+    tagcache = undefined;
     return imagesInView;
   };
 
   self.getTags = function(){
     //console.log(imagesInView);
     console.log("TypeMode:"+self.typeMode);
-    var tags = db.getCommonTags(imagesInView);
+
+    if(!tagcache) tagcache = db.getCommonTags(imagesInView);
+    var tags = tagcache.slice();
+
     if(query.length > 0) tags = db.difference(tags, query);
     // Testing type filtering
-    console.log(db.getTagsOfType('where',tags));
+
+    if(self.searchString)tags = tags.filter(function(element){
+      return element.substring(0, self.searchString.length) === self.searchString;
+    });
+
+
     if(self.typeMode==="all" || !self.typeMode) return weights(tags);
+
     return weights(db.getTagsOfType(self.typeMode,tags));
+  };
+
+  self.setSearchString = function(word){
+    self.searchString = word;
+    self.trigger("typechange");
   };
 
   self.setTypeMode = function(type){

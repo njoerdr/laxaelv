@@ -137,6 +137,12 @@
     tagcloudview = $("#tagcloud");
     renderTags();
 
+    $("#searchfield").keyup(function(){
+      console.log("jeyjey");
+      var text = $("#searchfield").val();
+      lax.setSearchString(text);
+    });
+
     $("button#edit").click(function(){
       lax.toggleEditMode();
     });
@@ -228,7 +234,7 @@
 
   lax.on("typechange", function(){
     console.log("change event!");
-    renderRHS();
+    renderTags();
   });
 
   lax.on("detailchange", function(){
