@@ -137,10 +137,26 @@
     tagcloudview = $("#tagcloud");
     renderTags();
 
-    $("#searchfield").keyup(function(){
-      console.log("jeyjey");
-      var text = $("#searchfield").val();
+    $("#searchfield").keypress(function(e){
+      return e.wich!=13;
+    });
+
+    $("#searchfield").keyup(function(e){
+      //e.preventDefault();
+      if(e.which===13){
+        var tagtext = $("#tagcloud").children().first().children().first().text();
+        lax.addTagToQuery(tagtext);
+        return false;
+      }
+
+      var text = $("#searchfield").text();
       lax.setSearchString(text);
+      $(this).attr("size", text.length);
+      return true;
+    });
+
+    $("#searchfield").click(function(){
+      $(this).text("");
     });
 
     $("button#edit").click(function(){

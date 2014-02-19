@@ -188,6 +188,7 @@ function Laxaelv() {
 
   self.addTagToQuery = function(tag){
     query.push(tag);
+    self.searchString = "";
     self.trigger("change");
   };
 

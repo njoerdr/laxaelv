@@ -182,14 +182,11 @@ footer#filter {
 }
 
 #searchfield{
-	border:thin solid black;
-	float:left;
-	margin: 2px;
-	background-color: #fafafa;
-	border-radius:15px;
-	padding: 3px;
-	cursor: pointer;
-	color:#555;
+	padding: 5px;
+	min-width: 20px;
+	text-align: center;
+	max-height:20px;
+	outline: 0 solid transparent;
 }
 
 .tag{
