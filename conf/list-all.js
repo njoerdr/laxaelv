@@ -422,5 +422,57 @@ var store = [
   {
     name:"00106-House.jpg",
     tags:["house", "lonely", "field", "nature"]
+  },
+  {
+    name:"00107-Trabi.jpg",
+    tags:["photo", "black and white", "trabi", "people", "car", "group"]
+  },
+  {
+    name:"00108-Mac.jpg",
+    tags:["photo", "black and white", "boy", "child", "mac", "computer"]
+  },
+  {
+    name:"00109-dogsledge.jpg",
+    tags:["photo", "2012", "lapland", "dog", "dog sledge", "sami", "winter", "animal", "sweden"]
+  },
+  {
+    name:"00110-kyrkan.jpg",
+    tags:["photo", "2012", "stockholm", "sweden", "church"]
+  },
+  {
+    name:"00111-kyrkan.jpg",
+    tags:["photo", "2012", "stockholm", "sweden", "church"]
+  },
+  {
+    name:"00112-kyrkan.jpg",
+    tags:["photo", "2012", "stockholm", "sweden", "church"]
+  },
+  {
+    name:"00113-kyrkan.jpg",
+    tags:["photo", "2012", "stockholm", "sweden", "church"]
+  },
+  {
+    name:"00114-riddarholmen.jpg",
+    tags:["photo", "2012", "stockholm", "sweden", "riddarholmen"]
+  },
+  {
+    name:"00115-pool.jpg",
+    tags:["photo", "black and white", "pool", "nude", "woman"]
+  },
+  {
+    name:"00116-sthlm.jpg",
+    tags:["photo", "2012", "stockholm", "sweden", "panorama"]
+  },
+  {
+    name:"00117-kyrkan.jpg",
+    tags:["photo", "2012", "stockholm", "sweden", "church"]
+  },
+  {
+    name:"00118-cow.jpg",
+    tags:["photo", "cow", "animal"]
+  },
+  {
+    name:"00119-cow.jpg",
+    tags:["photo", "cow", "animal"]
   }
 ];
