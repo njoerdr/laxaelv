@@ -119,12 +119,13 @@
       else lax.removeTagFromQuery(tagtext);
     });
 
-    $(".tag").draggable();
+    $(".tag").draggable({ stack: ".tag" });
 
     $(".tab").droppable({
       drop: function( event, ui ) {
         var tagtext = ui.draggable.children().first().text();
         var typetext = $(this).text();
+        if(typetext==="all") return;
         console.log(tagtext);
         console.log(typetext);
         lax.changeTagType(tagtext, typetext);
