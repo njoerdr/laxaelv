@@ -127,6 +127,7 @@
         var typetext = $(this).text();
         console.log(tagtext);
         console.log(typetext);
+        lax.changeTagType(tagtext, typetext);
       }
     });
 

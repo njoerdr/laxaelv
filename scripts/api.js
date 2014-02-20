@@ -180,6 +180,11 @@ function Laxaelv() {
     self.trigger("change");
   };
 
+  self.changeTagType = function(tag, type){
+    db.changeTagType(tag, type);
+    self.trigger("change");
+  };
+
 
   self.addTagToEdit = function(tag){
     editTags.push(tag);
