@@ -41,6 +41,17 @@ function Laxaelv() {
     return taglist;
   };
 
+  var filterTags = function(tags){
+    if(self.searchString) tags = tags.filter(function(element){
+      return element.substring(0, self.searchString.length) === self.searchString;
+    });
+
+
+    if(self.typeMode==="all" || !self.typeMode) return tags;
+
+    return db.getTagsOfType(self.typeMode,tags);
+  };
+
   self.initDB = function(){
     db = new DataBase();
     /*console.log(db.getImages(["house","pool"]));
@@ -89,14 +100,7 @@ function Laxaelv() {
     if(query.length > 0) tags = db.difference(tags, query);
     // Testing type filtering
 
-    if(self.searchString)tags = tags.filter(function(element){
-      return element.substring(0, self.searchString.length) === self.searchString;
-    });
-
-
-    if(self.typeMode==="all" || !self.typeMode) return weights(tags);
-
-    return weights(db.getTagsOfType(self.typeMode,tags));
+    return weights(filterTags(tags));
   };
 
   self.setSearchString = function(word){
@@ -125,13 +129,13 @@ function Laxaelv() {
 
   self.getTagCloudForSelection = function(){
      var tags = db.getCommonTags();
-     console.log(editTags);
-     return weights(db.difference(tags, editTags));
+     return weights(filterTags(db.difference(tags, editTags)));
   };
 
   self.getQueryTags = function(){
     return query;
   };
+
 
   self.renameTag = function(oldTag, newTag){
     db.rename(oldTag, newTag);
@@ -173,11 +177,13 @@ function Laxaelv() {
       db.addImage(image, editTags);
     });
     self.toggleEditMode();
+    self.trigger("change");
   };
 
 
   self.addTagToEdit = function(tag){
     editTags.push(tag);
+    self.searchString = "";
     self.trigger("editchange");
   };
 

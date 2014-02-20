@@ -202,7 +202,7 @@ var DataBase = function() {
     },
     // Adds a new tag to the index and its associated images passed as list
     addTag: function(tag, /*array*/ names) {
-      tags.forEach(function(value, index, array) {
+      names.forEach(function(value, index, array) {
         tag2imageIndex.add(tag, value);
         image2tagIndex.add(value, tag);
       });

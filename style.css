@@ -64,9 +64,14 @@ figcaption {
 button {
 	position: absolute;
 	right:0;
+	background-color: #cccccc;
 	border-style: none;
 	font-family: "Helvetica Neue", Arial, sans-serif;
 	font-size:10pt;
+}
+
+button:hover{
+	background-color: #aaaaaa;
 }
 
 footer#result button {
@@ -200,6 +205,10 @@ footer#filter {
 	color:#555;
 }
 
+.tag > span{
+	margin: 0 0.2em 0 0.2em;
+}
+
 .tag:hover{
 	color:black;
 }
@@ -285,6 +294,14 @@ footer#filter {
 
 .hidden{
 	display:none;
+}
+
+.x{
+	font-weight: bold;
+	color: white;
+	width:20px;
+	border-radius: 10px;
+	margin: 0 0 0 0.4em;
 }
 
 

@@ -125,7 +125,7 @@
     rhsview.empty();
     if(lax.isEditMode()){
       $($.render(edittemplate)).appendTo(rhsview);
-      editbox = $("#tagselection");
+      editbox = $("#selection");
     } else {
       $($.render(filtertemplate)).appendTo(rhsview);
       querybox = $("#query");
@@ -145,7 +145,13 @@
       //e.preventDefault();
       if(e.which===13){
         var tagtext = $("#tagcloud").children().first().children().first().text();
-        lax.addTagToQuery(tagtext);
+        if(lax.isEditMode()){
+          if (tagtext) lax.addTagToEdit(tagtext);
+          else{
+            lax.addTagToEdit($(this).text());
+          }
+        }
+        else lax.addTagToQuery(tagtext);
         return false;
       }
 
@@ -239,7 +245,7 @@
 
   lax.on("editchange", function(){
     console.log("editchange");
-    renderTags();
+    renderRHS();
   });
 
   lax.on("modechange", function(){
