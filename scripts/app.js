@@ -119,7 +119,7 @@
       else lax.removeTagFromQuery(tagtext);
     });
 
-    $("tagcloud .tag").draggable({ stack: ".tag" });
+    $("#tagcloud .tag").draggable({ stack: ".tag" });
 
     $(".tab").droppable({
       hoverClass: "drophover",
