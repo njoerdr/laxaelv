@@ -240,6 +240,7 @@ footer#filter {
 }
 
 .tab:hover{
+	background-color:#ffffff;
 	opacity: 0.5;
 }
 
@@ -249,7 +250,7 @@ footer#filter {
 }
 
 .drophover{
-	background-color: #d4d4d4;
+	background-color: #dfdfdf;
 }
 
 .active:hover{
