@@ -122,6 +122,8 @@
     $(".tag").draggable({ stack: ".tag" });
 
     $(".tab").droppable({
+      hoverClass: "drophover",
+      activeClass: "droptarget",
       drop: function( event, ui ) {
         var tagtext = ui.draggable.children().first().text();
         var typetext = $(this).text();

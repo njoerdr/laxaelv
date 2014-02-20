@@ -243,6 +243,15 @@ footer#filter {
 	opacity: 0.5;
 }
 
+.droptarget{
+	height: 70px;
+	transition: height .5s ease-in-out;
+}
+
+.drophover{
+	background-color: #d4d4d4;
+}
+
 .active:hover{
 	opacity: 1.0;
 }
