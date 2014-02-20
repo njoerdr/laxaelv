@@ -119,6 +119,17 @@
       else lax.removeTagFromQuery(tagtext);
     });
 
+    $(".tag").draggable();
+
+    $(".tab").droppable({
+      drop: function( event, ui ) {
+        var tagtext = ui.draggable.children().first().text();
+        var typetext = $(this).text();
+        console.log(tagtext);
+        console.log(typetext);
+      }
+    });
+
   };
 
   var renderRHS = function(){
