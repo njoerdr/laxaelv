@@ -186,6 +186,15 @@ var DataBase = function() {
     getTagType: function(tag) {
       return tagType(tag);
     },
+    changeTagType: function(tag, type){
+      var oldtype = tagType(tag);
+
+      tag2typeIndex.remove(tag, oldtype);
+      tag2typeIndex.add(tag, type);
+
+      type2tagIndex.remove(oldtype, tag);
+      type2tagIndex.add(type, tag);
+    },
     getTagsOfType: function(type, /*array or nothing*/ tags) {
       if(!tags || tags.length === 0) return type2tagIndex.lookup(type);
       return tags.filter(function(element) {
