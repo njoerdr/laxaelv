@@ -22,12 +22,13 @@
 
 	<script type="html/detail">
 		<figure>
-			<img class="largeview" src="photos/{name}" />
+
 			<div id="controls">
 				<button id="previous">previous</button>
 				<button id="close">close</button>
 				<button id="next">next</button>
 			</div>
+			<img class="largeview" src="photos/{name}" />
 		</figure>
 	</script>
 
@@ -59,7 +60,9 @@
 			<button class="tab who">who</button>
 			<button class="tab other">other</button>
 		</div>
+		<div id="filtercontrol">
 		<button id="edit" class="function">edit</button>
+		</div>
 		<footer class="tab" id="filter">
 			<span id="flagcount">0 of ?? flagged</span>
 		</footer>
@@ -81,8 +84,10 @@
 			<button class="tab who">who</button>
 			<button class="tab other">other</button>
 		</div>
-		<button id="save" class="function">save</button>
-		<button id="cancel" class="function">cancel</button>
+		<div id="filtercontrol">
+			<button id="save" class="function">save</button>
+			<button id="cancel" class="function">cancel</button>
+		</div>
 		<footer id="filter" class="function">
 			<span id="flagcount">0 of ?? flagged</span>
 		</footer>

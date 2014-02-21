@@ -55,7 +55,7 @@ figcaption {
 }
 
 #controls{
-	max-width: 155px;
+	max-width: 165px;
 	margin-top: 20px;
 	margin-left:auto;
 	margin-right:auto;
@@ -266,13 +266,20 @@ footer#filter {
 	opacity: 1.0;
 }
 
+#filtercontrol{
+	margin:0 auto;
+	width:133px;
+
+
+}
+
 #edit,
 #cancel,
 #save{
-	margin-left:auto;
-	margin-right:auto;
-	position: relative;
 	float:left;
+	position: relative;
+	display: block;
+	min-width: 20px;
 }
 
 .small{
