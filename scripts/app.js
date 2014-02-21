@@ -196,6 +196,8 @@
 
     $("button#cancel").click(function(){
       lax.toggleEditMode();
+      //After cancel the current selection should be discarded
+      lax.deselectAll();
     });
 
     $("button#save").click(function(){

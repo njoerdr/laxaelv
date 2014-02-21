@@ -180,8 +180,8 @@ function Laxaelv() {
       db.removeTags(image, removeTags);
     });
 
-
-
+    // after saving selection should be empty
+    self.deselectAll();
     self.toggleEditMode();
     self.trigger("change");
   };
