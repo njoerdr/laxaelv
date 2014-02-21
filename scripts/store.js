@@ -219,6 +219,12 @@ var DataBase = function() {
       	type2tagIndex.add("other", tag);
       });
     },
+    removeTags: function(image, /*array*/ tags) {
+    	tags.forEach(function(tag) {
+    		tag2imageIndex.remove(tag, image);
+        	image2tagIndex.remove(image, tag);
+    	});
+    },
     difference: function(listOne, listTwo) {
       return listOne.filter(function(v){
           return listTwo.indexOf(v) === -1;
