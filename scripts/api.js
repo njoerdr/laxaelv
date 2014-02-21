@@ -13,6 +13,7 @@ function Laxaelv() {
   var imagesInView = [];
   var selection = [];
   var editTags = [];
+  var removeTags = [];
 
   var iterator = 0;
   var tagcache;
@@ -176,7 +177,11 @@ function Laxaelv() {
   self.saveChanges = function(){
     selection.forEach(function(image){
       db.addImage(image, editTags);
+      db.removeTags(image, removeTags);
     });
+
+
+
     self.toggleEditMode();
     self.trigger("change");
   };
@@ -195,6 +200,7 @@ function Laxaelv() {
 
   self.removeTagFromEdit = function(tag){
     editTags.splice(editTags.indexOf(tag), 1);
+    removeTags.push(tag);
     self.trigger("editchange");
   };
 
