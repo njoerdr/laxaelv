@@ -221,8 +221,8 @@ var DataBase = function() {
     },
     removeTags: function(image, /*array*/ tags) {
     	tags.forEach(function(tag) {
-    		tag2imageIndex.add(tag, image);
-        	image2tagIndex.add(image, tag);
+    		tag2imageIndex.remove(tag, image);
+        	image2tagIndex.remove(image, tag);
     	});
     },
     difference: function(listOne, listTwo) {
