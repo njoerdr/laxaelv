@@ -189,7 +189,7 @@ var DataBase = function() {
     changeTagType: function(tag, type){
       var oldtype = tagType(tag);
 
-      if(oldtype !== 'other') tag2typeIndex.remove(tag, oldtype);
+      if(oldtype !== 'other') tag2typeIndex.remove(tag);
       if(type !== 'other') tag2typeIndex.add(tag, type);
 
       type2tagIndex.remove(oldtype, tag);
