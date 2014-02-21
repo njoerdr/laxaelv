@@ -31,6 +31,12 @@
 		</figure>
 	</script>
 
+	<script type="html/info">
+		<span id="infotext">
+				Press Return to create new tag
+		</span>
+	</script>
+
 
 	<script type="html/tag">
 		<span class="tag {size} {type}"><span>{tag}</span><button class="x">X</button></span>
@@ -53,7 +59,7 @@
 			<button class="tab who">who</button>
 			<button class="tab other">other</button>
 		</div>
-		<button id="edit">edit</button>
+		<button id="edit" class="function">edit</button>
 		<footer class="tab" id="filter">
 			<span id="flagcount">0 of ?? flagged</span>
 		</footer>
@@ -65,10 +71,19 @@
 			<div id="selection"></div>
 			<span contenteditable="true" id="searchfield" class="tag small">+</span>
 		</div>
-		<div id="tagcloud"></div>
-		<button id="save">save</button>
-		<button id="cancel">cancel</button>
-		<footer id="filter">
+		<div id="tagcloud">
+		</div>
+		<div id="tabs">
+			<button class="tab all">all</button>
+			<button class="tab where">where</button>
+			<button class="tab when">when</button>
+			<button class="tab what">what</button>
+			<button class="tab who">who</button>
+			<button class="tab other">other</button>
+		</div>
+		<button id="save" class="function">save</button>
+		<button id="cancel" class="function">cancel</button>
+		<footer id="filter" class="function">
 			<span id="flagcount">0 of ?? flagged</span>
 		</footer>
 	</script>

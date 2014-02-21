@@ -104,6 +104,7 @@ function Laxaelv() {
   };
 
   self.setSearchString = function(word){
+    word = word.toLowerCase();
     self.searchString = word;
     self.trigger("typechange");
   };

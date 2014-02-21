@@ -88,10 +88,14 @@
   var renderTags = function(){
     $("#tagcloud").empty();
     if(lax.isEditMode()) editbox.empty();
+
     else $("#query").empty();
 
     var tags = lax.getTags();
-    if(lax.isEditMode()) tags = lax.getTagCloudForSelection();
+    if(lax.isEditMode()){
+      tags = lax.getTagCloudForSelection();
+      if(tags.length===0) $($.render(infotemplate)).appendTo(tagcloudview);
+    }
     console.log(tags);
     tags.forEach(function(element){
       var item = {size: element.weight, tag: element.tag, type:element.type};
@@ -212,6 +216,7 @@
   var edittemplate = $("[type='html/edit']").html();
   var resulttemplate = $("[type='html/result']").html();
   var detailtemplate = $("[type='html/detail']").html();
+  var infotemplate = $("[type='html/info']").html();
 
   var rhsview = $("section#filter");
   var lhsview = $("#lhsview");

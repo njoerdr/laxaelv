@@ -64,11 +64,19 @@ figcaption {
 button {
 	position: absolute;
 	right:0;
-	background-color: #cccccc;
 	border-style: none;
 	font-family: "Helvetica Neue", Arial, sans-serif;
 	font-size:10pt;
 }
+
+button.function{
+	background-color: #666666;
+	color: #ffffff;
+	font-weight: 200;
+	text-transform: uppercase;
+	font-size: 12pt;
+}
+
 
 button:hover{
 	background-color: #aaaaaa;
@@ -225,6 +233,7 @@ footer#filter {
 	height: 35px;
 	width: 15%;
 	margin-left: 2px;
+	margin-bottom:10px;
 
 	border-radius: 0 0 10px 10px;
 	border: 1px solid #a6a6a6;
@@ -260,8 +269,9 @@ footer#filter {
 #edit,
 #cancel,
 #save{
+	margin-left:auto;
+	margin-right:auto;
 	position: relative;
-
 	float:left;
 }
 
