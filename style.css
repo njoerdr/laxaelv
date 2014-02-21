@@ -21,6 +21,7 @@ h2{
 	color:#555;
 	font-size: 20pt;
 	font-weight: lighter;
+	margin-top: 0;
 }
 
 #resultview figure {
@@ -188,14 +189,17 @@ footer#filter {
 	float:left;
 	line-height: 22pt;
 	background-color: #ffffff;
-	min-height: 390px;
-	width:100%;
-	/*border: thin solid #a6a6a6;
-	z-index: -1;*/
+	border-radius: 10px 10px 10px 0px;
+	/*min-height: 390px;*/
+	width:96%;
+	border: thin solid #a6a6a6;
+	z-index: -1;
+	padding:10px 5px 20px 5px;
 }
 
 #tagcloud button{
 	display: none;
+
 }
 
 #querybox button{
@@ -235,17 +239,20 @@ footer#filter {
 }
 
 #tabs{
+
 	float: left;
 	width: 100%;
 }
 
 .tab{
+	z-index: 99;
+	margin-top: -1px;
 	font-family: "Helvetica Neue", Arial, sans-serif;
 	font-size: 12pt;
 	text-align: center;
 	height: 35px;
 	width: 15%;
-	margin-left: 2px;
+	margin-right: 2px;
 	margin-bottom:10px;
 
 	border-radius: 0 0 10px 10px;
@@ -257,7 +264,7 @@ footer#filter {
 }
 
 .active{
-	border-top-width:0;
+	border-top-color: #ffffff !IMPORTANT;
 	opacity: 1.0;
 }
 
