@@ -43,14 +43,14 @@ function Laxaelv() {
   };
 
   var filterTags = function(tags){
+    if(self.typeMode!=="all" && self.typeMode)
+      tags = db.getTagsOfType(self.typeMode,tags);
+
     if(self.searchString) tags = tags.filter(function(element){
       return element.substring(0, self.searchString.length) === self.searchString;
     });
 
-
-    if(self.typeMode==="all" || !self.typeMode) return tags;
-
-    return db.getTagsOfType(self.typeMode,tags);
+    return tags;
   };
 
   self.initDB = function(){

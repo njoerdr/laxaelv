@@ -91,12 +91,14 @@
 
     else $("#query").empty();
 
-    var tags = lax.getTags();
+    var tags = [];
     if(lax.isEditMode()){
       tags = lax.getTagCloudForSelection();
       if(tags.length===0) $($.render(infotemplate)).appendTo(tagcloudview);
+    } else{
+      tags = lax.getTags();
     }
-    console.log(tags);
+
     tags.forEach(function(element){
       var item = {size: element.weight, tag: element.tag, type:element.type};
       $($.render(tagtemplate, item)).appendTo(tagcloudview);
