@@ -181,7 +181,7 @@
     });
 
     $("#searchfield").click(function(){
-      $(this).text("");
+      if($(this).text()==="+") $(this).text("");
     });
 
     $("#searchfield").focusout(function(){
