@@ -112,8 +112,8 @@ var DataBase = function() {
     }
   }();
   // for debugging purpose only
-  image2tagIndex.print();
-  tag2imageIndex.print();
+  //image2tagIndex.print();
+  //tag2imageIndex.print();
 
   type2tagIndex.print();
   tag2typeIndex.print();
@@ -190,11 +190,11 @@ var DataBase = function() {
       var oldtype = tagType(tag);
 
       if(oldtype!=='other'){
-        tag2typeIndex.remove(tag, oldtype);
-        type2tagIndex.remove(oldtype, tag);
+        tag2typeIndex.remove(tag);
+        tag2typeIndex.add(tag, type);
       }
 
-      tag2typeIndex.add(tag, type);
+      type2tagIndex.remove(oldtype, tag);
       type2tagIndex.add(type, tag);
     },
     getTagsOfType: function(type, /*array or nothing*/ tags) {
@@ -216,6 +216,7 @@ var DataBase = function() {
       names.forEach(function(value, index, array) {
         tag2imageIndex.add(tag, value);
         image2tagIndex.add(value, tag);
+      	type2tagIndex.add("other", tag);
       });
     },
     difference: function(listOne, listTwo) {
