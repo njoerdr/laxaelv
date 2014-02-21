@@ -184,6 +184,10 @@
       $(this).text("");
     });
 
+    $("#searchfield").focusout(function(){
+      if($(this).text().length===0) $(this).text("+");
+    });
+
     $("button#edit").click(function(){
       lax.toggleEditMode();
     });
