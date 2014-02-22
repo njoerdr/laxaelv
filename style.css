@@ -298,7 +298,12 @@ footer#filter {
 
 }
 
-#edit,
+#edit{
+	display:none;
+	float:left;
+	position: relative;
+}
+
 #cancel,
 #save{
 	float:left;

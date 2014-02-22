@@ -11,6 +11,10 @@
 
   var updateCounter = function(){
     $("#flagcount").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
+
+    if(lax.getSelectionCount()>0) $("#edit").show();
+    else $("#edit").hide();
+
   };
 
 
@@ -206,11 +210,7 @@
 
     $(".tab").click(function(){
       var type = $(this).text();
-      //$("#tagcloud > span").addClass("hidden");
-      //$("#tagcloud > ."+type).removeClass("hidden");
       lax.setTypeMode(type);
-
-      console.log(type);
     });
   };
 
