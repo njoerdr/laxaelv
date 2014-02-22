@@ -55,16 +55,10 @@ function Laxaelv() {
 
   self.initDB = function(){
     db = new DataBase();
-    /*console.log(db.getImages(["house","pool"]));
-    console.log(db.getCommonTags(["00044-konigsberg.jpg"]));
-    console.log(db.getCommonTags(["00044-konigsberg.jpg","00045-poolhouse.jpg"]));*/
-    console.log(db.getCommonTags(["00044-konigsberg.jpg","00045-poolhouse.jpg","00046-poolhouse.jpg"]));
-
     self.trigger("change");
   };
 
   self.getDetailImage = function(){
-    console.log(iterator);
     return imagesInView[iterator];
   };
 
@@ -83,6 +77,7 @@ function Laxaelv() {
   self.chooseImage = function(image){
     iterator = imagesInView.indexOf(image);
     self.trigger("detailchange");
+
   };
 
   self.getImages = function(){
@@ -92,8 +87,6 @@ function Laxaelv() {
   };
 
   self.getTags = function(){
-    //console.log(imagesInView);
-    console.log("TypeMode:"+self.typeMode);
 
     if(!tagcache) tagcache = db.getCommonTags(imagesInView);
     var tags = tagcache.slice();

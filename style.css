@@ -24,6 +24,13 @@ h2{
 	margin: 0 0 10px 0;
 }
 
+h2 span{
+	font-style: italic;
+	float: right;
+	margin-right: 5px;
+	color:#e4e4e4;
+}
+
 #resultview figure {
 	background-color: black;
 	position:relative;

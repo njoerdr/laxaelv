@@ -146,6 +146,10 @@
 
   };
 
+  var changesUnsaved = function(){
+    $("h2").append(" <span>unsaved changes</span>");
+  };
+
   var renderRHS = function(){
     rhsview.empty();
     if(lax.isEditMode()){
@@ -161,10 +165,6 @@
     }
     tagcloudview = $("#tagcloud");
     renderTags();
-
-    $("#searchfield").keypress(function(e){
-      return e.wich!=13;
-    });
 
     $("#searchfield").keyup(function(e){
       //e.preventDefault();
@@ -274,6 +274,7 @@
   lax.on("editchange", function(){
     console.log("editchange");
     renderRHS();
+    changesUnsaved();
   });
 
   lax.on("modechange", function(){
@@ -289,25 +290,11 @@
 
   lax.on("detailchange", function(){
     renderDetailView();
+    renderRHS();
   });
 
   lax.initDB();
-  //lax.renameTag("photo", "bubu");
 
-
-
-  /* Listen to user events */
-
-/*  $("figure").mouseenter(function() {
-    $("button", this).fadeIn();
-    $("figcaption", this).fadeIn();
-  });
-
-  $("figure").mouseleave(function() {
-    $("button", this).fadeOut(0);
-    $("figcaption", this).fadeOut(0);
-  });
-*/
   $("#querybox button").click(function(){
     lax.resetQuery();
   });
