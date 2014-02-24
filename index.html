@@ -24,9 +24,9 @@
 		<figure>
 
 			<div id="controls">
-				<button id="previous">previous</button>
-				<button id="close">close</button>
-				<button id="next">next</button>
+				<button id="previous">←</button>
+				<button id="close">×</button>
+				<button id="next">→</button>
 			</div>
 			<img class="largeview" src="photos/{name}" />
 		</figure>
@@ -60,10 +60,14 @@
 			<button class="tab who">who</button>
 			<button class="tab other">other</button>
 		</div>
-		<div id="filtercontrol">
-			<button id="edit" class="function">edit</button>
-		</div>
+
 		<footer id="filter">
+			<div id="filtercontrol">
+				<div>
+					<button id="edit" class="function">edit</button>
+				</div>
+			</div>
+
 			<span id="flagcount">0 of ?? flagged</span>
 		</footer>
 	</script>
@@ -85,11 +89,14 @@
 			<button class="tab other">other</button>
 		</div>
 
-		<div id="filtercontrol">
-			<button id="save" class="function">save</button>
-			<button id="cancel" class="function">cancel</button>
-		</div>
 		<footer id="filter">
+
+			<div id="filtercontrol">
+				<div>
+					<button id="save" class="function">save</button>
+					<button id="cancel" class="function">cancel</button>
+				</div>
+			</div>
 			<span id="flagcount">0 of ?? flagged</span>
 		</footer>
 	</script>

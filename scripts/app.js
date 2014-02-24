@@ -274,6 +274,7 @@
   lax.on("editchange", function(){
     console.log("editchange");
     renderRHS();
+    updateCounter();
     changesUnsaved();
   });
 
@@ -291,6 +292,7 @@
   lax.on("detailchange", function(){
     renderDetailView();
     renderRHS();
+    updateCounter();
   });
 
   lax.initDB();
