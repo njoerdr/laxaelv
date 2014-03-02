@@ -110,12 +110,8 @@
 
   // HTML for a single todo item
   var imagetemplate = $("[type='html/tumb']").html();
-  var tagtemplate = $("[type='html/tag']").html();
-  var filtertemplate = $("[type='html/filter']").html();
-  var edittemplate = $("[type='html/edit']").html();
   var resulttemplate = $("[type='html/result']").html();
   var detailtemplate = $("[type='html/detail']").html();
-  var infotemplate = $("[type='html/info']").html();
 
   var rhsview = $("section#filter");
   var lhsview = $("#lhsview");
