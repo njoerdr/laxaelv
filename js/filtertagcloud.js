@@ -11,11 +11,9 @@ function FilterTagcloud(){
 
     // Functions
     this.render = function(){
-        console.log("render!");
         tagcloudview = $("#tagcloud");
         tagcloudview.empty();
         var tags = lax.getTags();
-        console.log(tags.length);
         tags.forEach(function(tagdata){
             var tag = new Tag(tagdata, tagcloudview);
             tagviews.push(tag);

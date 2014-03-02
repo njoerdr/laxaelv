@@ -89,147 +89,20 @@
     });
   };
 
-  var renderTags = function(){
-    $("#tagcloud").empty();
-    if(lax.isEditMode()) editbox.empty();
-
-    else $("#query").empty();
-
-    var tags = [];
-    if(lax.isEditMode()){
-      tags = lax.getTagCloudForSelection();
-      if(tags.length===0) $($.render(infotemplate)).appendTo(tagcloudview);
-    } else{
-      tags = lax.getTags();
-    }
-
-    tags.forEach(function(element){
-      var item = {size: element.weight, tag: element.tag, type:element.type};
-      $($.render(tagtemplate, item)).appendTo(tagcloudview);
-    });
-
-    if(lax.isEditMode()) renderBox(lax.getEditTags(), editbox);
-    else renderBox(lax.getQueryTags(), querybox);
-
-    $("#tabs button").removeClass("active");
-    console.log(lax.getTypeMode());
-    $("button."+lax.getTypeMode()).addClass("active");
-    //+lax.getTypeMode).addClass("active");
-
-    $("#tagcloud .tag span").click(function(e){
-      var tagtext = $(this).text();
-      if(lax.isEditMode()) lax.addTagToEdit(tagtext);
-      else lax.addTagToQuery(tagtext);
-    });
-
-
-    $(".tag button").click(function(e){
-      var tagtext = $(this).parent().children().first().text();
-      if(lax.isEditMode()) lax.removeTagFromEdit(tagtext);
-      else lax.removeTagFromQuery(tagtext);
-    });
-
-    $("#tagcloud .tag").draggable({ stack: ".tag" });
-
-    $(".tab").droppable({
-      hoverClass: "drophover",
-      activeClass: "droptarget",
-      drop: function( event, ui ) {
-        var tagtext = ui.draggable.children().first().text();
-        var typetext = $(this).text();
-        if(typetext==="all") return;
-        console.log(tagtext);
-        console.log(typetext);
-        lax.changeTagType(tagtext, typetext);
-      }
-    });
-
-  };
-
   var changesUnsaved = function(){
     $("h2").append(" <span>unsaved changes</span>");
   };
 
   var renderRHS = function(){
-    rhsview.empty();
-    /*if(lax.isEditMode()){
-
-      editbox = $("#selection");
-    } else {
-
-      querybox = $("#query");
-
-      $("#querybox button").click(function(){
-        lax.resetQuery();
-      });
-    }
-    tagcloudview = $("#tagcloud");*/
-    //renderTags();
-    var filterTagcloud = new FilterTagcloud();
-    var editTagcloud = new EditTagcloud();
-
     if(lax.isEditMode()){
-      $($.render(edittemplate)).appendTo(rhsview);
-      editTagcloud.render();
-
-      editbox = new Editbox($("#selection"));
-      editbox.render();
-      editbox.searchBoxListeners();
-
+      var editView = new EditView();
+      editView.render();
+      editView.controlListeners();
     } else{
-      $($.render(filtertemplate)).appendTo(rhsview);
-      filterTagcloud.render();
-      querybox = new Querybox($("#query"));
-      querybox.render();
-      querybox.searchBoxListeners();
+      var filterView = new FilterView();
+      filterView.render();
+      filterView.controlListeners();
     }
-
-    /*$("#searchfield").keyup(function(e){
-      //e.preventDefault();
-      if(e.which===13){
-        var tagtext = $("#tagcloud").children().first().children().first().text();
-        if(lax.isEditMode()){
-          if (tagtext) lax.addTagToEdit(tagtext);
-          else{
-            lax.addTagToEdit($(this).text());
-          }
-        }
-        else lax.addTagToQuery(tagtext);
-        return false;
-      }
-
-      var text = $("#searchfield").text();
-      lax.setSearchString(text);
-      $(this).attr("size", text.length);
-      return true;
-    }); */
-
-
-    $("button#edit").click(function(){
-      lax.toggleEditMode();
-    });
-
-    $("button#cancel").click(function(){
-      lax.toggleEditMode();
-      //After cancel the current selection should be discarded
-      lax.deselectAll();
-    });
-
-    $("button#save").click(function(){
-      lax.saveChanges();
-    });
-
-    $("#tabs button").removeClass("active");
-        $("#tabs button."+lax.getTypeMode()).addClass("active");
-        $(".tab").click(function(){
-            var type = $(this).text();
-            lax.setTypeMode(type);
-    });
-
-    $(".tab").click(function(){
-      var type = $(this).text();
-      lax.setTypeMode(type);
-    });
   };
 
 
