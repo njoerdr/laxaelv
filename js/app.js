@@ -167,10 +167,9 @@
     //renderTags();
 
     var filterTagcloud = new FilterTagcloud();
-    console.log(filterTagcloud);
     filterTagcloud.render();
 
-    $("#searchfield").keyup(function(e){
+    /*$("#searchfield").keyup(function(e){
       //e.preventDefault();
       if(e.which===13){
         var tagtext = $("#tagcloud").children().first().children().first().text();
@@ -188,7 +187,7 @@
       lax.setSearchString(text);
       $(this).attr("size", text.length);
       return true;
-    });
+    }); */
 
     $("#searchfield").click(function(){
       if($(this).text()==="+") $(this).text("");

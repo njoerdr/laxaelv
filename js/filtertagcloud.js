@@ -1,4 +1,4 @@
-/* Tagcloud presenter */
+/* Filtertagcloud presenter */
 
 function FilterTagcloud(){
     // Templates
@@ -8,8 +8,6 @@ function FilterTagcloud(){
 
     var tagviews = [];
     var querybox;
-    // Events
-
 
     // Functions
     this.render = function(){
@@ -23,8 +21,9 @@ function FilterTagcloud(){
             tag.addToQueryListener();
         });
 
-        querybox = new Querybox();
+        querybox = new Querybox($("#query"));
         querybox.render();
+        querybox.searchBoxListeners();
 
         $("#tabs button").removeClass("active");
         $("#tabs button."+lax.getTypeMode()).addClass("active");
@@ -33,6 +32,14 @@ function FilterTagcloud(){
             lax.setTypeMode(type);
         });
     };
+
+    // Events
+
+    lax.on("change", function(){
+      this.render();
+    }.bind(this));
+
+
 }
 
 
@@ -48,6 +55,7 @@ function Tag(tagdata, parentElement){
         var item = {size: tagdata.weight, tag: tagdata.tag, type:tagdata.type};
         domElement = $($.render(tagtemplate, item)).appendTo(parentElement);
         domElement = domElement[0];
+        $(domElement).draggable({ stack: ".tag" });
     };
 
     this.addToQueryListener = function(){
@@ -64,14 +72,21 @@ function Tag(tagdata, parentElement){
         });
     };
 
+    this.addDeleteTagListener = function(){
+        $(domElement).children().last().click(function(e){
+            var tagtext = $(this).parent().children().first().text();
+            lax.removeTagFromEdit(tagtext);
+        });
+    };
+
 }
 
 /* Querybox presenter */
 
-function Querybox(){
+function Querybox(appendTo){
 
     // Elements
-    var querybox = $("#query");
+    var querybox = appendTo;
 
     var tagviews = [];
 
@@ -86,6 +101,31 @@ function Querybox(){
             tag.render();
             tag.addRemoveFromQueryListener();
         });
+
+        //this.searchBoxListeners();
+    };
+
+    this.searchBoxListeners = function(){
+        $("#searchfield").unbind();
+        $("#searchfield").keyup(function(e){
+            if(e.which===13){
+                var tagtext = $("#tagcloud").children().first().children().first().text();
+                if (tagtext)
+                    lax.addTagToQuery(tagtext);
+                else{
+                    lax.setSearchString('');
+                    $(this).html('');
+                }
+
+                return false;
+            }
+            var text = $("#searchfield").text();
+            lax.setSearchString(text);
+            $(this).attr("size", text.length);
+            return true;
+        });
+
+
     };
 }
 
