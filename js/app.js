@@ -152,22 +152,37 @@
 
   var renderRHS = function(){
     rhsview.empty();
-    if(lax.isEditMode()){
-      $($.render(edittemplate)).appendTo(rhsview);
+    /*if(lax.isEditMode()){
+
       editbox = $("#selection");
     } else {
-      $($.render(filtertemplate)).appendTo(rhsview);
+
       querybox = $("#query");
 
       $("#querybox button").click(function(){
         lax.resetQuery();
       });
     }
-    tagcloudview = $("#tagcloud");
+    tagcloudview = $("#tagcloud");*/
     //renderTags();
-
     var filterTagcloud = new FilterTagcloud();
-    filterTagcloud.render();
+    var editTagcloud = new EditTagcloud();
+
+    if(lax.isEditMode()){
+      $($.render(edittemplate)).appendTo(rhsview);
+      editTagcloud.render();
+
+      editbox = new Editbox($("#selection"));
+      editbox.render();
+      editbox.searchBoxListeners();
+
+    } else{
+      $($.render(filtertemplate)).appendTo(rhsview);
+      filterTagcloud.render();
+      querybox = new Querybox($("#query"));
+      querybox.render();
+      querybox.searchBoxListeners();
+    }
 
     /*$("#searchfield").keyup(function(e){
       //e.preventDefault();
@@ -189,13 +204,6 @@
       return true;
     }); */
 
-    $("#searchfield").click(function(){
-      if($(this).text()==="+") $(this).text("");
-    });
-
-    $("#searchfield").focusout(function(){
-      if($(this).text().length===0) $(this).text("+");
-    });
 
     $("button#edit").click(function(){
       lax.toggleEditMode();
@@ -211,10 +219,17 @@
       lax.saveChanges();
     });
 
-    /*$(".tab").click(function(){
+    $("#tabs button").removeClass("active");
+        $("#tabs button."+lax.getTypeMode()).addClass("active");
+        $(".tab").click(function(){
+            var type = $(this).text();
+            lax.setTypeMode(type);
+    });
+
+    $(".tab").click(function(){
       var type = $(this).text();
       lax.setTypeMode(type);
-    });*/
+    });
   };
 
 
@@ -289,7 +304,7 @@
 
   lax.on("typechange", function(){
     console.log("change event!");
-    renderTags();
+    //renderRHS();
   });
 
   lax.on("detailchange", function(){

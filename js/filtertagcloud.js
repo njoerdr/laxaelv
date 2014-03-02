@@ -11,9 +11,11 @@ function FilterTagcloud(){
 
     // Functions
     this.render = function(){
+        console.log("render!");
+        tagcloudview = $("#tagcloud");
         tagcloudview.empty();
         var tags = lax.getTags();
-
+        console.log(tags.length);
         tags.forEach(function(tagdata){
             var tag = new Tag(tagdata, tagcloudview);
             tagviews.push(tag);
@@ -21,21 +23,11 @@ function FilterTagcloud(){
             tag.addToQueryListener();
         });
 
-        querybox = new Querybox($("#query"));
-        querybox.render();
-        querybox.searchBoxListeners();
-
-        $("#tabs button").removeClass("active");
-        $("#tabs button."+lax.getTypeMode()).addClass("active");
-        $(".tab").click(function(){
-            var type = $(this).text();
-            lax.setTypeMode(type);
-        });
     };
 
     // Events
 
-    lax.on("change", function(){
+    lax.on("typechange", function(){
       this.render();
     }.bind(this));
 
@@ -62,6 +54,13 @@ function Tag(tagdata, parentElement){
         $(domElement).children().first().click(function(e){
             var tagtext = $(this).text();
             lax.addTagToQuery(tagtext);
+        });
+    };
+
+    this.addToEditListener = function(){
+        $(domElement).children().first().click(function(e){
+            var tagtext = $(this).text();
+            lax.addTagToEdit(tagtext);
         });
     };
 
@@ -106,7 +105,7 @@ function Querybox(appendTo){
     };
 
     this.searchBoxListeners = function(){
-        $("#searchfield").unbind();
+        $("#searchfield").unbind('keyup');
         $("#searchfield").keyup(function(e){
             if(e.which===13){
                 var tagtext = $("#tagcloud").children().first().children().first().text();
@@ -122,11 +121,19 @@ function Querybox(appendTo){
             var text = $("#searchfield").text();
             lax.setSearchString(text);
             $(this).attr("size", text.length);
-            return true;
+            //return true;
         });
-
-
     };
+
+    $("#searchfield").click(function(){
+      if($(this).text()==="+") $(this).html("");
+    });
+
+    $("#searchfield").focusout(function(){
+      if($(this).text().length===0) $(this).html("+");
+    });
+
+
 }
 
 
