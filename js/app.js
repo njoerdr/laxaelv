@@ -82,13 +82,6 @@
     lax.activateEditMode();
   };
 
-  var renderBox = function(list, node){
-    list.forEach(function(element){
-      var item = {size: "small", tag: element};
-      $($.render(tagtemplate, item)).appendTo(node);
-    });
-  };
-
   var changesUnsaved = function(){
     $("h2").append(" <span>unsaved changes</span>");
   };
