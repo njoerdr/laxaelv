@@ -164,10 +164,6 @@
     updateButtonStatus();
   });
 
-  lax.on("typechange", function(){
-    console.log("change event!");
-    //renderRHS();
-  });
 
   lax.on("detailchange", function(){
     renderDetailView();

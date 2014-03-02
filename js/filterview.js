@@ -20,14 +20,17 @@ function FilterView(){
     };
 
     this.controlListeners = function(){
+        $("#tabs button").removeClass("active");
+
         $("button#edit").click(function(){
             lax.toggleEditMode();
         });
 
-        $("#tabs button").removeClass("active");
-        $("#tabs button."+lax.getTypeMode()).addClass("active");
         $(".tab").click(function(){
+                $("#tabs button").removeClass("active");
                 var type = $(this).text();
+                $(this).addClass("active");
+                console.log(type);
                 lax.setTypeMode(type);
         });
 
@@ -48,6 +51,4 @@ function FilterView(){
             }
         });
     };
-
-    // Events
 }

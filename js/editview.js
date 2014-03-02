@@ -20,6 +20,8 @@ function EditView(){
     };
 
     this.controlListeners = function(){
+
+
         $("button#cancel").click(function(){
             lax.toggleEditMode();
             //After cancel the current selection should be discarded
@@ -30,10 +32,11 @@ function EditView(){
             lax.saveChanges();
         });
 
-        $("#tabs button").removeClass("active");
-        $("#tabs button."+lax.getTypeMode()).addClass("active");
+
         $(".tab").click(function(){
+                $("#tabs button").removeClass("active");
                 var type = $(this).text();
+                $(this).addClass("active");
                 lax.setTypeMode(type);
         });
 

@@ -29,6 +29,10 @@ function FilterTagcloud(){
       this.render();
     }.bind(this));
 
+    lax.on("querychange", function(){
+      this.render();
+    }.bind(this));
+
 
 }
 
@@ -121,17 +125,21 @@ function Querybox(appendTo){
             $(this).attr("size", text.length);
             //return true;
         });
+        $("#searchfield").click(function(){
+          if($(this).text()==="+") $(this).html("");
+        });
+
+        $("#searchfield").focusout(function(){
+          if($(this).text().length===0) $(this).html("+");
+        });
     };
 
-    $("#searchfield").click(function(){
-      if($(this).text()==="+") $(this).html("");
-    });
 
-    $("#searchfield").focusout(function(){
-      if($(this).text().length===0) $(this).html("+");
-    });
+    // Events
 
-
+    lax.on("querychange", function(){
+      this.render();
+    }.bind(this));
 }
 
 

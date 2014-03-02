@@ -200,17 +200,17 @@ function Laxaelv() {
   self.addTagToQuery = function(tag){
     query.push(tag);
     self.searchString = "";
-    self.trigger("change");
+    self.trigger("querychange");
   };
 
   self.removeTagFromQuery = function(tag){
     query.splice(query.indexOf(tag), 1);
-    self.trigger("change");
+    self.trigger("querychange");
   };
 
   self.resetQuery = function(){
     query = [];
-    self.trigger("change");
+    self.trigger("querychange");
   };
 
   self.selectImage = function(image){
