@@ -123,10 +123,6 @@ button {
 }
 
 
-footer#result button {
-
-	width:80px;
-}
 
 img.thumb {
 	position:absolute;
@@ -176,10 +172,18 @@ footer{
 	&#result {
 		position: fixed;
 		bottom: 0px;
-		height: 20px;
+		height: 35px;
 		right:401px;
 		left:0;
 		background-color: rgba(204,204,204,0.75);
+
+		button {
+			@extend .function;
+			margin-top: 5px;
+			position: relative;
+
+		}
+
 	}
 
 	&#filter {
@@ -190,6 +194,7 @@ footer{
 		width:400px;
 		background-color: rgba(204,204,204,0.75);
 	}
+
 }
 
 section#filter {
