@@ -33,6 +33,7 @@ function Router(){
     };
 
     this.searchTags = function(values){
+        if(lax.isEditMode()) lax.deactivateEditMode();
         lax.addTagsToQuery(values);
     };
 
