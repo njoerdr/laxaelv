@@ -32,9 +32,19 @@ function EditTagcloud(){
         });
     };
 
+    this.changesunsaved = function(){
+        $("h2 span").remove();
+        $("h2").append(" <span>unsaved changes</span>");
+    };
+
     // Events
     lax.on("typechange", function(){
       this.render();
+    }.bind(this));
+
+    lax.on("editchange", function(){
+        this.render();
+        this.changesunsaved();
     }.bind(this));
 
 }
@@ -85,6 +95,10 @@ function Editbox(appendTo){
           if($(this).text().length===0) $(this).html("+");
         });
     };
+
+    lax.on("editchange", function(){
+        this.render();
+    }.bind(this));
 }
 
 

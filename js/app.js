@@ -28,34 +28,6 @@
   var renderImages = function(){
     var resultView = new ResultView();
     resultView.render();
-    /*lhsview.empty();
-    $($.render(resulttemplate)).appendTo(lhsview);
-
-    var resultview = $("#resultview");
-
-    //$("#resultview figure").remove("figure");
-    var images = lax.getImages();
-    images.forEach(function(element){
-      //element = JSON.parse(element);
-      var item = {id: element, name: element};
-      $($.render(imagetemplate, item)).appendTo(resultview);
-    });
-
-    $("figure img").click(function(){
-      var image = $(this).attr("id");
-      lax.chooseImage(image);
-    });
-
-    $("figure button").click(function(){
-      $(this).parent().toggleClass("marked");
-      if($(this).parent().hasClass("marked")){
-        $(this).text("unflag");
-        lax.selectImage($(this).parent().children().first().attr("id"));
-      }else{
-        $(this).text("flag");
-        lax.deselectImage($(this).parent().children().first().attr("id"));
-      }
-    });*/
   };
 
   var renderDetailView = function(){
@@ -84,10 +56,6 @@
     lax.activateEditMode();
   };
 
-  var changesUnsaved = function(){
-    $("h2").append(" <span>unsaved changes</span>");
-  };
-
   var renderRHS = function(){
     if(lax.isEditMode()){
       var editView = new EditView();
@@ -102,6 +70,7 @@
 
 
   window.lax = new Laxaelv();
+  window.router = new Router();
 
   // HTML for a single todo item
   var imagetemplate = $("[type='html/tumb']").html();
@@ -140,13 +109,10 @@
 
   });
 
-
-
   lax.on("change", function() {
     console.log("change event!");
     renderImages();
     renderRHS();
-
     //renderTags();
   });
 
@@ -155,22 +121,20 @@
   });
 
   lax.on("editchange", function(){
-    console.log("editchange");
-    renderRHS();
     updateCounter();
-    changesUnsaved();
+    //changeRoute();
   });
 
   lax.on("modechange", function(){
     renderRHS();
     updateCounter();
     updateButtonStatus();
+
   });
 
 
   lax.on("detailchange", function(){
     renderDetailView();
-    renderRHS();
     updateCounter();
   });
 

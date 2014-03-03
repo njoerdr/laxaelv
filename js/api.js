@@ -203,6 +203,15 @@ function Laxaelv() {
     self.trigger("querychange");
   };
 
+  self.addTagsToQuery = function(tags){
+    query = [];
+    tags.forEach(function(tag){
+      query.push(tag);
+    });
+    self.searchString = "";
+    self.trigger("querychange");
+  };
+
   self.removeTagFromQuery = function(tag){
     query.splice(query.indexOf(tag), 1);
     self.trigger("querychange");

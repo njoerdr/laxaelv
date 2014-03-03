@@ -9,6 +9,7 @@ function FilterTagcloud(){
 
     // Functions
     this.render = function(){
+
         tagcloudview = $("#tagcloud");
         tagcloudview.empty();
         var tags = lax.getTags();
