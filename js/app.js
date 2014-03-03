@@ -31,29 +31,16 @@
   };
 
   var renderDetailView = function(){
-    lhsview.empty();
-    $("#resultview figure").remove("figure");
-    var image = lax.getDetailImage();
-    var item = {name: image};
-    $($.render(detailtemplate, item)).appendTo(lhsview);
+    var detailview = new DetailView();
+    detailview.render();
+    detailview.addControlListiner();
 
-    $("#close").click(function(){
-      renderImages();
-      lax.deselectAll();
-      lax.deactivateEditMode();
-    });
-
-    $("#next").click(function(){
-      lax.nextImage();
-    });
-
-    $("#previous").click(function(){
-      lax.previousImage();
-    });
-
-    lax.deselectAll();
+    var infoview = new InfoView();
+    infoview.render();
+    infoview.addListener();
+    /*lax.deselectAll();
     lax.selectImage(image);
-    lax.activateEditMode();
+    lax.activateEditMode();*/
   };
 
   var renderRHS = function(){

@@ -5,18 +5,19 @@ function Router(){
             this.searchTags([]);
             return;
         }
-        var method = path.split("&")[0];
+        var method = path.split("?")[0];
         console.log(method);
         if(method==="search") this.parseSearch(path);
+        if(method==="detail") this.parseDetail(path);
     };
 
     this.parseSearch = function(path){
-        if(path.split("&").length<2){
+        if(path.split("?").length<2){
             this.searchTags([]);
             return;
         }
 
-        path.split("&").slice(1).forEach(function(element){
+        path.split("?").slice(1).forEach(function(element){
             kv = element.split("=");
 
             if(kv.length != 2){
@@ -37,10 +38,16 @@ function Router(){
         lax.addTagsToQuery(values);
     };
 
+
+    this.parseDetail = function(path){
+        var image = path.split("?")[1];
+        lax.chooseImage(image);
+    };
+
     this.updateSearchURL = function(){
         var tags = lax.getQueryTags();
         path = "index.html#search";
-        if(tags.length>0) path += "&q=";
+        if(tags.length>0) path += "?q=";
         tags.forEach(function(tag){
             path += tag + ",";
         });
@@ -51,6 +58,12 @@ function Router(){
     this.updateEditURL = function(){
         console.log("editurl");
         path = "index.html#edit";
+        $.route(path);
+    };
+
+    this.updateDetailURL = function(){
+        path = "index.html#detail?";
+        path += lax.getDetailImage();
         $.route(path);
     };
 
@@ -69,5 +82,9 @@ function Router(){
     lax.on("modechange", function(){
         if(lax.isEditMode()) this.updateEditURL();
         else this.updateSearchURL();
+    }.bind(this));
+
+    lax.on("detailchange", function(){
+        this.updateDetailURL();
     }.bind(this));
 }

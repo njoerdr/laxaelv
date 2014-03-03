@@ -226,6 +226,12 @@ section#filter {
 	}
 }
 
+#tags{
+	.tag button{
+		display:none;
+	}
+}
+
 .tag{
 	border: thin solid #e4e4e4;
 	float: left;

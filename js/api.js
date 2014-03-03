@@ -62,6 +62,12 @@ function Laxaelv() {
     return imagesInView[iterator];
   };
 
+  self.getDetailImageTags = function(){
+    console.log(imagesInView[iterator]);
+    var detailTags = db.getCommonTags([imagesInView[iterator]]);
+    return detailTags;
+  };
+
   self.nextImage = function(){
     iterator += 1;
     iterator = Math.min(iterator, imagesInView.length-1);
