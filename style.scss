@@ -172,14 +172,17 @@ footer{
 	&#result {
 		position: fixed;
 		bottom: 0px;
-		height: 35px;
+		height: 20px;
 		right:401px;
 		left:0;
 		background-color: rgba(204,204,204,0.75);
 
 		button {
 			@extend .function;
-			margin-top: 5px;
+			font-size: 10pt;
+
+			margin-top: 2px;
+			padding: 1px 5px;
 			position: relative;
 
 		}
@@ -415,5 +418,107 @@ section#filter {
 
 	span{
 		background-color: white;
+	}
+}
+
+
+
+.editmode{
+	background-color: #000000;
+	color: #FFFFFF;
+
+	span{
+		background-color: #000000;
+		color: #FFFFFF;
+	}
+
+	h2{
+		color: #FFFFFF;
+	}
+
+	#tagcloud{
+		background-color: #222222;
+		border-color: #111111;
+
+		.tag{
+			background-color: #000000;
+			span{
+				background-color: #000000;
+			}
+		}
+	}
+
+	#tagselection{
+		background-color: #333333;
+
+		.tag{
+			background-color: #222222;
+			border-color:#111111;
+			span{
+				background-color: #000000;
+			}
+			button{
+				background-color: #222222 !important;
+			}
+		}
+	}
+
+
+	#controls{
+		display:none;
+		#previous, #close, #next{
+			background-color: #000000;
+			color: #ffffff;
+		}
+
+	}
+
+	#filtercontrol{
+		background-color: #000000;
+	}
+
+	.other{
+		border-color: #000000;
+	}
+
+	#tabs{
+		background-color: #000000;
+		.tab{
+			background-color: #000000;
+			color: #FFFFFF;
+		}
+
+	}
+
+	.function{
+		background-color: #333333;
+	}
+
+	#resultview{
+		img{
+
+
+
+		}
+
+		figure{
+			opacity:0.2;
+			border-color: #333333;
+
+			&.marked{
+				border-color: #c05665;
+				opacity:1;
+			}
+		}
+
+	}
+
+
+	footer#result{
+		display: none;
+	}
+
+	footer#filter{
+		background-color: #000000;
 	}
 }

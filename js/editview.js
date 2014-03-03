@@ -17,6 +17,7 @@ function EditView(){
         editbox = new Editbox($("#selection"));
         editbox.render();
         editbox.searchBoxListeners();
+        $("body").addClass('editmode');
     };
 
     this.controlListeners = function(){

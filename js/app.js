@@ -49,6 +49,7 @@
       editView.render();
       editView.controlListeners();
     } else{
+      $("body").removeClass('editmode');
       var filterView = new FilterView();
       filterView.render();
       filterView.controlListeners();
