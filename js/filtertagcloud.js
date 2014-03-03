@@ -6,8 +6,6 @@ function FilterTagcloud(){
     // Elements
     var tagcloudview = $("#tagcloud");
 
-    var tagviews = [];
-    var querybox;
 
     // Functions
     this.render = function(){
@@ -16,7 +14,6 @@ function FilterTagcloud(){
         var tags = lax.getTags();
         tags.forEach(function(tagdata){
             var tag = new Tag(tagdata, tagcloudview);
-            tagviews.push(tag);
             tag.render();
             tag.addToQueryListener();
         });
@@ -30,7 +27,7 @@ function FilterTagcloud(){
     }.bind(this));
 
     lax.on("querychange", function(){
-      this.render();
+        this.render();
     }.bind(this));
 
 
@@ -138,7 +135,7 @@ function Querybox(appendTo){
     // Events
 
     lax.on("querychange", function(){
-      this.render();
+        this.render();
     }.bind(this));
 }
 

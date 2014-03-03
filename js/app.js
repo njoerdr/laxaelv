@@ -26,7 +26,9 @@
   };
 
   var renderImages = function(){
-    lhsview.empty();
+    var resultView = new ResultView();
+    resultView.render();
+    /*lhsview.empty();
     $($.render(resulttemplate)).appendTo(lhsview);
 
     var resultview = $("#resultview");
@@ -53,7 +55,7 @@
         $(this).text("flag");
         lax.deselectImage($(this).parent().children().first().attr("id"));
       }
-    });
+    });*/
   };
 
   var renderDetailView = function(){
@@ -144,6 +146,7 @@
     console.log("change event!");
     renderImages();
     renderRHS();
+
     //renderTags();
   });
 

@@ -5,18 +5,28 @@ function FilterView(){
     var filtertemplate = $("[type='html/filter']").html();
     var rhsview = $("section#filter");
     // Elements
+    var filterTagcloud;
+    var querybox;
+
 
     // Functions
     this.render =function(){
         rhsview.empty();
 
-        var filterTagcloud = new FilterTagcloud();
+        filterTagcloud = new FilterTagcloud();
         $($.render(filtertemplate)).appendTo(rhsview);
         filterTagcloud.render();
 
-        var querybox = new Querybox($("#query"));
+        querybox = new Querybox($("#query"));
         querybox.render();
         querybox.searchBoxListeners();
+    };
+
+    this.rerender = function(){
+        filterTagcloud.render();
+        querybox.render();
+        filterTagcloud.render();
+
     };
 
     this.controlListeners = function(){
@@ -51,4 +61,12 @@ function FilterView(){
             }
         });
     };
+
+
+    // Events
+    /*lax.on("querychange", function(){
+        console.log("query change - woohooooo!");
+        this.rerender();
+        this.controlListeners();
+    }.bind(this));*/
 }
