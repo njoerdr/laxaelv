@@ -109,8 +109,11 @@ function Querybox(appendTo){
         $("#searchfield").keyup(function(e){
             if(e.which===13){
                 var tagtext = $("#tagcloud").children().first().children().first().text();
-                if (tagtext)
+                if (tagtext){
                     lax.addTagToQuery(tagtext);
+                    lax.setSearchString('');
+                    $(this).html('');
+                }
                 else{
                     lax.setSearchString('');
                     $(this).html('');

@@ -9,6 +9,7 @@ function Router(){
         console.log(method);
         if(method==="search") this.parseSearch(path);
         if(method==="detail") this.parseDetail(path);
+        if(method==="edit") this.parseEdit(path);
     };
 
     this.parseSearch = function(path){
@@ -33,8 +34,12 @@ function Router(){
         }.bind(this));
     };
 
+    this.parseEdit = function(path){
+        console.log("edit history");
+    };
+
     this.searchTags = function(values){
-        if(lax.isEditMode()) lax.deactivateEditMode();
+        lax.deactivateEditMode();
         lax.addTagsToQuery(values);
     };
 
