@@ -99,8 +99,8 @@
 
   lax.on("change", function() {
     console.log("change event!");
-    renderImages();
     renderRHS();
+    renderImages();
     //renderTags();
   });
 

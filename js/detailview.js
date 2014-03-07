@@ -6,15 +6,13 @@ function DetailView(){
     var lhsview = $("#lhsview");
     // Elements
 
-    var domElement;
     // Functions
 
     this.render = function(){
         lhsview.empty();
         var image = lax.getDetailImage();
         var item = {name: image};
-        domElement = $($.render(detailtemplate, item)).appendTo(lhsview);
-        domElement = domElement[0];
+        $($.render(detailtemplate, item)).appendTo(lhsview);
         lax.selectImage(image);
     };
 

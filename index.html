@@ -8,7 +8,9 @@
 
 	<script type="html/upload">
 		<div id="upload">
-			<input type="file" name="upload" accept="image/jpeg" multiple="multiple" />
+			<form id="form" action="http://localhost:8080/upload" enctype="multipart/form-data" method="post">
+			<input id="upform" style="display:none;" type="file" name="upload" accept="image/jpeg" multiple="multiple" />
+			</form>
 		</div>
 	</script>
 
@@ -20,7 +22,7 @@
 
 	<script type="html/tumb">
 		<figure>
-			<img id="{id}" class="thumb" src="photos/{name}" />
+			<img id="{id}" class="thumb" src="small/{name}" />
 			<button class="flagbutton">flag</button>
 			<figcaption>{name}<figcaption>
 		</figure>
@@ -153,6 +155,7 @@
 		<script src="conf/list-all.js"></script>
 		<script src="conf/list-types.js"></script>
 		<script src="js/store.js"></script>
+		<script src="js/upload.js"></script>
 		<script src="js/api.js"></script>
 		<script src="js/filtertagcloud.js"></script>
 		<script src="js/edittagcloud.js"></script>

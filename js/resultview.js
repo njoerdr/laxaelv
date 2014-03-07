@@ -7,7 +7,23 @@ function ResultView(){
     // Elements
     var lhsview = $("#lhsview");
 
-    // Functions
+    var up = new Upload();
+
+    var imgClick = function() {
+        var image = $(this).attr("id");
+        lax.chooseImage(image);
+    };
+
+    var flagClick = function() {
+        $(this).parent().toggleClass("marked");
+        if($(this).parent().hasClass("marked")) {
+            $(this).text("unflag");
+            lax.selectImage($(this).parent().children().first().attr("id"));
+        } else {
+            $(this).text("flag");
+            lax.deselectImage($(this).parent().children().first().attr("id"));
+        }
+    };
 
     this.render = function(){
 
@@ -16,14 +32,32 @@ function ResultView(){
 
         var resultview = $("#resultview");
 
+        up.render(resultview);
+        up.addListeners();
+
         var images = lax.getImages();
         images.forEach(function(element){
-            var imagedata = {id: element, name: element};
-            thumbnail = new Thumbnail(imagedata, resultview);
-            thumbnail.render();
-            thumbnail.addClickListeners();
-        });
+            // DOM Manipulation
+            var fignode = document.createElement('figure');
+            var figcap = document.createElement('figcaption');
+            figcap.innerHTML = element;
+            var flag = document.createElement('button');
+            flag.className = 'flagbutton';
+            flag.innerHTML = 'flag';
+            flag.onclick = flagClick;
 
+            var img = new Image();
+            img.id = element;
+            img.className = 'thumb';
+            img.src = 'small/' + element;
+            img.onclick = imgClick;
+
+            fignode.appendChild(img);
+            fignode.appendChild(flag);
+            fignode.appendChild(figcap);
+
+            resultview.append(fignode);
+        });
     };
 
     // Events
@@ -31,44 +65,5 @@ function ResultView(){
         this.render();
     }.bind(this));
 
-
-}
-
-
-/* Thumbnail Presenter */
-
-function Thumbnail(imagedata, appendTo){
-    // Templates
-    var imagetemplate = $("[type='html/tumb']").html();
-
-    // Elements
-    var domElement;
-
-    // Functions
-
-    this.render = function(){
-        domElement = $($.render(imagetemplate, imagedata)).appendTo(appendTo);
-        domElement = domElement[0];
-    };
-
-    this.addClickListeners = function(){
-        $(domElement).children("img").click(function(){
-            var image = $(this).attr("id");
-            lax.chooseImage(image);
-        });
-
-        $(domElement).children("button").click(function(){
-            $(this).parent().toggleClass("marked");
-            if($(this).parent().hasClass("marked")){
-                $(this).text("unflag");
-                lax.selectImage($(this).parent().children().first().attr("id"));
-              }else{
-                $(this).text("flag");
-                lax.deselectImage($(this).parent().children().first().attr("id"));
-            }
-        });
-    };
-
-    // Events
 
 }

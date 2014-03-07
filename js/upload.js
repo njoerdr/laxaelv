@@ -25,36 +25,46 @@ function Upload() {
         xhr.send(form);
     };
 
-    droplet.onclick = function() {
 
-    };
-
-	droplet.ondragover = function() {
-        this.className = 'hover';
-   		return false;
-    };
-    droplet.ondragleave = function () { 
-    	this.className = ''; 
-        return false; 
-    };
-    droplet.ondrop = function(event) {
-    	var form = new FormData();
-        this.className = ''; 
-    	event.preventDefault();
-    	var imgs = event.dataTransfer.files;
-    	for(var i = 0; i < imgs.length; i++) {
-    		if(imgs[i].type === 'image/jpeg') {
-    			form.append('file', imgs[i]);
-    		} else {
-    			alert('Only images of type JPEG are supported.');
-    		}
-    	}
-        self.transfer(form);
-    };
 
 	this.render = function(parent) {
 		$($.render(droplet)).appendTo(parent);
 	};
+
+    this.addListeners = function() {
+        var domElement = document.getElementById('upload');
+        var upform = document.getElementById('upform');
+
+        domElement.onclick = function() {
+            upform.click();
+            upform.onchange = function() {
+                upform.parentElement.submit();
+            };
+        };
+
+        domElement.ondragover = function() {
+            this.className = 'hover';
+            return false;
+        };
+        domElement.ondragleave = function () { 
+            this.className = ''; 
+            return false; 
+        };
+        domElement.ondrop = function(event) {
+            var form = new FormData();
+            this.className = ''; 
+            event.preventDefault();
+            var imgs = event.dataTransfer.files;
+            for(var i = 0; i < imgs.length; i++) {
+                if(imgs[i].type === 'image/jpeg') {
+                    form.append('file', imgs[i]);
+                } else {
+                    alert('Only images of type JPEG are supported.');
+                }
+            }
+            transfer(form);
+        };
+    };
 
 
 }
