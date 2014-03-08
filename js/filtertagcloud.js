@@ -14,9 +14,12 @@ function FilterTagcloud(){
         tagcloudview.empty();
         var tags = lax.getTags();
         tags.forEach(function(tagdata){
-            var tag = new Tag(tagdata, tagcloudview);
+            var tag = TagFactory.createTag(tagdata, tagcloudview);
+            TagFactory.addToQueryListener(tag);
+            // old
+            /*var tag = new Tag(tagdata, tagcloudview);
             tag.render();
-            tag.addToQueryListener();
+            tag.addToQueryListener();*/
         });
 
     };
