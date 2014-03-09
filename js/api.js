@@ -7,7 +7,7 @@ function Laxaelv() {
 
   var editMode = false;
   var typeMode = 'all';
-  var searchstring = '';
+  var searchString = '';
 
   var query = [];
   var imagesInView = [];

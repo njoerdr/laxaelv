@@ -58,7 +58,6 @@
 		<h2>Filter</h2>
 		<div id="querybox">
 			<div id="query"></div>
-			<!--<input class="tag small"  size="5" type="text" id="searchfield" name="searchfield" />-->
 			<span contenteditable="true" id="searchfield" class="tag small">+</span>
 			<button>clear</button>
 		</div>
@@ -128,6 +127,25 @@
 		</footer>
 	</script>
 
+	<script type="html/details">
+		<section id="details">
+			<section class="lhs">
+				<figure>
+					<div id="controls">
+						<button id="previous">←</button>
+						<button id="close">×</button>
+						<button id="next">→</button>
+					</div>
+					<img id="detailimg" class="largeview" src="" />
+				</figure>
+			</section>
+			<section class="rhs">
+				<h2></h2>
+				<div id="tags"></div>
+			</section>
+		</section>
+	</script>
+
 
 	<body>
 		<section id="laxaelvapp">
@@ -163,6 +181,7 @@
 		<script src="js/editview.js"></script>
 		<script src="js/filterview.js"></script>
 		<script src="js/resultview.js"></script>
+		<script src="js/detailoverlay.js"></script>
 		<script src="js/detailview.js"></script>
 		<script src="js/infoview.js"></script>
 		<script src="js/router.js"></script>

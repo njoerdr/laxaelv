@@ -3,23 +3,14 @@
 function FilterTagcloud(){
     // Templates
 
-    // Elements
-    var tagcloudview = $("#tagcloud");
-
-
     // Functions
     this.render = function(){
-
-        tagcloudview = $("#tagcloud");
+        var tagcloudview = $("#tagcloud");
         tagcloudview.empty();
         var tags = lax.getTags();
         tags.forEach(function(tagdata){
             var tag = TagFactory.createTag(tagdata, tagcloudview);
             TagFactory.addToQueryListener(tag);
-            // old
-            /*var tag = new Tag(tagdata, tagcloudview);
-            tag.render();
-            tag.addToQueryListener();*/
         });
 
     };
@@ -34,52 +25,6 @@ function FilterTagcloud(){
         this.render();
     }.bind(this));
 
-
-}
-
-
-/* Tag presener */
-
-function Tag(tagdata, parentElement){
-    // Templates
-    var tagtemplate = $("[type='html/tag']").html();
-    var domElement;
-
-    // Functions
-    this.render = function(){
-        var item = {size: tagdata.weight, tag: tagdata.tag, type:tagdata.type};
-        domElement = $($.render(tagtemplate, item)).appendTo(parentElement);
-        domElement = domElement[0];
-        $(domElement).draggable({ stack: ".tag" });
-    };
-
-    this.addToQueryListener = function(){
-        $(domElement).children().first().click(function(e){
-            var tagtext = $(this).text();
-            lax.addTagToQuery(tagtext);
-        });
-    };
-
-    this.addToEditListener = function(){
-        $(domElement).children().first().click(function(e){
-            var tagtext = $(this).text();
-            lax.addTagToEdit(tagtext);
-        });
-    };
-
-    this.addRemoveFromQueryListener = function(){
-        $(domElement).children().last().click(function(e){
-            var tagtext = $(this).parent().children().first().text();
-            lax.removeTagFromQuery(tagtext);
-        });
-    };
-
-    this.addDeleteTagListener = function(){
-        $(domElement).children().last().click(function(e){
-            var tagtext = $(this).parent().children().first().text();
-            lax.removeTagFromEdit(tagtext);
-        });
-    };
 
 }
 
@@ -98,10 +43,8 @@ function Querybox(appendTo){
         var taglist = lax.getQueryTags();
         taglist.forEach(function(element){
             var tagdata = {size: "small", tag: element};
-            var tag = new Tag(tagdata, querybox);
-            tagviews.push(tag);
-            tag.render();
-            tag.addRemoveFromQueryListener();
+            var tag = TagFactory.createTag(tagdata, querybox);
+            TagFactory.addRemoveFromQueryListener(tag);
         });
 
         //this.searchBoxListeners();

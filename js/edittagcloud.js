@@ -4,24 +4,16 @@ function EditTagcloud(){
     // Templates
     var infotemplate = $("[type='html/info']").html();
 
-    // Elements
-    var tagcloudview = $("#tagcloud");
-
-    var tagviews = [];
-    var editbox;
-
     // Functions
     this.render = function(){
-        tagcloudview = $("#tagcloud");
+        var tagcloudview = $("#tagcloud");
         tagcloudview.empty();
         var tags = lax.getTagCloudForSelection();
         if(tags.length===0)
             $($.render(infotemplate)).appendTo(tagcloudview);
         tags.forEach(function(tagdata){
-            var tag = new Tag(tagdata, tagcloudview);
-            tagviews.push(tag);
-            tag.render();
-            tag.addToEditListener();
+            var tag = TagFactory.createTag(tagdata, tagcloudview);
+            TagFactory.addToEditListener(tag);
         });
 
         $("#tabs button").removeClass("active");
@@ -56,7 +48,7 @@ function Editbox(appendTo){
     // Elements
     var querybox = appendTo;
 
-    var tagviews = [];
+    //var tagviews = [];
 
     // Functions
     this.render = function(){
@@ -64,10 +56,8 @@ function Editbox(appendTo){
         var taglist = lax.getEditTags();
         taglist.forEach(function(element){
             var tagdata = {size: "small", tag: element};
-            var tag = new Tag(tagdata, querybox);
-            tagviews.push(tag);
-            tag.render();
-            tag.addDeleteTagListener();
+            var tag = TagFactory.createTag(tagdata, querybox);
+            TagFactory.addDeleteTagListener(tag);
         });
     };
 

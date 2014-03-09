@@ -8,7 +8,7 @@ function DetailView(){
 
     // Functions
 
-    this.render = function(){
+    this.render = function() {
         lhsview.empty();
         var image = lax.getDetailImage();
         var item = {name: image};

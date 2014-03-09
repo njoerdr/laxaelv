@@ -5,20 +5,15 @@ function InfoView(){
     var infotemplate = $("[type='html/infoview']").html();
     var rhsview = $("section#filter");
 
-    // Elements
-    var domElement;
-
     // Functions
     this.render = function(){
         rhsview.empty();
-        domElement = $($.render(infotemplate)).appendTo(rhsview);
-        domElement = domElement[0];
+        $($.render(infotemplate)).appendTo(rhsview);
         $("h2").text(lax.getDetailImage);
         var tags = lax.getDetailImageTags();
         tags.forEach(function(tagname){
             tagdata = {size: "small", tag: tagname, type:"other"};
-            var tag = new Tag(tagdata, $("#tags"));
-            tag.render();
+            var tag = TagFactory.createTag(tagdata, $("#tags"));
         });
     };
 

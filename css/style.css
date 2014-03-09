@@ -13,6 +13,15 @@ a {
     border-radius: 5px;
     color: white; }
 
+section#details {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(1, 1, 1, 0.9);
+  z-index: 2; }
+
 h2 {
   color: #555;
   font-size: 20pt;
@@ -39,14 +48,14 @@ figcaption {
   bottom: 0;
   width: 100%; }
 
-#lhsview {
+.lhs, #lhsview {
   position: absolute;
   left: 0px;
   right: 401px;
   /*border: thin solid black;*/
   padding-bottom: 20px;
   float: left; }
-  #lhsview button {
+  .lhs button, #lhsview button {
     position: relative; }
 
 .largeview {
@@ -141,7 +150,7 @@ footer#filter {
   width: 400px;
   background-color: rgba(204, 204, 204, 0.75); }
 
-section#filter {
+.rhs, section#filter {
   position: fixed;
   /* vs. absolute */
   right: 0px;

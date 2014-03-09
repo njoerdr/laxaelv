@@ -31,6 +31,7 @@
   };
 
   var renderDetailView = function(){
+
     var detailview = new DetailView();
     detailview.render();
     detailview.addControlListiner();
@@ -38,6 +39,7 @@
     var infoview = new InfoView();
     infoview.render();
     infoview.addListener();
+
     /*lax.deselectAll();
     lax.selectImage(image);
     lax.activateEditMode();*/
@@ -84,6 +86,7 @@
     lax.selectAll();
   });
 
+  /*
   $(document).keydown(function( event ) {
     //event.preventDefault();
     event.cancelBubble = true;
@@ -96,7 +99,8 @@
     }
 
   });
-
+  */
+  
   lax.on("change", function() {
     console.log("change event!");
     renderRHS();
@@ -122,8 +126,9 @@
 
 
   lax.on("detailchange", function(){
-    renderDetailView();
-    updateCounter();
+    DetailOverlay.render();
+    //renderDetailView();
+    //updateCounter();
   });
 
   lax.initDB();

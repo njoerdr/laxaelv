@@ -1,3 +1,5 @@
+
+
 body {
 	margin:0;
 	padding:0;
@@ -15,6 +17,16 @@ a {
 		border-radius:5px;
 		color:white;
 	}
+}
+
+section#details {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: rgba(1,1,1,0.9);
+	z-index: 2;
 }
 
 h2{
@@ -49,7 +61,7 @@ figcaption {
 	width:100%;
 }
 
-#lhsview{
+.lhs, #lhsview{
 	position:absolute;
 	left:0px;
 	right:401px;
@@ -200,7 +212,7 @@ footer{
 
 }
 
-section#filter {
+.rhs, section#filter {
 	position: fixed; /* vs. absolute */
 	right:0px;
 	width:400px;

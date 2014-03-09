@@ -23,7 +23,7 @@ function FilterView(){
     };
 
     this.rerender = function(){
-        filterTagcloud.render();
+        //filterTagcloud.render();
         querybox.render();
         filterTagcloud.render();
 
