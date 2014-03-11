@@ -80,7 +80,7 @@
 
   
   lax.on("change", function() {
-    console.log("change event!");
+    console.log("change event");
     renderRHS();
     renderImages();
     updateCounter();
@@ -88,19 +88,23 @@
   });
 
   lax.on("selectchange", function(){
+    console.log('selectchange event');
     updateCounter();
   });
 
   lax.on("editchange", function(){
+    console.log('editchange event');
     updateCounter();
     //changeRoute();
   });
 
   lax.on("querychange", function(){
+    console.log('querychange event');
     updateCounter();
   });
 
   lax.on("modechange", function(){
+    console.log('modechange event');
     renderRHS();
     updateCounter();
     updateButtonStatus();
@@ -108,7 +112,8 @@
   });
 
 
-  lax.on("detailchange", function(){
+  lax.on("detailrendering", function(){
+    console.log('detailchange event');
     //DetailOverlay.render();
     renderDetailView();
     updateCounter();

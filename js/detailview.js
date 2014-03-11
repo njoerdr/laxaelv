@@ -38,11 +38,13 @@ var DetailView = function() {
         $("#previous").click(function(){
            lax.previousImage();
         });
-        $(document).keydown(function(event) {
+        $(document).keyup(function(event) {
             if(active) {
-                event.cancelBubble = true;
-                event.returnValue = false;
+                event.stopImmediatePropagation();
+                //event.cancelBubble = true;
+                //event.returnValue = false;
                 if(event.which == 39){
+                    console.log('BUTTON');
                   lax.nextImage();
                 }
                 if(event.which == 37){

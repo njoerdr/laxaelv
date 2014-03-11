@@ -52,9 +52,11 @@ var DetailOverlay = function(){
                     event.returnValue = false;
                     if(event.which == 39){
                       lax.nextImage();
+                      //show();
                     }
                     if(event.which == 37){
                       lax.previousImage();
+                      //show();
                     }
                     if(event.which == 27){
                       remove();
@@ -67,4 +69,4 @@ var DetailOverlay = function(){
         show();
     };
     return this;
-}();
+};
