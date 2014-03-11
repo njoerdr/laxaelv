@@ -9,7 +9,7 @@ var InfoView = function() {
     this.render = function(){
         rhsview.empty();
         $($.render(infotemplate)).appendTo(rhsview);
-        $("h2").text(lax.getDetailImage);
+        $("h3").text(lax.getDetailImage);
         var tags = lax.getDetailImageTags();
         tags.forEach(function(tagname){
             tagdata = {size: "small", tag: tagname, type:"other"};

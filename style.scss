@@ -240,6 +240,19 @@ footer{
 
 }
 
+div#editswitch {
+	position: fixed;
+	bottom: 0px;
+	height: 60px;
+	right:0px;
+	width:400px;
+	background-color: rgba(204,204,204,0.75);
+	#slider {
+		font-family: 'fontello';
+		font-size: 18pt;
+	}
+}
+
 .rhs, section#filter {
 	position: fixed; /* vs. absolute */
 	right:0px;

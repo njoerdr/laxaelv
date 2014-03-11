@@ -46,7 +46,7 @@ function Router(){
 
     this.parseDetail = function(path){
         var image = path.split("?")[1];
-        lax.chooseImage(image);
+        lax.triggerDetails(image);
     };
 
     this.updateSearchURL = function(){

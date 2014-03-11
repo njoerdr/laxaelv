@@ -91,8 +91,12 @@ function Laxaelv() {
 
   self.chooseImage = function(image){
     iterator = imagesInView.indexOf(image);
-    self.trigger("detailrendering");
+    self.trigger("detailchange");
+  };
 
+  self.triggerDetails = function(image){
+    iterator = imagesInView.indexOf(image);
+    self.trigger("detailrendering");
   };
 
   self.getImages = function(){
