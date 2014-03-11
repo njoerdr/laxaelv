@@ -47,17 +47,19 @@ var DetailOverlay = function(){
                //show();
             });
             $(document).keydown(function(event) {
-              event.cancelBubble = true;
-              event.returnValue = false;
-              if(event.which == 39){
-                lax.nextImage();
-              }
-              if(event.which == 37){
-                lax.previousImage();
-              }
-              if(event.which == 27){
-                remove();
-              }
+                if(attached) {
+                    event.cancelBubble = true;
+                    event.returnValue = false;
+                    if(event.which == 39){
+                      lax.nextImage();
+                    }
+                    if(event.which == 37){
+                      lax.previousImage();
+                    }
+                    if(event.which == 27){
+                      remove();
+                    }
+                }
             });
             attached = true;
         }

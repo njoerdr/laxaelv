@@ -1,13 +1,13 @@
 /* Result Presenter */
 
-function ResultView(){
+var ResultView = function(){
     // Templates
     var resulttemplate = $("[type='html/result']").html();
 
     // Elements
     var lhsview = $("#lhsview");
 
-    var up = new Upload();
+    //var up = new Upload();
 
     var imgClick = function() {
         var image = $(this).attr("id");
@@ -17,10 +17,10 @@ function ResultView(){
     var flagClick = function() {
         $(this).parent().toggleClass("marked");
         if($(this).parent().hasClass("marked")) {
-            $(this).text("unflag");
+            this.innerHTML = '&#xe813;';
             lax.selectImage($(this).parent().children().first().attr("id"));
         } else {
-            $(this).text("flag");
+            this.innerHTML = '&#xe814;';
             lax.deselectImage($(this).parent().children().first().attr("id"));
         }
     };
@@ -32,8 +32,8 @@ function ResultView(){
 
         var resultview = $("#resultview");
 
-        up.render(resultview);
-        up.addListeners();
+        //up.render(resultview);
+        //up.addListeners();
 
         var images = lax.getImages();
         images.forEach(function(element){
@@ -43,7 +43,7 @@ function ResultView(){
             figcap.innerHTML = element;
             var flag = document.createElement('button');
             flag.className = 'flagbutton';
-            flag.innerHTML = 'flag';
+            flag.innerHTML = '&#xe814;';
             flag.onclick = flagClick;
 
             var img = new Image();
@@ -65,5 +65,5 @@ function ResultView(){
         this.render();
     }.bind(this));
 
-
-}
+    return this;
+};

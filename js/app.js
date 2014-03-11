@@ -2,18 +2,24 @@
 /* The presenter */
 
 (function() { 'use strict';
-  /*
-    A Model instance exposed to global space so you can
-    use the Todo APi from the console. For example:
 
-    todo.add("My task");
-  */
+  window.lax = new Laxaelv();
+  window.router = new Router();
+
+  var resultView = new ResultView();
+  var detailView = new DetailView();
+  var infoview = new InfoView();
+  var filterView = new FilterView();
+
+  var editView = new EditView();
 
   var updateCounter = function(){
     $("#flagcount").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
 
-    if(lax.getSelectionCount()>0) $("#edit").show();
-    else $("#edit").hide();
+    if(lax.getSelectionCount()>0) 
+      $("#edit").show();
+    else 
+      $("#edit").hide();
 
   };
 
@@ -26,41 +32,27 @@
   };
 
   var renderImages = function(){
-    var resultView = new ResultView();
     resultView.render();
   };
 
   var renderDetailView = function(){
-
-    var detailview = new DetailView();
-    detailview.render();
-    detailview.addControlListiner();
-
-    var infoview = new InfoView();
+    detailView.render();
+    detailView.addListener();
+    
     infoview.render();
     infoview.addListener();
-
-    /*lax.deselectAll();
-    lax.selectImage(image);
-    lax.activateEditMode();*/
   };
 
   var renderRHS = function(){
     if(lax.isEditMode()){
-      var editView = new EditView();
       editView.render();
       editView.controlListeners();
     } else{
       $("body").removeClass('editmode');
-      var filterView = new FilterView();
       filterView.render();
       filterView.controlListeners();
     }
   };
-
-
-  window.lax = new Laxaelv();
-  window.router = new Router();
 
   // HTML for a single todo item
   var imagetemplate = $("[type='html/tumb']").html();
@@ -86,35 +78,26 @@
     lax.selectAll();
   });
 
-  /*
-  $(document).keydown(function( event ) {
-    //event.preventDefault();
-    event.cancelBubble = true;
-    event.returnValue = false;
-    if(event.which == 39){
-      lax.nextImage();
-    }
-    if(event.which == 37){
-      lax.previousImage();
-    }
-
-  });
-  */
   
   lax.on("change", function() {
     console.log("change event!");
     renderRHS();
     renderImages();
+    updateCounter();
     //renderTags();
   });
 
-  lax.on("selectchange change", function(){
+  lax.on("selectchange", function(){
     updateCounter();
   });
 
   lax.on("editchange", function(){
     updateCounter();
     //changeRoute();
+  });
+
+  lax.on("querychange", function(){
+    updateCounter();
   });
 
   lax.on("modechange", function(){
@@ -126,9 +109,9 @@
 
 
   lax.on("detailchange", function(){
-    DetailOverlay.render();
-    //renderDetailView();
-    //updateCounter();
+    //DetailOverlay.render();
+    renderDetailView();
+    updateCounter();
   });
 
   lax.initDB();

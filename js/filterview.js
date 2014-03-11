@@ -1,6 +1,6 @@
 /* Filterview presenter */
 
-function FilterView(){
+var FilterView = function(){
     // Templates
     var filtertemplate = $("[type='html/filter']").html();
     var rhsview = $("section#filter");
@@ -62,6 +62,7 @@ function FilterView(){
         });
     };
 
+    return this;
 
     // Events
     /*lax.on("querychange", function(){
@@ -69,4 +70,4 @@ function FilterView(){
         this.rerender();
         this.controlListeners();
     }.bind(this));*/
-}
+};

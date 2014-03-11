@@ -43,14 +43,23 @@ function Laxaelv() {
   };
 
   var filterTags = function(tags){
-    if(self.typeMode!=="all" && self.typeMode)
-      tags = db.getTagsOfType(self.typeMode,tags);
+    var tmp = tags;
+    if(self.typeMode!=='all' && self.typeMode) {
+      tmp = db.getTagsOfType(self.typeMode,tags);
+    }
 
-    if(self.searchString) tags = tags.filter(function(element){
-      return element.substring(0, self.searchString.length) === self.searchString;
-    });
+    if(self.searchString) {
+      tmp = tmp.filter( function(element) {
+        return element.substring(0, self.searchString.length) === self.searchString;
+      });
+      if(tmp.length === 0 && self.typeMode !== 'all') {
+        self.typeMode = 'all';
+        self.trigger('typechange');
+        return filterTags(tags);
+      }
+    }
 
-    return tags;
+    return tmp;
   };
 
   self.initDB = function(){
@@ -192,7 +201,7 @@ function Laxaelv() {
 
 
   self.addTagToEdit = function(tag){
-    editTags.push(tag);
+    editTags.push(tag.toLowerCase());
     self.searchString = "";
     self.trigger("editchange");
   };
@@ -204,7 +213,7 @@ function Laxaelv() {
   };
 
   self.addTagToQuery = function(tag){
-    query.push(tag);
+    query.push(tag.toLowerCase());
     self.searchString = "";
     self.trigger("querychange");
   };
@@ -212,7 +221,7 @@ function Laxaelv() {
   self.addTagsToQuery = function(tags){
     query = [];
     tags.forEach(function(tag){
-      query.push(tag);
+      query.push(tag.toLowerCase());
     });
     self.searchString = "";
     self.trigger("querychange");
@@ -244,7 +253,6 @@ function Laxaelv() {
       selection.push(imagesInView[image]);
     self.trigger("selectchange");
   };
-
 
   self.deselectAll = function(){
     selection = [];

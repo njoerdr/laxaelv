@@ -1,25 +1,34 @@
 /* Detailview Presenter */
 
-function DetailView(){
-    // Templates
+var DetailView = function() {
+
     var detailtemplate = $("[type='html/detail']").html();
     var lhsview = $("#lhsview");
-    // Elements
 
-    // Functions
+    var active = false;
+
+    var deactivate = function() {
+        // TODO Promblematic
+        lax.deselectAll();
+        lax.deactivateEditMode();
+        active = false;
+    };
 
     this.render = function() {
         lhsview.empty();
+        // TODO Promblematic
+        lax.deselectAll();
         var image = lax.getDetailImage();
         var item = {name: image};
         $($.render(detailtemplate, item)).appendTo(lhsview);
+        // TODO Promblematic
         lax.selectImage(image);
+        active = true;
     };
 
-    this.addControlListiner = function(){
+    this.addListener = function(){
         $("#close").click(function(){
-           lax.deselectAll();
-           lax.deactivateEditMode();
+           deactivate();
         });
 
         $("#next").click(function(){
@@ -29,8 +38,23 @@ function DetailView(){
         $("#previous").click(function(){
            lax.previousImage();
         });
+        $(document).keydown(function(event) {
+            if(active) {
+                event.cancelBubble = true;
+                event.returnValue = false;
+                if(event.which == 39){
+                  lax.nextImage();
+                }
+                if(event.which == 37){
+                  lax.previousImage();
+                }
+                if(event.which == 27){
+                  deactivate();
+                }
+            }
+        });
     };
 
-    // Events
+    return this;
 
-}
+};

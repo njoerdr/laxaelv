@@ -1,4 +1,13 @@
-
+@font-face {
+  font-family: 'fontello';
+  src: url('../font/fontello.eot?3828674');
+  src: url('../font/fontello.eot?3828674#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff?3828674') format('woff'),
+       url('../font/fontello.ttf?3828674') format('truetype'),
+       url('../font/fontello.svg?3828674#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
 	margin:0;
@@ -95,6 +104,8 @@ figcaption {
 	#previous, #close, #next{
 		margin:0 2px;
 		background-color: #ffffff;
+		font-family: 'fontello';
+		font-size: 14pt;
 
 		&:hover{
 			background-color: #666666;
@@ -102,6 +113,12 @@ figcaption {
 			color:white;
 		}
 	}
+}
+
+.flagbutton {
+	font-family: 'fontello';
+	font-size: 20pt;
+	color:orange;
 }
 
 button {
@@ -149,6 +166,14 @@ img.thumb {
 
 #resultview{
 	figure{
+		button {
+			background-color:transparent;
+		}
+		button:hover {
+			color: black;
+			background-color: orange;
+		}
+
 		button, figcaption{
 			opacity: 0;
 			transition: opacity .25s ease-in-out;
@@ -162,7 +187,10 @@ img.thumb {
 		}
 
 		&.marked {
-			border: 5px solid #c05665;
+			button {
+				opacity: 1;
+			}
+			border: 5px solid orange;
 			margin:1px;
 		}
 	}
