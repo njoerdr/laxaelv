@@ -94,7 +94,8 @@
 
   lax.on("editchange", function(){
     console.log('editchange event');
-    updateCounter();
+    console.log(lax.getEditTags());
+    //updateCounter();
     //changeRoute();
   });
 

@@ -6,7 +6,7 @@ function EditView(){
     var rhsview = $("section#filter");
 
     var editTagcloud = new EditTagcloud();
-    
+    var editbox = new Editbox();
 
     // Functions
     this.render =function(){
@@ -14,7 +14,6 @@ function EditView(){
         $($.render(edittemplate)).appendTo(rhsview);
         editTagcloud.render();
 
-        var editbox = new Editbox($("#selection"));
         editbox.render();
         editbox.searchBoxListeners();
         $("body").addClass('editmode');

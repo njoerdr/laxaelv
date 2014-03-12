@@ -57,14 +57,9 @@ function Querybox(appendTo){
                 var tagtext = $("#tagcloud").children().first().children().first().text();
                 if (tagtext){
                     lax.addTagToQuery(tagtext);
-                    lax.setSearchString('');
-                    $(this).html('');
                 }
-                else{
-                    lax.setSearchString('');
-                    $(this).html('');
-                }
-
+                lax.setSearchString('');
+                $(this).html('');
                 return false;
             }
             var text = $("#searchfield").text();

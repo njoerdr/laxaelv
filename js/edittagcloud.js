@@ -45,12 +45,11 @@ function EditTagcloud(){
 
 /* Editbox presenter */
 
-function Editbox(appendTo){
-
-    var querybox = appendTo;
+function Editbox(){
 
     // Functions
     this.render = function(){
+        var querybox = $("#selection");
         querybox.empty();
         var taglist = lax.getEditTags();
         taglist.forEach(function(element){
@@ -66,8 +65,13 @@ function Editbox(appendTo){
         $("#searchfield").keyup(function(e){
             if(e.which===13){
                 var tagtext = $("#tagcloud").children().first().children().first().text();
-                if (tagtext) lax.addTagToEdit(tagtext);
-                else lax.addTagToEdit($(this).text());
+                if (tagtext) {
+                    lax.saveTag(tagtext);  
+                } else {
+                    lax.saveTag($(this).text());
+                } 
+                lax.setSearchString('');
+                $(this).html('');
                 return false;
             }
             var text = $("#searchfield").text();

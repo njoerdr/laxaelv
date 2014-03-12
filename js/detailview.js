@@ -5,25 +5,26 @@ var DetailView = function() {
     var detailtemplate = $("[type='html/detail']").html();
     var lhsview = $("#lhsview");
 
-    var active = false;
+    //var active = false;
 
     var deactivate = function() {
         // TODO Promblematic
-        lax.deselectAll();
+        //lax.deselectAll();
         lax.deactivateEditMode();
-        active = false;
+        lax.deactivateDetailMode();
+        //active = false;
     };
 
     this.render = function() {
         lhsview.empty();
         // TODO Promblematic
-        lax.deselectAll();
+        //lax.deselectAll();
         var image = lax.getDetailImage();
         var item = {name: image};
         $($.render(detailtemplate, item)).appendTo(lhsview);
         // TODO Promblematic
-        lax.selectImage(image);
-        active = true;
+        //lax.selectImage(image);
+        //active = true;
     };
 
     this.addListener = function(){
@@ -39,7 +40,7 @@ var DetailView = function() {
            lax.previousImage();
         });
         $(document).keyup(function(event) {
-            if(active) {
+            if(lax.isDetailMode() && !lax.isEditMode()) {
                 event.stopImmediatePropagation();
                 //event.cancelBubble = true;
                 //event.returnValue = false;

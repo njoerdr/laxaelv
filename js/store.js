@@ -16,6 +16,7 @@ var Index = function() {
      */
     add: function(key, value) {
       var keystring = JSON.stringify(key);
+      console.log(keystring + ' : ' + value);
       if(index[keystring] === undefined) index[keystring] = [];
       var array = index[keystring];
       if(array.indexOf(value) === -1) array.push(value);
@@ -214,13 +215,14 @@ var DataBase = function() {
       names.forEach(function(value, index, array) {
         tag2imageIndex.add(tag, value);
         image2tagIndex.add(value, tag);
-      	type2tagIndex.add("other", tag);
+        if(!tag2typeIndex.lookup(tag))
+          type2tagIndex.add("other", tag);
       });
     },
     removeTags: function(image, /*array*/ tags) {
     	tags.forEach(function(tag) {
     		tag2imageIndex.remove(tag, image);
-        	image2tagIndex.remove(image, tag);
+        image2tagIndex.remove(image, tag);
     	});
     },
     difference: function(listOne, listTwo) {

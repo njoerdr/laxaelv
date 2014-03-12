@@ -5,6 +5,7 @@ function Laxaelv() {
 
   var self = $.observable(this);
 
+  var detailMode = false;
   var editMode = false;
   var typeMode = 'all';
   var searchString = '';
@@ -91,11 +92,13 @@ function Laxaelv() {
 
   self.chooseImage = function(image){
     iterator = imagesInView.indexOf(image);
+    detailMode = true;
     self.trigger("detailchange");
   };
 
   self.triggerDetails = function(image){
     iterator = imagesInView.indexOf(image);
+    detailMode = true;
     self.trigger("detailrendering");
   };
 
@@ -133,7 +136,10 @@ function Laxaelv() {
   };
 
   self.initEditTagsForSelection = function(){
-    editTags = db.getCommonTags(selection, "intersection");
+    if(detailMode) 
+      editTags = db.getCommonTags([imagesInView[iterator]]);
+    else
+      editTags = db.getCommonTags(selection, "intersection");
     //return editTags;
   };
 
@@ -185,6 +191,43 @@ function Laxaelv() {
   self.isEditMode = function(){
     return editMode;
   };
+
+  self.deactivateDetailMode = function(){
+    detailMode = false;
+    //self.trigger("modechange");
+  };
+
+  self.isDetailMode = function(){
+    return detailMode;
+  };
+
+  /* immediately saving changes */
+  self.saveTag = function(tag) {
+    var tag = tag.toLocaleLowerCase().valueOf();
+    if(detailMode) {
+      db.addTag(tag, [imagesInView[iterator]]);
+      //db.addImage(imagesInView[iterator], [tag]);
+    } 
+    else db.addTag(tag, selection);
+    self.searchString = "";
+    console.log('TAG: ' + tag);
+    console.log('EDITTAGS: ' + editTags);
+    //editTags.push(tag);
+    console.log('EDITTAGS: ' + editTags);
+    self.trigger('editchange');
+  };
+
+  self.removeTag = function(tag) {
+    var tag = tag.toLowerCase();
+    if(detailMode) db.removeTags(imagesInView[iterator], [tag]);
+    else {
+      selection.forEach(function(image) {
+        db.removeTags(image, [tag]);
+      });
+    } 
+    editTags.splice(editTags.indexOf(tag), 1);
+    self.trigger('editchange');
+  }
 
   self.saveChanges = function(){
     selection.forEach(function(image){
