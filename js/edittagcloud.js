@@ -39,16 +39,15 @@ function EditTagcloud(){
         this.changesunsaved();
     }.bind(this));
 
+    return this;
+
 }
 
 /* Editbox presenter */
 
 function Editbox(appendTo){
 
-    // Elements
     var querybox = appendTo;
-
-    //var tagviews = [];
 
     // Functions
     this.render = function(){
@@ -89,6 +88,8 @@ function Editbox(appendTo){
     lax.on("editchange", function(){
         this.render();
     }.bind(this));
+
+    return this;
 }
 
 

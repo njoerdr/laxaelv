@@ -25,7 +25,7 @@ var InfoView = function() {
     };
 
     this.addListener = function(){
-        $("button#edit").click(function(){
+        $('#editswitch').click(function(){
             lax.toggleEditMode();
         });
     };

@@ -243,13 +243,38 @@ footer{
 div#editswitch {
 	position: fixed;
 	bottom: 0px;
-	height: 60px;
+	height: 30px;
 	right:0px;
 	width:400px;
-	background-color: rgba(204,204,204,0.75);
+	text-align: center;
+	color:#ddd;
+	background-color: #666666;
+	border-top-left-radius: 20px;
+	transition: height .10s ease-in-out;
+	&:hover {
+		height: 100px;
+		transition: height .10s ease-in-out;
+	}
 	#slider {
 		font-family: 'fontello';
 		font-size: 18pt;
+	}
+	#counter {
+		position: absolute;
+		top: 5px;
+		left: 15px;
+	}
+	h2 {
+		color:#ddd;
+	}
+	#control {
+		width:100%;
+		text-align: center;
+		button {
+			position: relative;
+			padding:1px 5px;
+			text-transform: uppercase;
+		}
 	}
 }
 

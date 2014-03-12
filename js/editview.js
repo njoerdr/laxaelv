@@ -4,24 +4,23 @@ function EditView(){
     // Templates
     var edittemplate = $("[type='html/edit']").html();
     var rhsview = $("section#filter");
-    // Elements
+
+    var editTagcloud = new EditTagcloud();
+    
 
     // Functions
     this.render =function(){
         rhsview.empty();
-
-        var editTagcloud = new EditTagcloud();
         $($.render(edittemplate)).appendTo(rhsview);
         editTagcloud.render();
 
-        editbox = new Editbox($("#selection"));
+        var editbox = new Editbox($("#selection"));
         editbox.render();
         editbox.searchBoxListeners();
         $("body").addClass('editmode');
     };
 
     this.controlListeners = function(){
-
 
         $("button#cancel").click(function(){
             lax.toggleEditMode();
@@ -59,5 +58,5 @@ function EditView(){
         });
     };
 
-    // Events
+    return this;
 }
