@@ -38,11 +38,11 @@ section#details {
 	z-index: 2;
 }
 
-h2{
+h2 {
 	color:#555;
 	font-size: 20pt;
 	font-weight: 200;
-	//margin: 0 0 10px 0;
+	margin: 10px 0;
 	text-align: center;
 
 	span{
@@ -51,6 +51,10 @@ h2{
 		margin-right: 5px;
 		color:#e4e4e4;
 	}
+}
+
+h3 {
+	font-weight: 200;
 }
 
 #resultview figure {
