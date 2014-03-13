@@ -39,15 +39,29 @@
     detailView.render();
     detailView.addListener();
     
-    infoview.render();
-    infoview.addListener();
+    //infoview.render();
+    //infoview.addListener();
   };
-
-  var renderRHS = function(){
-    if(lax.isEditMode()){
+  /*
+  var renderLHS = function() {
+    if(lax.isDetailMode()) {
+      detailView.render();
+      detailView.addListener();
+    } else {
+      resultView.render();
+    }
+  };
+  */
+  var renderRHS = function() {
+    if(lax.isEditMode()) {
+      $("body").addClass('editmode');
       editView.render();
       editView.controlListeners();
-    } else{
+    } else if(lax.isDetailMode()) {
+      $("body").removeClass('editmode');
+      infoview.render();
+      infoview.addListener();
+    } else {
       $("body").removeClass('editmode');
       filterView.render();
       filterView.controlListeners();
@@ -55,6 +69,7 @@
   };
 
   // HTML for a single todo item
+  /*
   var imagetemplate = $("[type='html/tumb']").html();
   var resulttemplate = $("[type='html/result']").html();
   var detailtemplate = $("[type='html/detail']").html();
@@ -64,7 +79,7 @@
   var tagcloudview = $("#tagcloud");
   var querybox = $("#query");
   var editbox = $("#tagselection");
-
+  */
 
 
   $("footer#result button#deselect").click(function(){
@@ -94,7 +109,6 @@
 
   lax.on("editchange", function(){
     console.log('editchange event');
-    console.log(lax.getEditTags());
     //updateCounter();
     //changeRoute();
   });
@@ -112,12 +126,12 @@
 
   });
 
-
   lax.on("detailrendering", function(){
     console.log('detailchange event');
     //DetailOverlay.render();
     renderDetailView();
-    updateCounter();
+    renderRHS();
+    //updateCounter();
   });
 
   lax.initDB();

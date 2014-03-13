@@ -1,16 +1,15 @@
 /* Edittagcloud presenter */
 
 function EditTagcloud(){
-    // Templates
-    var infotemplate = $("[type='html/info']").html();
 
-    // Functions
     this.render = function(){
         var tagcloudview = $("#tagcloud");
         tagcloudview.empty();
         var tags = lax.getTagCloudForSelection();
-        if(tags.length===0)
+        if(tags.length===0) {
+            var infotemplate = $("[type='html/info']").html();
             $($.render(infotemplate)).appendTo(tagcloudview);
+        }
         tags.forEach(function(tagdata){
             var tag = TagFactory.createTag(tagdata, tagcloudview);
             TagFactory.addToEditListener(tag);
@@ -29,9 +28,8 @@ function EditTagcloud(){
         $("h2").append(" <span>unsaved changes</span>");
     };
 
-    // Events
     lax.on("typechange", function(){
-      this.render();
+        this.render();
     }.bind(this));
 
     lax.on("editchange", function(){
@@ -40,7 +38,6 @@ function EditTagcloud(){
     }.bind(this));
 
     return this;
-
 }
 
 /* Editbox presenter */
@@ -58,7 +55,6 @@ function Editbox(){
             TagFactory.addDeleteTagListener(tag);
         });
     };
-
 
     this.searchBoxListeners = function(){
         $("#searchfield").unbind('keyup');
@@ -95,8 +91,4 @@ function Editbox(){
 
     return this;
 }
-
-
-
-
 

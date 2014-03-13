@@ -5,18 +5,17 @@ function EditView(){
     var edittemplate = $("[type='html/edit']").html();
     var rhsview = $("section#filter");
 
-    var editTagcloud = new EditTagcloud();
     var editbox = new Editbox();
 
     // Functions
     this.render =function(){
+        var editTagcloud = new EditTagcloud();
         rhsview.empty();
         $($.render(edittemplate)).appendTo(rhsview);
         editTagcloud.render();
 
         editbox.render();
         editbox.searchBoxListeners();
-        $("body").addClass('editmode');
     };
 
     this.controlListeners = function(){
@@ -24,7 +23,7 @@ function EditView(){
         $("button#cancel").click(function(){
             lax.toggleEditMode();
             //After cancel the current selection should be discarded
-            lax.deselectAll();
+            //lax.deselectAll();
         });
 
         $("button#save").click(function(){

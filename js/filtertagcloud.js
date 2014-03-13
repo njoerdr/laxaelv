@@ -1,44 +1,37 @@
 /* Filtertagcloud presenter */
 
 function FilterTagcloud(){
-    // Templates
 
-    // Functions
     this.render = function(){
         var tagcloudview = $("#tagcloud");
         tagcloudview.empty();
         var tags = lax.getTags();
         tags.forEach(function(tagdata){
             var tag = TagFactory.createTag(tagdata, tagcloudview);
+            //TagFactory.unbindAll(tag);
             TagFactory.addToQueryListener(tag);
         });
 
     };
 
-    // Events
-
     lax.on("typechange", function(){
-      this.render();
+        this.render();
     }.bind(this));
 
     lax.on("querychange", function(){
         this.render();
     }.bind(this));
 
-
+    return this;
 }
 
 /* Querybox presenter */
 
-function Querybox(appendTo){
-
-    // Elements
-    var querybox = appendTo;
-
-    var tagviews = [];
+function Querybox(){
 
     // Functions
     this.render = function(){
+        var querybox = $("#query");
         querybox.empty();
         var taglist = lax.getQueryTags();
         taglist.forEach(function(element){
@@ -46,8 +39,6 @@ function Querybox(appendTo){
             var tag = TagFactory.createTag(tagdata, querybox);
             TagFactory.addRemoveFromQueryListener(tag);
         });
-
-        //this.searchBoxListeners();
     };
 
     this.searchBoxListeners = function(){
@@ -65,8 +56,9 @@ function Querybox(appendTo){
             var text = $("#searchfield").text();
             lax.setSearchString(text);
             $(this).attr("size", text.length);
-            //return true;
+            return true;
         });
+
         $("#searchfield").click(function(){
           if($(this).text()==="+") $(this).html("");
         });
@@ -76,12 +68,10 @@ function Querybox(appendTo){
         });
     };
 
-
-    // Events
-
     lax.on("querychange", function(){
         this.render();
     }.bind(this));
-}
 
+    return this;
+}
 

@@ -59,7 +59,6 @@ function Laxaelv() {
         return filterTags(tags);
       }
     }
-
     return tmp;
   };
 
@@ -73,9 +72,7 @@ function Laxaelv() {
   };
 
   self.getDetailImageTags = function(){
-    console.log(imagesInView[iterator]);
-    var detailTags = db.getCommonTags([imagesInView[iterator]]);
-    return detailTags;
+    return db.getCommonTags([imagesInView[iterator]]);
   };
 
   self.nextImage = function(){
@@ -108,19 +105,16 @@ function Laxaelv() {
     return imagesInView;
   };
 
-  self.getTags = function(){
-
+  self.getTags = function() {
     if(!tagcache) tagcache = db.getCommonTags(imagesInView);
     var tags = tagcache.slice();
-
     if(query.length > 0) tags = db.difference(tags, query);
-    // Testing type filtering
 
     return weights(filterTags(tags));
   };
 
   self.setSearchString = function(word){
-    word = word.toLowerCase();
+    var word = word.toLocaleLowerCase().valueOf();
     self.searchString = word;
     self.trigger("typechange");
   };
@@ -140,7 +134,6 @@ function Laxaelv() {
       editTags = db.getCommonTags([imagesInView[iterator]]);
     else
       editTags = db.getCommonTags(selection, "intersection");
-    //return editTags;
   };
 
   self.getEditTags = function(){
@@ -173,6 +166,7 @@ function Laxaelv() {
   self.toggleEditMode = function(){
     editMode = !editMode;
     if(editMode) self.initEditTagsForSelection();
+    else editTags = [];
     self.trigger("modechange");
   };
 
@@ -185,6 +179,7 @@ function Laxaelv() {
 
   self.deactivateEditMode = function(){
     editMode = false;
+    editTags = [];
     self.trigger("modechange");
   };
 
@@ -194,7 +189,7 @@ function Laxaelv() {
 
   self.deactivateDetailMode = function(){
     detailMode = false;
-    //self.trigger("modechange");
+    self.trigger("modechange");
   };
 
   self.isDetailMode = function(){
@@ -206,30 +201,29 @@ function Laxaelv() {
     var tag = tag.toLocaleLowerCase().valueOf();
     if(detailMode) {
       db.addTag(tag, [imagesInView[iterator]]);
-      //db.addImage(imagesInView[iterator], [tag]);
-    } 
-    else db.addTag(tag, selection);
+    } else {
+      db.addTag(tag, selection);
+    }
     self.searchString = "";
-    console.log('TAG: ' + tag);
-    console.log('EDITTAGS: ' + editTags);
-    //editTags.push(tag);
-    console.log('EDITTAGS: ' + editTags);
+    editTags.push(tag);
     self.trigger('editchange');
   };
 
   self.removeTag = function(tag) {
-    var tag = tag.toLowerCase();
-    if(detailMode) db.removeTags(imagesInView[iterator], [tag]);
-    else {
+    var tag = tag.toLocaleLowerCase().valueOf();
+    if(detailMode) {
+      db.removeTags(imagesInView[iterator], [tag]);
+    } else {
       selection.forEach(function(image) {
         db.removeTags(image, [tag]);
       });
-    } 
+    }
     editTags.splice(editTags.indexOf(tag), 1);
     self.trigger('editchange');
-  }
+  };
 
   self.saveChanges = function(){
+    console.log('saveChanges');
     selection.forEach(function(image){
       db.addImage(image, editTags);
       db.removeTags(image, removeTags);
@@ -248,7 +242,8 @@ function Laxaelv() {
 
 
   self.addTagToEdit = function(tag){
-    editTags.push(tag.toLowerCase());
+    var tag = tag.toLocaleLowerCase().valueOf();
+    editTags.push(tag);
     self.searchString = "";
     self.trigger("editchange");
   };
@@ -260,7 +255,8 @@ function Laxaelv() {
   };
 
   self.addTagToQuery = function(tag){
-    query.push(tag.toLowerCase());
+    var tag = tag.toLocaleLowerCase().valueOf();
+    query.push(tag);
     self.searchString = "";
     self.trigger("querychange");
   };
@@ -268,7 +264,8 @@ function Laxaelv() {
   self.addTagsToQuery = function(tags){
     query = [];
     tags.forEach(function(tag){
-      query.push(tag.toLowerCase());
+      var tag = tag.toLocaleLowerCase().valueOf();
+      query.push(tag);
     });
     self.searchString = "";
     self.trigger("querychange");
@@ -296,14 +293,19 @@ function Laxaelv() {
 
   self.selectAll = function(){
     selection = [];
-    for(var image in imagesInView)
+    for(var image in imagesInView) {
       selection.push(imagesInView[image]);
+    }
     self.trigger("selectchange");
   };
 
   self.deselectAll = function(){
     selection = [];
     self.trigger("selectchange");
+  };
+
+  self.isSelected = function(image) {
+    return selection.indexOf(image) !== -1;
   };
 
 }

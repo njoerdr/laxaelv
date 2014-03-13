@@ -4,31 +4,28 @@ var FilterView = function(){
     // Templates
     var filtertemplate = $("[type='html/filter']").html();
     var rhsview = $("section#filter");
-    // Elements
-    var filterTagcloud;
-    var querybox;
 
+    //var filterTagcloud = new FilterTagcloud();
+    var querybox = new Querybox();
 
     // Functions
     this.render =function(){
+        var filterTagcloud = new FilterTagcloud();
         rhsview.empty();
 
-        filterTagcloud = new FilterTagcloud();
         $($.render(filtertemplate)).appendTo(rhsview);
         filterTagcloud.render();
-
-        querybox = new Querybox($("#query"));
+        //var querybox = new Querybox();
         querybox.render();
         querybox.searchBoxListeners();
     };
-
+    /*
     this.rerender = function(){
         //filterTagcloud.render();
         querybox.render();
         filterTagcloud.render();
-
     };
-
+    */
     this.controlListeners = function(){
         $("#tabs button").removeClass("active");
 

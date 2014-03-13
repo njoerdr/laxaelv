@@ -10,7 +10,7 @@ var DetailView = function() {
     var deactivate = function() {
         // TODO Promblematic
         //lax.deselectAll();
-        lax.deactivateEditMode();
+        //lax.deactivateEditMode();
         lax.deactivateDetailMode();
         //active = false;
     };
@@ -41,11 +41,11 @@ var DetailView = function() {
         });
         $(document).keyup(function(event) {
             if(lax.isDetailMode() && !lax.isEditMode()) {
+                console.log(event.which);
                 event.stopImmediatePropagation();
                 //event.cancelBubble = true;
                 //event.returnValue = false;
                 if(event.which == 39){
-                    console.log('BUTTON');
                   lax.nextImage();
                 }
                 if(event.which == 37){

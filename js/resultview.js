@@ -43,7 +43,6 @@ var ResultView = function(){
             figcap.innerHTML = element;
             var flag = document.createElement('button');
             flag.className = 'flagbutton';
-            flag.innerHTML = '&#xe814;';
             flag.onclick = flagClick;
 
             var img = new Image();
@@ -51,6 +50,13 @@ var ResultView = function(){
             img.className = 'thumb';
             img.src = 'small/' + element;
             img.onclick = imgClick;
+
+            if(lax.isSelected(element)) {
+                fignode.className = 'marked';
+                flag.innerHTML = '&#xe813;';
+            } else {
+                flag.innerHTML = '&#xe814;';
+            }
 
             fignode.appendChild(img);
             fignode.appendChild(flag);

@@ -13,7 +13,13 @@ var TagFactory = {
 
 	    parent.append(tag);
 
+	    $(tag).draggable({ stack: ".tag" });
+
 		return tag;
+	},
+	unbindAll:function(tag) {
+		$(tag).unbind();
+		$(tag).children().first().unbind('click');
 	},
 	addToQueryListener:function(tag) {
 	    tag.onclick = function(e) {
@@ -23,10 +29,8 @@ var TagFactory = {
 	},
 	addToEditListener:function(tag) {
 	    tag.onclick = function(e) {
-	    	console.log('SAVE KLICK');
 	    	e.stopImmediatePropagation();
 	        var tagtext = $(this).children().first().text();
-	        //lax.addTagToEdit(tagtext);
 	        lax.saveTag(tagtext);
 	    };
 	},
@@ -39,7 +43,6 @@ var TagFactory = {
 	addDeleteTagListener:function(tag) {
 	    tag.lastChild.onclick = function(e) {
 	        var tagtext = $(this).parent().children().first().text();
-	        //lax.removeTagFromEdit(tagtext);
 	        lax.removeTag(tagtext);
 	    };
 	},
@@ -48,6 +51,7 @@ var TagFactory = {
 			var tagtext = $(this).text();
 			tagtext = tagtext.slice(0, tagtext.length-1);
 			lax.addTagsToQuery([tagtext]);
+			lax.deactivateDetailMode();
 		};
 	},
 	addDraggabillity:function(tag) {

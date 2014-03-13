@@ -28,7 +28,6 @@ function Router(){
 
             key = kv[0];
             values = kv[1].split(",");
-            console.log(values);
             if(key==="q") this.searchTags(values);
             if(values.length===0) searchTags([]);
         }.bind(this));
@@ -39,7 +38,8 @@ function Router(){
     };
 
     this.searchTags = function(values){
-        lax.deactivateEditMode();
+        //lax.deactivateEditMode();
+        //lax.deactivateDetailMode();
         lax.addTagsToQuery(values);
     };
 
@@ -85,7 +85,8 @@ function Router(){
     }.bind(this));
 
     lax.on("modechange", function(){
-        if(lax.isEditMode()) this.updateEditURL();
+        /*if(lax.isEditMode()) this.updateEditURL();*/ 
+        if(lax.isDetailMode()) this.updateDetailURL();
         else this.updateSearchURL();
     }.bind(this));
 
