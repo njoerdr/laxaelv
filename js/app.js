@@ -16,11 +16,13 @@
   var updateCounter = function(){
     $("#flagcount").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
 
-    if(lax.getSelectionCount()>0) 
+    if(lax.getSelectionCount()>0) {
       $("#edit").show();
-    else 
+      $('#editswitch').addClass('activated');
+    } else {
       $("#edit").hide();
-
+      $('#editswitch').removeClass('activated');
+    } 
   };
 
 

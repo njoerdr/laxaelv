@@ -256,13 +256,13 @@ div#editswitch {
 	background-color: #666666;
 	border-top-left-radius: 10px;
 	transition: height .10s ease-in-out;
-	&:hover {
+	&.activated {
 		height: 100px;
 		transition: height .10s ease-in-out;
 	}
-	#slider {
-		font-family: 'fontello';
-		font-size: 18pt;
+	&:hover {
+		height: 100px;
+		transition: height .10s ease-in-out;
 	}
 	#counter {
 		position: absolute;
@@ -272,6 +272,11 @@ div#editswitch {
 	h2 {
 		margin: 0;
 		color:#ddd;
+	}
+	h2:before {
+		font-family: 'fontello';
+		content: '\e82a';
+		padding: 0 0.4em;
 	}
 	#control {
 		width:100%;
