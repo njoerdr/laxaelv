@@ -513,12 +513,13 @@ div#searchswitch {
 	}
 }
 
-
+$bright_bg_edit: #666;
+$border_edit: #aaa;
+$dark_bg_edit: #444;
 
 .editmode{
-	background-color: #000000;
-	color: #FFFFFF;
-
+	background-color: $bright_bg_edit;
+	color: #ffffff;
 	span{
 		background-color: #000000;
 		color: #FFFFFF;
@@ -529,28 +530,28 @@ div#searchswitch {
 	}
 
 	#tagcloud{
-		background-color: #333333;
-		border-color: #111111;
+		background-color: $bright_bg_edit;
+		border-color: $border_edit;
 
 		.tag{
-			background-color: #222222;
+			background-color: $dark_bg_edit;
 			span{
-				background-color: #222222;
+				background-color: $dark_bg_edit;
 			}
 		}
 	}
 
 	#tagselection{
-		background-color: #333333;
+		background-color: $dark_bg_edit;
 
 		.tag{
-			background-color: #222222;
-			border-color:#111111;
+			background-color: $bright_bg_edit;
+			border-color:$border_edit;
 			span{
-				background-color: #222222;
+				background-color: $bright_bg_edit;
 			}
 			button{
-				background-color: #000000 !important;
+				background-color: $dark_bg_edit !important;
 			}
 		}
 	}
@@ -569,13 +570,18 @@ div#searchswitch {
 	}
 
 	.other{
-		border-color: #000000;
+		border-color: $border_edit;
 	}
 
+	.active{
+		border-top-color: $bright_bg_edit !IMPORTANT;
+	}
+
+
 	#tabs{
-		background-color: #000000;
+		background-color: $bright_bg_edit;
 		.tab{
-			background-color: #000000;
+			background-color: $bright_bg_edit;
 			color: #FFFFFF;
 		}
 
