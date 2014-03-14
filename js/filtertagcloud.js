@@ -77,6 +77,11 @@ function Querybox(){
             $(this).hide();
           //if($(this).text().length===0) $(this).html("+");
         });
+
+        $("#querycontrol button").click(function(){
+            lax.resetQuery();
+        });
+
     };
 
     lax.on("querychange", function(){

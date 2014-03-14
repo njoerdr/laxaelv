@@ -19,7 +19,7 @@
     } else {
       $("#counter").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
     }
-    
+
     if(lax.isDetailMode()) {
       $("#counter").hide();
     } else {
@@ -38,7 +38,7 @@
         $('#editswitch').removeClass('activated');
         $('#editswitch').unbind('click');
       }
-    } 
+    }
   };
 
   var renderImages = function(){
@@ -104,10 +104,5 @@
   });
 
   lax.initDB();
-
-  $("#querybox button").click(function(){
-    lax.resetQuery();
-  });
-
 
 })();
