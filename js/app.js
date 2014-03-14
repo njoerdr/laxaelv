@@ -14,17 +14,28 @@
   var editView = new EditView();
 
   var updateCounter = function(){
-    $("#flagcount").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
+    $("#counter").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
 
-    if(lax.getSelectionCount()>0) {
-      $("#edit").show();
-      $('#editswitch').addClass('activated');
+    if(lax.isDetailMode()) {
+      $("#counter").hide();
     } else {
-      $("#edit").hide();
-      $('#editswitch').removeClass('activated');
+      $("#counter").show();
+    }
+    
+    if(lax.getSelectionCount()>0) {
+      if(!lax.isDetailMode()) {
+        $('#editswitch').addClass('activated');
+        $('#editswitch').click(function(){
+            lax.toggleEditMode();
+        });
+      }
+    } else {
+      if(!lax.isDetailMode()) {
+        $('#editswitch').removeClass('activated');
+        $('#editswitch').unbind('click');
+      }
     } 
   };
-
 
   var updateButtonStatus = function(){
     if(lax.isEditMode())
@@ -40,20 +51,8 @@
   var renderDetailView = function(){
     detailView.render();
     detailView.addListener();
-    
-    //infoview.render();
-    //infoview.addListener();
   };
-  /*
-  var renderLHS = function() {
-    if(lax.isDetailMode()) {
-      detailView.render();
-      detailView.addListener();
-    } else {
-      resultView.render();
-    }
-  };
-  */
+
   var renderRHS = function() {
     if(lax.isEditMode()) {
       $("body").addClass('editmode');
@@ -70,38 +69,11 @@
     }
   };
 
-  // HTML for a single todo item
-  /*
-  var imagetemplate = $("[type='html/tumb']").html();
-  var resulttemplate = $("[type='html/result']").html();
-  var detailtemplate = $("[type='html/detail']").html();
-
-  var rhsview = $("section#filter");
-  var lhsview = $("#lhsview");
-  var tagcloudview = $("#tagcloud");
-  var querybox = $("#query");
-  var editbox = $("#tagselection");
-  */
-
-
-  $("footer#result button#deselect").click(function(){
-    $("figure").removeClass("marked");
-    $("figure button").text("flag");
-    lax.deselectAll();
-  });
-  $("footer#result button#select").click(function(){
-    $("figure").addClass("marked");
-    $("figure button").text("unflag");
-    lax.selectAll();
-  });
-
-  
   lax.on("change", function() {
     console.log("change event");
     renderRHS();
     renderImages();
     updateCounter();
-    //renderTags();
   });
 
   lax.on("selectchange", function(){

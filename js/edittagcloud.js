@@ -23,18 +23,12 @@ function EditTagcloud(){
         });
     };
 
-    this.changesunsaved = function(){
-        $("h2 span").remove();
-        $("h2").append(" <span>unsaved changes</span>");
-    };
-
     lax.on("typechange", function(){
         this.render();
     }.bind(this));
 
     lax.on("editchange", function(){
         this.render();
-        this.changesunsaved();
     }.bind(this));
 
     return this;

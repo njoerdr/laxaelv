@@ -16,9 +16,16 @@ function EditView(){
 
         editbox.render();
         editbox.searchBoxListeners();
+        if(lax.isDetailMode()) {
+            $("#searchswitch>h2").text("Details");
+        }
     };
 
     this.controlListeners = function(){
+
+        $("#searchswitch").click(function(){
+            lax.toggleEditMode();
+        });
 
         $("button#cancel").click(function(){
             lax.toggleEditMode();

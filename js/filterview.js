@@ -19,19 +19,20 @@ var FilterView = function(){
         querybox.render();
         querybox.searchBoxListeners();
     };
-    /*
-    this.rerender = function(){
-        //filterTagcloud.render();
-        querybox.render();
-        filterTagcloud.render();
-    };
-    */
+    
     this.controlListeners = function(){
-        $("#tabs button").removeClass("active");
-
-        $("button#edit").click(function(){
-            lax.toggleEditMode();
+        $("button#deselect").click(function(e){
+            e.stopImmediatePropagation();
+            $("figure").removeClass("marked");
+            lax.deselectAll();
         });
+        $("button#select").click(function(e){
+            e.stopImmediatePropagation();
+            $("figure").addClass("marked");
+            lax.selectAll();
+        });
+
+        $("#tabs button").removeClass("active");
 
         $(".tab").click(function(){
                 $("#tabs button").removeClass("active");
@@ -45,7 +46,6 @@ var FilterView = function(){
             var type = $(this).text();
             lax.setTypeMode(type);
         });
-
 
         $(".tab").droppable({
             hoverClass: "drophover",

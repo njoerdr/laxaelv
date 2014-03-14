@@ -14,7 +14,7 @@ body {
 	padding:0;
 	font-family: "Helvetica Neue", Arial, sans-serif;
 }
-
+/*
 a {
 	text-decoration: none;
 	color:black;
@@ -27,7 +27,8 @@ a {
 		color:white;
 	}
 }
-
+*/
+/*
 section#details {
 	position: fixed;
 	top:0;
@@ -37,7 +38,7 @@ section#details {
 	background-color: rgba(1,1,1,0.9);
 	z-index: 2;
 }
-
+*/
 h2 {
 	color:#555;
 	font-size: 20pt;
@@ -99,7 +100,6 @@ figcaption {
 	max-width: 100%;
 }
 
-
 #controls{
 	max-width: 100px;
 	margin-bottom: 20px;
@@ -127,22 +127,14 @@ figcaption {
 }
 
 button {
-	position: absolute;
-	right:0;
+	//position: absolute;
+	//right:0;
 	border-style: none;
 	font-family: "Helvetica Neue", Arial, sans-serif;
 	font-size:10pt;
 
 	&:hover{
 		background-color: #aaaaaa;
-	}
-
-	#select {
-		right:100px;
-	}
-
-	#deselect {
-		right:10px;
 	}
 
 	&.function{
@@ -155,8 +147,6 @@ button {
 	}
 
 }
-
-
 
 img.thumb {
 	position:absolute;
@@ -213,42 +203,10 @@ img.thumb {
 	border: thin solid #e4e4e4;
 }
 
-footer{
-	&#result {
-		position: fixed;
-		bottom: 0px;
-		height: 20px;
-		right:401px;
-		left:0;
-		background-color: rgba(204,204,204,0.75);
-
-		button {
-			@extend .function;
-			font-size: 10pt;
-
-			margin-top: 2px;
-			padding: 1px 5px;
-			position: relative;
-
-		}
-
-	}
-
-	&#filter {
-		position: fixed;
-		bottom: 0px;
-		height: 60px;
-		right:0px;
-		width:400px;
-		background-color: rgba(204,204,204,0.75);
-	}
-
-}
-
 div#editswitch {
 	position: fixed;
 	bottom: 0px;
-	height: 30px;
+	height: 35px;
 	right:0px;
 	width:400px;
 	text-align: center;
@@ -257,17 +215,31 @@ div#editswitch {
 	border-top-left-radius: 10px;
 	transition: height .10s ease-in-out;
 	&.activated {
+		cursor: pointer;
+		height: 70px;
+		transition: height .10s ease-in-out;
+	}
+	&.activated:hover {
 		height: 100px;
 		transition: height .10s ease-in-out;
 	}
-	&:hover {
-		height: 100px;
+	&.infoview {
+		cursor: pointer;
+	}
+	&.infoview:hover {
+		height: 70px;
 		transition: height .10s ease-in-out;
 	}
 	#counter {
-		position: absolute;
-		top: 5px;
-		left: 15px;
+		font-size: 12pt;
+		width: 100%;
+		text-align: left;
+		margin: 5px 15px;
+		line-height: 20pt;
+	}
+	span {
+		font-size: 10pt;
+		color:#ddd;
 	}
 	h2 {
 		margin: 0;
@@ -279,12 +251,27 @@ div#editswitch {
 		padding: 0 0.4em;
 	}
 	#control {
-		width:100%;
+		position: absolute;
+		top:5px;
+		right:15px;
 		text-align: center;
 		button {
+			font-size: 12pt;
 			position: relative;
 			padding:1px 5px;
 			text-transform: uppercase;
+			border-radius: 3px;
+		}
+		button:hover {
+			box-shadow: 2px 2px 4px black;
+		}
+		button:active {
+			box-shadow: 1px 1px 2px black;
+		}
+		button:before {
+			font-family: 'fontello';
+			content: '\e80b';
+			padding-right: 0.3em;
 		}
 	}
 }
@@ -292,6 +279,7 @@ div#editswitch {
 div#searchswitch {
 	height: 35px;
 	text-align: center;
+	cursor: pointer;
 	background-color: #FFFFFF;
 	border-bottom-left-radius: 10px;
 	overflow: hidden;
@@ -343,9 +331,25 @@ div#searchswitch {
 	button{
 		display: inline;
 	}
-
 	& > button{
-		display:none;
+		background-color: transparent;
+		cursor: pointer;
+		border-radius:15px;
+		color: rgb(170,170,170);
+		margin: 2px;
+		padding: 3px;
+		//display:none;
+	}
+	& > button:hover {
+		color: rgb(150,150,150);
+	}
+	& > button:active {
+		color: rgb(140,140,140);
+	}
+	& > button:before{
+		font-family: 'fontello';
+		font-size: 18pt;
+		content: '\e82b';
 	}
 }
 
@@ -436,39 +440,10 @@ div#searchswitch {
 	background-color: #dfdfdf;
 }
 
-#filtercontrol{
-	margin:0 auto;
-	width:100%;
-	height: 40px;
-	text-align: center;
-	float:left;
-	background-color: #ffffff;
-
-	& > div{
-		float:right;
-		margin-right:10px;
-		height:23px;
-	}
-}
-
-#flagcount{
-	text-align: center;
-	float:left;
-	width:100%;
-}
-
 #edit{
 	display:none;
 	float:left;
 	position: relative;
-}
-
-#cancel,
-#save{
-	float:left;
-	position: relative;
-	display: block;
-	min-width: 20px;
 }
 
 .small{
@@ -578,7 +553,6 @@ div#searchswitch {
 		}
 	}
 
-
 	#controls{
 		display:none;
 		#previous, #close, #next{
@@ -610,12 +584,6 @@ div#searchswitch {
 	}
 
 	#resultview{
-		img{
-
-
-
-		}
-
 		figure{
 			opacity:0.2;
 			border-color: #333333;
@@ -628,12 +596,14 @@ div#searchswitch {
 
 	}
 
-
-	footer#result{
-		display: none;
-	}
-
-	footer#filter{
-		background-color: #000000;
+	footer#editorfooter{
+		position: fixed;
+		bottom: 0px;
+		height: 50px;
+		right:0px;
+		width:400px;
+		#counter {
+			text-align: center;
+		}
 	}
 }

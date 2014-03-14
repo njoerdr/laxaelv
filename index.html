@@ -52,7 +52,7 @@
 		<div id="querybox">
 			<div id="query"></div>
 			<span contenteditable="true" id="searchfield" class="tag small">+</span>
-			<button>clear</button>
+			<button></button>
 		</div>
 		<div id="tagcloud"></div>
 		<div id="tabs">
@@ -63,24 +63,14 @@
 			<button class="tab who">who</button>
 			<button class="tab other">other</button>
 		</div>
-
-		<footer id="filter">
-			<div id="filtercontrol">
-				<div>
-					<button id="edit" class="function">edit</button>
-				</div>
-			</div>
-
-			<span id="flagcount">0 of ?? flagged</span>
-		</footer>
-
 		<div id="editswitch">
-			<span id="counter">0 of ?? selected</span>
-			<h2>Editor</h2>
+			<div id="counter">0 of ?? selected</div>
 			<div id="control">
-				<button id="select">select all</button>
-				<button id="deselect">select none</button>
+				<button id="select">all</button>
+				<button id="deselect">none</button>
 			</div>
+			<h2>Editor</h2>
+			<span>click to switch<span>
 		</div>
 	</script>
 
@@ -105,15 +95,9 @@
 			<button class="tab other">other</button>
 		</div>
 
-		<footer id="filter">
 
-			<div id="filtercontrol">
-				<div>
-					<button id="save" class="function">save</button>
-					<button id="cancel" class="function">cancel</button>
-				</div>
-			</div>
-			<span id="flagcount">0 of ?? flagged</span>
+		<footer id="editorfooter">
+			<div id="counter">0 of ?? selected</div>
 		</footer>
 	</script>
 
@@ -121,19 +105,9 @@
 		<h2>Details</h2>
 		<h3></h3>
 		<div id="tags"></div>
-		<!--
-		<footer id="filter">
-			<div id="filtercontrol">
-				<div>
-					<button id="edit" class="function">edit</button>
-				</div>
-			</div>
-			<span id="flagcount">0 of ?? flagged</span>
-		</footer>
-		-->
-		<div id="editswitch">
-			<span id="slider">&#xe82a;</span>
+		<div id="editswitch" class="infoview">
 			<h2>Editor</h2>
+			<span>click to switch<span>
 		</div>
 	</script>
 	<!--
@@ -158,20 +132,8 @@
 	-->
 	<body>
 		<section id="laxaelvapp">
-			<!--<header id="header">
-				<h1>Laxälv</h1>
-			</header>-->
-			<section id="lhsview">
-
-			</section>
-			<footer id="result">
-				<button id="select">flag all</button>
-				<button id="deselect">unflag all</button>
-			</footer>
-
-			<section id="filter">
-
-			</section>
+			<section id="lhsview"></section>
+			<section id="filter"></section>
 		</section>
 
 		<script src="libs/jquery-2.0.3.min.js"></script>
@@ -193,9 +155,6 @@
 		<script src="js/infoview.js"></script>
 		<script src="js/router.js"></script>
 		<script src="js/app.js"></script>
-
 	</body>
-
-
 </html>
 

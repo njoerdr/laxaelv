@@ -17,10 +17,8 @@ var ResultView = function(){
     var flagClick = function() {
         $(this).parent().toggleClass("marked");
         if($(this).parent().hasClass("marked")) {
-            this.innerHTML = '&#xe813;';
             lax.selectImage($(this).parent().children().first().attr("id"));
         } else {
-            this.innerHTML = '&#xe814;';
             lax.deselectImage($(this).parent().children().first().attr("id"));
         }
     };
@@ -53,10 +51,8 @@ var ResultView = function(){
 
             if(lax.isSelected(element)) {
                 fignode.className = 'marked';
-                flag.innerHTML = '&#xe813;';
-            } else {
-                flag.innerHTML = '&#xe814;';
             }
+            flag.innerHTML = '&#xe80b;';
 
             fignode.appendChild(img);
             fignode.appendChild(flag);

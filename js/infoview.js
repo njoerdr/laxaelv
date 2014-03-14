@@ -15,15 +15,6 @@ var InfoView = function() {
             tagdata = {size: "small", tag: tagname, type:"other"};
             var tag = TagFactory.createTag(tagdata, $("#tags"));
             TagFactory.addSearchListener(tag);
-            /*
-            $(tag).click( function(e) {
-                var tagtext = $(this).text();
-                tagtext = tagtext.slice(0, tagtext.length-1);
-                console.log(tagtext);
-                lax.addTagsToQuery([tagtext]);
-                //lax.deselectAll();
-            });
-            */  
         });
     };
 
