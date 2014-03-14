@@ -13,7 +13,6 @@ function FilterTagcloud(){
         });
         
         var type = lax.getTypeMode();
-
         $('.tab').each(function(){
             $(this).toggleClass('active', $(this).hasClass(type));
         });

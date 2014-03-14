@@ -15,11 +15,9 @@ function EditTagcloud(){
             TagFactory.addToEditListener(tag);
         });
 
-        $("#tabs button").removeClass("active");
-        $("#tabs button."+lax.getTypeMode()).addClass("active");
-        $(".tab").click(function(){
-            var type = $(this).text();
-            lax.setTypeMode(type);
+        var type = lax.getTypeMode();
+        $('.tab').each(function(){
+            $(this).toggleClass('active', $(this).hasClass(type));
         });
     };
 
