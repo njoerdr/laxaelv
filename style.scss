@@ -331,32 +331,62 @@ div#searchswitch {
 }
 
 #querybox{
+	& > div{
+		float:left;
+		width: 350px;
+	}
+
+	#querycontrol{
+		width: 34px;
+		float:left;
+		& > button{
+			position: absolute;
+			right: 0;
+			background-color: transparent;
+			cursor: pointer;
+			border-radius:15px;
+			color: rgb(170,170,170);
+			margin: 2px;
+			padding: 3px;
+			//display:none;
+		}
+		& > button:hover {
+			color: rgb(150,150,150);
+		}
+		& > button:active {
+			color: rgb(140,140,140);
+		}
+		& > button:before{
+			font-family: 'fontello';
+			font-size: 18pt;
+			content: '\e82b';
+		}
+	}
+
 	button{
 		display: inline;
 	}
-	& > button{
-		position: absolute;
-		right: 0;
-		background-color: transparent;
-		cursor: pointer;
-		border-radius:15px;
-		color: rgb(170,170,170);
-		margin: 2px;
-		padding: 3px;
-		//display:none;
-	}
-	& > button:hover {
-		color: rgb(150,150,150);
-	}
-	& > button:active {
-		color: rgb(140,140,140);
-	}
-	& > button:before{
-		font-family: 'fontello';
-		font-size: 18pt;
-		content: '\e82b';
+
+}
+
+
+#querybox,
+#tagselection{
+	float:left;
+	margin-bottom: 5px;
+	min-height:30px;
+	width:384px;
+	padding: 5px;
+	position:relative;
+	background-color: #fafafa;
+	border-radius: 10px;
+	/*border: thin solid #e4e4e4;*/
+
+	span{
+		background-color: white;
 	}
 }
+
 
 #tags{
 	.tag button{
@@ -499,22 +529,6 @@ div#searchswitch {
 	margin: 0 0 0 0.4em;
 }
 
-#querybox,
-#tagselection{
-	float:left;
-	margin-bottom: 5px;
-	min-height:30px;
-	width:96%;
-	padding: 5px;
-	position:relative;
-	background-color: #fafafa;
-	border-radius: 10px;
-	/*border: thin solid #e4e4e4;*/
-
-	span{
-		background-color: white;
-	}
-}
 
 $bright_bg_edit: #666;
 $border_edit: #aaa;
