@@ -203,6 +203,7 @@ img.thumb {
 	border: thin solid #e4e4e4;
 }
 
+
 div#editswitch {
 	position: fixed;
 	bottom: 0px;
@@ -213,7 +214,8 @@ div#editswitch {
 	color:#ddd;
 	background-color: #666666;
 	border-top-left-radius: 10px;
-	transition: height .10s ease-in-out;
+	/*transition: height .10s ease-in-out;*/
+
 	&.activated {
 		cursor: pointer;
 		height: 70px;
@@ -223,6 +225,7 @@ div#editswitch {
 		height: 100px;
 		transition: height .10s ease-in-out;
 	}
+
 	&.infoview {
 		cursor: pointer;
 	}
