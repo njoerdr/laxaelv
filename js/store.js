@@ -115,8 +115,8 @@ var DataBase = function() {
   //image2tagIndex.print();
   //tag2imageIndex.print();
 
-  type2tagIndex.print();
-  tag2typeIndex.print();
+  //type2tagIndex.print();
+  //tag2typeIndex.print();
 
 
   // private method for intersection of multiple lists
@@ -151,8 +151,8 @@ var DataBase = function() {
     // Images for query passed as list
     getImages: function(/*array or nothing*/ query) {
       // trivial cases
-      if(!query || query.length === 0) return image2tagIndex.list();
-      if(query.length === 1) return tag2imageIndex.lookup(query[0]);
+      if(!query || query.length === 0) return image2tagIndex.list().slice();
+      if(query.length === 1) return tag2imageIndex.lookup(query[0]).slice();
 
       // preparation for intersection
       var arrays = [];
@@ -165,8 +165,8 @@ var DataBase = function() {
     // Tags for selection passed as list
     getCommonTags: function(/*array or nothing*/ selection, /*intersection or union=default*/ operation) {
       // trivial cases
-      if(!selection || selection.length === 0) return tag2imageIndex.list();
-      if(selection.length === 1) return image2tagIndex.lookup(selection[0]);
+      if(!selection || selection.length === 0) return tag2imageIndex.list().slice();
+      if(selection.length === 1) return image2tagIndex.lookup(selection[0]).slice();;
 
       // preparation for intersection
       var arrays = [];
@@ -196,7 +196,7 @@ var DataBase = function() {
       type2tagIndex.add(type, tag);
     },
     getTagsOfType: function(type, /*array or nothing*/ tags) {
-      if(!tags || tags.length === 0) return type2tagIndex.lookup(type);
+      if(!tags || tags.length === 0) return type2tagIndex.lookup(type).slice();
       return tags.filter(function(element) {
       	return tagType(element) === type;
       });
@@ -214,13 +214,15 @@ var DataBase = function() {
       names.forEach(function(value, index, array) {
         tag2imageIndex.add(tag, value);
         image2tagIndex.add(value, tag);
-      	type2tagIndex.add("other", tag);
+        if(!tag2typeIndex.lookup(tag))
+          type2tagIndex.add("other", tag);
       });
+      return;
     },
     removeTags: function(image, /*array*/ tags) {
     	tags.forEach(function(tag) {
     		tag2imageIndex.remove(tag, image);
-        	image2tagIndex.remove(image, tag);
+        image2tagIndex.remove(image, tag);
     	});
     },
     difference: function(listOne, listTwo) {

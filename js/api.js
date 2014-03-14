@@ -5,9 +5,10 @@ function Laxaelv() {
 
   var self = $.observable(this);
 
+  var detailMode = false;
   var editMode = false;
   var typeMode = 'all';
-  var searchstring = '';
+  var searchString = '';
 
   var query = [];
   var imagesInView = [];
@@ -43,14 +44,22 @@ function Laxaelv() {
   };
 
   var filterTags = function(tags){
-    if(self.typeMode!=="all" && self.typeMode)
-      tags = db.getTagsOfType(self.typeMode,tags);
+    var tmp = tags;
+    if(self.typeMode!=='all' && self.typeMode) {
+      tmp = db.getTagsOfType(self.typeMode,tags);
+    }
 
-    if(self.searchString) tags = tags.filter(function(element){
-      return element.substring(0, self.searchString.length) === self.searchString;
-    });
-
-    return tags;
+    if(self.searchString) {
+      tmp = tmp.filter( function(element) {
+        return element.substring(0, self.searchString.length) === self.searchString;
+      });
+      if(tmp.length === 0 && self.typeMode !== 'all') {
+        self.typeMode = 'all';
+        self.trigger('typechange');
+        return filterTags(tags);
+      }
+    }
+    return tmp;
   };
 
   self.initDB = function(){
@@ -60,6 +69,10 @@ function Laxaelv() {
 
   self.getDetailImage = function(){
     return imagesInView[iterator];
+  };
+
+  self.getDetailImageTags = function(){
+    return db.getCommonTags([imagesInView[iterator]]);
   };
 
   self.nextImage = function(){
@@ -76,8 +89,18 @@ function Laxaelv() {
 
   self.chooseImage = function(image){
     iterator = imagesInView.indexOf(image);
+    detailMode = true;
     self.trigger("detailchange");
+  };
 
+  self.triggerDetails = function(image){
+    iterator = imagesInView.indexOf(image);
+    detailMode = true;
+    self.trigger("detailrendering");
+  };
+
+  self.resetTagCache = function() {
+    tagcache = undefined;
   };
 
   self.getImages = function(){
@@ -86,19 +109,16 @@ function Laxaelv() {
     return imagesInView;
   };
 
-  self.getTags = function(){
-
+  self.getTags = function() {
     if(!tagcache) tagcache = db.getCommonTags(imagesInView);
     var tags = tagcache.slice();
-
     if(query.length > 0) tags = db.difference(tags, query);
-    // Testing type filtering
 
     return weights(filterTags(tags));
   };
 
   self.setSearchString = function(word){
-    word = word.toLowerCase();
+    var word = word.toLocaleLowerCase().valueOf();
     self.searchString = word;
     self.trigger("typechange");
   };
@@ -114,8 +134,10 @@ function Laxaelv() {
   };
 
   self.initEditTagsForSelection = function(){
-    editTags = db.getCommonTags(selection, "intersection");
-    //return editTags;
+    if(detailMode) 
+      editTags = db.getCommonTags([imagesInView[iterator]]);
+    else
+      editTags = db.getCommonTags(selection, "intersection");
   };
 
   self.getEditTags = function(){
@@ -130,7 +152,6 @@ function Laxaelv() {
   self.getQueryTags = function(){
     return query;
   };
-
 
   self.renameTag = function(oldTag, newTag){
     db.rename(oldTag, newTag);
@@ -148,6 +169,7 @@ function Laxaelv() {
   self.toggleEditMode = function(){
     editMode = !editMode;
     if(editMode) self.initEditTagsForSelection();
+    else editTags = [];
     self.trigger("modechange");
   };
 
@@ -160,6 +182,7 @@ function Laxaelv() {
 
   self.deactivateEditMode = function(){
     editMode = false;
+    editTags = [];
     self.trigger("modechange");
   };
 
@@ -167,7 +190,45 @@ function Laxaelv() {
     return editMode;
   };
 
+  self.deactivateDetailMode = function(){
+    detailMode = false;
+    self.trigger("modechange");
+  };
+
+  self.isDetailMode = function(){
+    return detailMode;
+  };
+
+  /* immediately saving changes */
+  self.saveTag = function(tag) {
+    var tag = tag.toLocaleLowerCase().valueOf();
+    if(detailMode) {
+      db.addTag(tag, [imagesInView[iterator]]);
+    } else {
+      db.addTag(tag, selection);
+    }
+    self.searchString = "";
+    editTags.push(tag);
+    self.resetTagCache();
+    self.trigger('editchange');
+  };
+
+  self.removeTag = function(tag) {
+    var tag = tag.toLocaleLowerCase().valueOf();
+    if(detailMode) {
+      db.removeTags(imagesInView[iterator], [tag]);
+    } else {
+      selection.forEach(function(image) {
+        db.removeTags(image, [tag]);
+      });
+    }
+    editTags.splice(editTags.indexOf(tag), 1);
+    self.resetTagCache();
+    self.trigger('editchange');
+  };
+  /*
   self.saveChanges = function(){
+    console.log('saveChanges');
     selection.forEach(function(image){
       db.addImage(image, editTags);
       db.removeTags(image, removeTags);
@@ -178,14 +239,14 @@ function Laxaelv() {
     self.toggleEditMode();
     self.trigger("change");
   };
-
+  */
   self.changeTagType = function(tag, type){
     db.changeTagType(tag, type);
     self.trigger("change");
   };
-
-
+  /*
   self.addTagToEdit = function(tag){
+    var tag = tag.toLocaleLowerCase().valueOf();
     editTags.push(tag);
     self.searchString = "";
     self.trigger("editchange");
@@ -196,21 +257,32 @@ function Laxaelv() {
     removeTags.push(tag);
     self.trigger("editchange");
   };
-
+  */
   self.addTagToQuery = function(tag){
+    var tag = tag.toLocaleLowerCase().valueOf();
     query.push(tag);
     self.searchString = "";
-    self.trigger("change");
+    self.trigger("querychange");
+  };
+
+  self.addTagsToQuery = function(tags){
+    query = [];
+    tags.forEach(function(tag){
+      var tag = tag.toLocaleLowerCase().valueOf();
+      query.push(tag);
+    });
+    self.searchString = "";
+    self.trigger("querychange");
   };
 
   self.removeTagFromQuery = function(tag){
     query.splice(query.indexOf(tag), 1);
-    self.trigger("change");
+    self.trigger("querychange");
   };
 
   self.resetQuery = function(){
     query = [];
-    self.trigger("change");
+    self.trigger("querychange");
   };
 
   self.selectImage = function(image){
@@ -225,15 +297,19 @@ function Laxaelv() {
 
   self.selectAll = function(){
     selection = [];
-    for(var image in imagesInView)
+    for(var image in imagesInView) {
       selection.push(imagesInView[image]);
+    }
     self.trigger("selectchange");
   };
-
 
   self.deselectAll = function(){
     selection = [];
     self.trigger("selectchange");
+  };
+
+  self.isSelected = function(image) {
+    return selection.indexOf(image) !== -1;
   };
 
 }

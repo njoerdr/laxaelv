@@ -3,30 +3,35 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Laxälv</title>
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="css/style.css">
 	</head>
-
-	<script type="html/result">
-			<div id="resultview">
-				<div id="upload"></div>
-			</div>
+	<!--
+	<script type="html/upload">
+		<div id="upload">
+			<form id="form" action="http://localhost:8080/upload" enctype="multipart/form-data" method="post">
+			<input id="upform" style="display:none;" type="file" name="upload" accept="image/jpeg" multiple="multiple" />
+			</form>
+		</div>
 	</script>
-
+	-->
+	<script type="html/result">
+		<div id="resultview"></div>
+	</script>
+	<!--
 	<script type="html/tumb">
 		<figure>
-			<img id="{id}" class="thumb" src="photos/{name}" />
+			<img id="{id}" class="thumb" src="small/{name}" />
 			<button class="flagbutton">flag</button>
 			<figcaption>{name}<figcaption>
 		</figure>
 	</script>
-
+	-->
 	<script type="html/detail">
 		<figure>
-
 			<div id="controls">
-				<button id="previous">←</button>
-				<button id="close">×</button>
-				<button id="next">→</button>
+				<button id="previous">&#xe828;</button>
+				<button id="close">&#xe811;</button>
+				<button id="next">&#xe829;</button>
 			</div>
 			<img class="largeview" src="photos/{name}" />
 		</figure>
@@ -37,19 +42,21 @@
 				Press Return to create new tag
 		</span>
 	</script>
-
-
+	<!--
 	<script type="html/tag">
 		<span class="tag {size} {type}"><span>{tag}</span><button class="x">X</button></span>
 	</script>
-
+	-->
 	<script type="html/filter">
-		<h2>Filter</h2>
+		<h2>Search</h2>
 		<div id="querybox">
-			<div id="query"></div>
-			<!--<input class="tag small"  size="5" type="text" id="searchfield" name="searchfield" />-->
-			<span contenteditable="true" id="searchfield" class="tag small">+</span>
-			<button>clear</button>
+			<div>
+				<div id="query"></div>
+				<span contenteditable="true" id="searchfield" class="tag small"></span>
+			</div>
+			<div id="querycontrol">
+				<button></button>
+			</div>
 		</div>
 		<div id="tagcloud"></div>
 		<div id="tabs">
@@ -60,20 +67,23 @@
 			<button class="tab who">who</button>
 			<button class="tab other">other</button>
 		</div>
-
-		<footer id="filter">
-			<div id="filtercontrol">
-				<div>
-					<button id="edit" class="function">edit</button>
-				</div>
+		<div id="editswitch">
+			<div id="counter">0 of ?? selected</div>
+			<div id="control">
+				<button id="select">all</button>
+				<button id="deselect">none</button>
 			</div>
-
-			<span id="flagcount">0 of ?? flagged</span>
-		</footer>
+			<h2>Editor</h2>
+			<span>click to switch<span>
+		</div>
 	</script>
 
 	<script type="html/edit">
-		<h2>Edit</h2>
+		<div id="searchswitch">
+			<h2>Search</h2>
+			<span>click to switch<span>
+		</div>
+		<h2>Editor</h2>
 		<div id="tagselection">
 			<div id="selection"></div>
 			<span contenteditable="true" id="searchfield" class="tag small">+</span>
@@ -89,38 +99,45 @@
 			<button class="tab other">other</button>
 		</div>
 
-		<footer id="filter">
 
-			<div id="filtercontrol">
-				<div>
-					<button id="save" class="function">save</button>
-					<button id="cancel" class="function">cancel</button>
-				</div>
-			</div>
-			<span id="flagcount">0 of ?? flagged</span>
+		<footer id="editorfooter">
+			<div id="counter">0 of ?? selected</div>
 		</footer>
 	</script>
 
-
-
+	<script type="html/infoview">
+		<h2>Details</h2>
+		<h3></h3>
+		<div id="tags"></div>
+		<div id="editswitch" class="infoview">
+			<h2>Editor</h2>
+			<span>click to switch<span>
+		</div>
+	</script>
+	<!--
+	<script type="html/details">
+		<section id="details">
+			<section class="lhs">
+				<figure>
+					<div id="controls">
+						<button id="previous">←</button>
+						<button id="close">×</button>
+						<button id="next">→</button>
+					</div>
+					<img id="detailimg" class="largeview" src="" />
+				</figure>
+			</section>
+			<section class="rhs">
+				<h2></h2>
+				<div id="tags"></div>
+			</section>
+		</section>
+	</script>
+	-->
 	<body>
 		<section id="laxaelvapp">
-			<a name="up"></a>
-			<!--<header id="header">
-				<h1>Laxälv</h1>
-			</header>-->
-			<section id="lhsview">
-
-			</section>
-			<footer id="result">
-				<a href="#up">&#8593;</a>
-				<button id="select">flag all</button>
-				<button id="deselect">unflag all</button>
-			</footer>
-
-			<section id="filter">
-
-			</section>
+			<section id="lhsview"></section>
+			<section id="filter"></section>
 		</section>
 
 		<script src="libs/jquery-2.0.3.min.js"></script>
@@ -128,12 +145,20 @@
 		<script src="libs/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="conf/list-all.js"></script>
 		<script src="conf/list-types.js"></script>
-		<script src="scripts/store.js"></script>
-		<script src="scripts/api.js"></script>
-		<script src="scripts/app.js"></script>
-
+		<script src="js/store.js"></script>
+		<script src="js/upload.js"></script>
+		<script src="js/api.js"></script>
+		<script src="js/tagFactory.js"></script>
+		<script src="js/filtertagcloud.js"></script>
+		<script src="js/edittagcloud.js"></script>
+		<script src="js/editview.js"></script>
+		<script src="js/filterview.js"></script>
+		<script src="js/resultview.js"></script>
+		<!--<script src="js/detailoverlay.js"></script>-->
+		<script src="js/detailview.js"></script>
+		<script src="js/infoview.js"></script>
+		<script src="js/router.js"></script>
+		<script src="js/app.js"></script>
 	</body>
-
-
 </html>
 
