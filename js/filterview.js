@@ -32,7 +32,7 @@ var FilterView = function(){
             lax.selectAll();
         });
 
-        $("#tabs button").removeClass("active");
+        //$("#tabs button").removeClass("active");
 
         $(".tab").click(function(){
                 //$("#tabs button").removeClass("active");
