@@ -14,8 +14,12 @@
   var editView = new EditView();
 
   var updateCounter = function(){
-    $("#counter").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
-
+    if(lax.isEditMode()) {
+      $("#counter").text(lax.getSelectionCount() + ' Image(s) affected by changes');
+    } else {
+      $("#counter").text(lax.getSelectionCount()+" of "+lax.getImagesInViewCount() + " selected");
+    }
+    
     if(lax.isDetailMode()) {
       $("#counter").hide();
     } else {
