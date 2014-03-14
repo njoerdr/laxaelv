@@ -11,7 +11,7 @@ function FilterTagcloud(){
             //TagFactory.unbindAll(tag);
             TagFactory.addToQueryListener(tag);
         });
-        
+
         var type = lax.getTypeMode();
         $('.tab').each(function(){
             $(this).toggleClass('active', $(this).hasClass(type));
@@ -43,6 +43,7 @@ function Querybox(){
             var tag = TagFactory.createTag(tagdata, querybox);
             TagFactory.addRemoveFromQueryListener(tag);
         });
+        $("#searchfield").focus();
     };
 
     this.searchBoxListeners = function(){
@@ -63,12 +64,18 @@ function Querybox(){
             return true;
         });
 
-        $("#searchfield").click(function(){
-          if($(this).text()==="+") $(this).html("");
+        $("#querybox > div:first").click(function(e){
+            console.log("click");
+            e.stopImmediatePropagation();
+            $("#searchfield").show();
+            $("#searchfield").focus();
+          //if($(this).text()==="+") $(this).html("");
         });
 
         $("#searchfield").focusout(function(){
-          if($(this).text().length===0) $(this).html("+");
+            $(this).html("");
+            $(this).hide();
+          //if($(this).text().length===0) $(this).html("+");
         });
     };
 

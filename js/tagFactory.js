@@ -42,6 +42,7 @@ var TagFactory = {
 	},
 	addDeleteTagListener:function(tag) {
 	    tag.lastChild.onclick = function(e) {
+	    	e.stopImmediatePropagation();
 	        var tagtext = $(this).parent().children().first().text();
 	        lax.removeTag(tagtext);
 	    };
