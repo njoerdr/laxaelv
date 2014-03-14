@@ -332,6 +332,8 @@ div#searchswitch {
 		display: inline;
 	}
 	& > button{
+		position: absolute;
+		right: 0;
 		background-color: transparent;
 		cursor: pointer;
 		border-radius:15px;
@@ -589,7 +591,7 @@ div#searchswitch {
 			border-color: #333333;
 
 			&.marked{
-				border-color: #c05665;
+				border-color: orange;
 				opacity:1;
 			}
 		}

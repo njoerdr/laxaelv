@@ -35,18 +35,18 @@ var FilterView = function(){
         $("#tabs button").removeClass("active");
 
         $(".tab").click(function(){
-                $("#tabs button").removeClass("active");
+                //$("#tabs button").removeClass("active");
                 var type = $(this).text();
-                $(this).addClass("active");
+                //$(this).addClass("active");
                 console.log(type);
                 lax.setTypeMode(type);
         });
-
+        /*
         $(".tab").click(function(){
             var type = $(this).text();
             lax.setTypeMode(type);
         });
-
+        */
         $(".tab").droppable({
             hoverClass: "drophover",
             activeClass: "droptarget",

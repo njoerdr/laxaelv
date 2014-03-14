@@ -21,7 +21,7 @@
     } else {
       $("#counter").show();
     }
-    
+
     if(lax.getSelectionCount()>0) {
       if(!lax.isDetailMode()) {
         $('#editswitch').addClass('activated');
@@ -35,13 +35,6 @@
         $('#editswitch').unbind('click');
       }
     } 
-  };
-
-  var updateButtonStatus = function(){
-    if(lax.isEditMode())
-      $("#select, #deselect, #flagbutton").attr("disabled", "disabled");
-    else
-      $("#select, #deselect, #flagbutton").removeAttr("disabled");
   };
 
   var renderImages = function(){
@@ -96,8 +89,6 @@
     console.log('modechange event');
     renderRHS();
     updateCounter();
-    updateButtonStatus();
-
   });
 
   lax.on("detailrendering", function(){

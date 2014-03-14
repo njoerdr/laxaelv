@@ -11,7 +11,12 @@ function FilterTagcloud(){
             //TagFactory.unbindAll(tag);
             TagFactory.addToQueryListener(tag);
         });
+        
+        var type = lax.getTypeMode();
 
+        $('.tab').each(function(){
+            $(this).toggleClass('active', $(this).hasClass(type));
+        });
     };
 
     lax.on("typechange", function(){

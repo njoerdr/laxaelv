@@ -10,11 +10,13 @@ var ResultView = function(){
     //var up = new Upload();
 
     var imgClick = function() {
+        if(lax.isEditMode()) return;
         var image = $(this).attr("id");
         lax.chooseImage(image);
     };
 
     var flagClick = function() {
+        if(lax.isEditMode()) return;
         $(this).parent().toggleClass("marked");
         if($(this).parent().hasClass("marked")) {
             lax.selectImage($(this).parent().children().first().attr("id"));
