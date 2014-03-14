@@ -99,6 +99,10 @@ function Laxaelv() {
     self.trigger("detailrendering");
   };
 
+  self.resetTagCache = function() {
+    tagcache = undefined;
+  };
+
   self.getImages = function(){
     imagesInView = db.getImages(query);
     tagcache = undefined;
@@ -148,7 +152,6 @@ function Laxaelv() {
   self.getQueryTags = function(){
     return query;
   };
-
 
   self.renameTag = function(oldTag, newTag){
     db.rename(oldTag, newTag);
@@ -206,6 +209,7 @@ function Laxaelv() {
     }
     self.searchString = "";
     editTags.push(tag);
+    self.resetTagCache();
     self.trigger('editchange');
   };
 
@@ -219,9 +223,10 @@ function Laxaelv() {
       });
     }
     editTags.splice(editTags.indexOf(tag), 1);
+    self.resetTagCache();
     self.trigger('editchange');
   };
-
+  /*
   self.saveChanges = function(){
     console.log('saveChanges');
     selection.forEach(function(image){
@@ -234,13 +239,12 @@ function Laxaelv() {
     self.toggleEditMode();
     self.trigger("change");
   };
-
+  */
   self.changeTagType = function(tag, type){
     db.changeTagType(tag, type);
     self.trigger("change");
   };
-
-
+  /*
   self.addTagToEdit = function(tag){
     var tag = tag.toLocaleLowerCase().valueOf();
     editTags.push(tag);
@@ -253,7 +257,7 @@ function Laxaelv() {
     removeTags.push(tag);
     self.trigger("editchange");
   };
-
+  */
   self.addTagToQuery = function(tag){
     var tag = tag.toLocaleLowerCase().valueOf();
     query.push(tag);
