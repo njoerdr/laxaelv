@@ -329,7 +329,7 @@ var store = [
   },
   {
     name:"00083-Norway.jpg",
-    tags:["norway", "mountain", "lake", "nature"]
+    tags:["norway", "mountain", "lake", "nature", "coast"]
   },
   {
     name:"00084-Dali.jpg",
@@ -353,11 +353,11 @@ var store = [
   },
   {
     name:"00089-Norway.jpg",
-    tags:["norway", "coast", "red", "house", "ocean"]
+    tags:["norway", "coast", "red", "house", "ocean", "nature"]
   },
   {
     name:"00090-Norway.jpg",
-    tags:["norway", "village", "black and white", "ocean", "coast"]
+    tags:["norway", "village", "black and white", "ocean", "coast", "nature"]
   },
   {
     name:"00091-Finland.jpg",
