@@ -28,7 +28,6 @@ function Router(){
             subqueries.forEach(function(query, index){
                 subqueries[index] = query.split(",");
             }); 
-            console.log(subqueries);
             if(key==="q") {
                 this.searchTags(subqueries);
                 return;

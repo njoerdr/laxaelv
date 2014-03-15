@@ -51,7 +51,7 @@ var TagFactory = {
 		tag.onclick = function(e) {
 			var tagtext = $(this).text();
 			tagtext = tagtext.slice(0, tagtext.length-1);
-			lax.addTagsToQuery([tagtext]);
+			lax.setTagAsQuery(tagtext);
 			lax.deactivateDetailMode();
 		};
 	},

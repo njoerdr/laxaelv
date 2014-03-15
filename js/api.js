@@ -10,7 +10,7 @@ function Laxaelv() {
   var typeMode = 'all';
   var searchString = '';
 
-  var queryfocus = 0;
+  var queryfocus = undefined;
   var query = [[]];
   var imagesInView = [];
   var selection = [];
@@ -18,7 +18,7 @@ function Laxaelv() {
   var removeTags = [];
 
   var iterator = 0;
-  var tagcache;
+  var tagcache = [];
 
   var db = new DataBase();
 
@@ -31,8 +31,7 @@ function Laxaelv() {
       if(weight<0.5) return "medium";
       if(weight>=0.5) return "large";
     };
-
-    taglist.forEach(function(element, index){
+    taglist.forEach(function(element, index) {
       var refCount = db.getReferenceCountForTag(element);
       var weight = refCount/imagecount;
       var type = db.getTagType(element);
@@ -97,27 +96,31 @@ function Laxaelv() {
   };
 
   self.triggerDetails = function(image){
+    if(imagesInView.length === 0) this.getImages();
     iterator = imagesInView.indexOf(image);
     detailMode = true;
     self.trigger("detailrendering");
   };
 
-  self.resetTagCache = function() {
-    tagcache = undefined;
+  self.resetTagCache = function(index) {
+    tagcache[index] = undefined;
+  };
+
+  self.hardResetTagCache = function() {
+    tagcache = [];
   };
 
   self.getImages = function(){
     imagesInView = db.getCommonImages(query);
-    //imagesInView = db.getImages(query[queryfocus]);
-    //tagcache = undefined;
     return imagesInView;
   };
 
   self.getTags = function() {
-    if(!tagcache) tagcache = db.getCommonTags(db.getImages(query[queryfocus]));
-    var tags = tagcache.slice();
-    if(query[queryfocus].length > 0) tags = db.difference(tags, query[queryfocus]);
-
+    if(!tagcache[queryfocus]) 
+      tagcache[queryfocus] = db.getCommonTags(db.getImages(query[queryfocus]));
+    var tags = tagcache[queryfocus].slice();
+    if(query[queryfocus].length > 0) 
+      tags = db.difference(tags, query[queryfocus]);
     return weights(filterTags(tags));
   };
 
@@ -168,14 +171,13 @@ function Laxaelv() {
   self.addSubquery = function() {
     queryfocus = query.length;
     query.push([]);
-    tagcache = undefined;
+    tagcache[queryfocus] = undefined;
     self.trigger("typechange");
     return queryfocus;
   };
 
   self.setQueryFocus = function(index) {
     queryfocus = index;
-    tagcache = undefined;
     self.trigger("typechange");
   };
 
@@ -243,7 +245,7 @@ function Laxaelv() {
     }
     self.searchString = "";
     editTags.push(tag);
-    self.resetTagCache();
+    self.hardResetTagCache();
     self.trigger('editchange');
   };
 
@@ -257,7 +259,7 @@ function Laxaelv() {
       });
     }
     editTags.splice(editTags.indexOf(tag), 1);
-    self.resetTagCache();
+    self.hardResetTagCache();
     self.trigger('editchange');
   };
   /*
@@ -302,16 +304,10 @@ function Laxaelv() {
     self.trigger("querychange");
   };
 
-  self.addTagsToQuery = function(queries){
-    query = [];
-    queries.forEach(function(subquery, index) {
-      queryfocus = index;
-      query[queryfocus] = [];
-      subquery.forEach(function(tag) {
-        var tag = tag.toLocaleLowerCase().valueOf();
-        query[queryfocus].push(tag);
-      });
-    });
+  self.setTagAsQuery = function(tag){
+    query = [[]];
+    var tag = tag.toLocaleLowerCase().valueOf();
+    query[0].push(tag);
     self.searchString = "";
     self.trigger("querychange");
   };
@@ -319,13 +315,13 @@ function Laxaelv() {
   self.triggerSearch = function(queries){
     query = [];
     queries.forEach(function(subquery, index) {
-      queryfocus = index;
-      query[queryfocus] = [];
+      query[index] = [];
       subquery.forEach(function(tag) {
         var tag = tag.toLocaleLowerCase().valueOf();
-        query[queryfocus].push(tag);
+        query[index].push(tag);
       });
     });
+    if(!queryfocus) queryfocus = queries.length - 1;
     self.searchString = "";
     self.trigger("searchrendering");
   };
