@@ -49,8 +49,8 @@ function Editbox(){
     };
 
     this.searchBoxListeners = function(){
-        $("#searchfield").unbind('keyup');
-        $("#searchfield").keyup(function(e){
+        $(".searchfield").unbind('keyup');
+        $(".searchfield").keyup(function(e){
             if(e.which===13){
                 var tagtext = $("#tagcloud").children().first().children().first().text();
                 if (tagtext) {
@@ -62,17 +62,17 @@ function Editbox(){
                 $(this).html('');
                 return false;
             }
-            var text = $("#searchfield").text();
+            var text = $(".searchfield").text();
             lax.setSearchString(text);
             $(this).attr("size", text.length);
             return true;
         });
 
-        $("#searchfield").click(function(){
+        $(".searchfield").click(function(){
           if($(this).text()==="+") $(this).html("");
         });
 
-        $("#searchfield").focusout(function(){
+        $(".searchfield").focusout(function(){
           if($(this).text().length===0) $(this).html("+");
         });
     };

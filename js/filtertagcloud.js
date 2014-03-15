@@ -18,6 +18,35 @@ function FilterTagcloud(){
         });
     };
 
+    this.controlListeners = function(){
+        $("button#deselect").click(function(e){
+            e.stopImmediatePropagation();
+            $("figure").removeClass("marked");
+            lax.deselectAll();
+        });
+        $("button#select").click(function(e){
+            e.stopImmediatePropagation();
+            $("figure").addClass("marked");
+            lax.selectAll();
+        });
+
+        $(".tab").click(function(){
+            var type = $(this).text();
+            lax.setTypeMode(type);
+        });
+
+        $(".tab").droppable({
+            hoverClass: "drophover",
+            activeClass: "droptarget",
+            drop: function( event, ui ) {
+                var tagtext = ui.draggable.children().first().text();
+                var typetext = $(this).text();
+                if(typetext==="all") return;
+                lax.changeTagType(tagtext, typetext);
+            }
+        });
+    };
+
     lax.on("typechange", function(){
         this.render();
     }.bind(this));
@@ -31,11 +60,12 @@ function FilterTagcloud(){
 
 /* Querybox presenter */
 
-function Querybox(){
+function Querybox(queryboxId){
 
-    // Functions
+    var id = queryboxId.toString();
+
     this.render = function(){
-        var querybox = $("#query");
+        var querybox = $('#'+id+' .query');
         querybox.empty();
         var taglist = lax.getQueryTags();
         taglist.forEach(function(element){
@@ -43,12 +73,12 @@ function Querybox(){
             var tag = TagFactory.createTag(tagdata, querybox);
             TagFactory.addRemoveFromQueryListener(tag);
         });
-        $("#searchfield").focus();
+        $('#'+id+ ' .searchfield').focus();
     };
 
     this.searchBoxListeners = function(){
-        $("#searchfield").unbind('keyup');
-        $("#searchfield").keyup(function(e){
+        $('#'+id+ ' .searchfield').unbind('keyup');
+        $('#'+id+ ' .searchfield').keyup(function(e){
             if(e.which===13){
                 var tagtext = $("#tagcloud").children().first().children().first().text();
                 if (tagtext){
@@ -58,28 +88,34 @@ function Querybox(){
                 $(this).html('');
                 return false;
             }
-            var text = $("#searchfield").text();
+            var text = $('#'+id+ ' .searchfield').text();
             lax.setSearchString(text);
             $(this).attr("size", text.length);
             return true;
         });
 
-        $("#querybox > div:first").click(function(e){
-            console.log("click");
+        $('#'+id+ ' > div:first').click(function(e){
             e.stopImmediatePropagation();
-            $("#searchfield").show();
-            $("#searchfield").focus();
-          //if($(this).text()==="+") $(this).html("");
+            $('#'+id+ ' .searchfield').show();
+            $('#'+id+ ' .searchfield').focus();
         });
 
-        $("#searchfield").focusout(function(){
+        $('#'+id+ ' .searchfield').focusout(function(e){
+            e.stopImmediatePropagation();
             $(this).html("");
             $(this).hide();
-          //if($(this).text().length===0) $(this).html("+");
         });
 
-        $("#querycontrol button").click(function(){
+        $('#'+id+ ' button.clear').click(function(){
             lax.resetQuery();
+        });
+
+        $('#'+id+ ' button.plus').click(function(){
+            var querytemplate = $("[type='html/querybox']").html();
+            var querybox = new Querybox(id);
+            $($.render(querytemplate)).insertBefore($('#tagcloud'));
+            querybox.render();
+            querybox.searchBoxListeners();
         });
 
     };

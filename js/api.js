@@ -10,7 +10,8 @@ function Laxaelv() {
   var typeMode = 'all';
   var searchString = '';
 
-  var query = [];
+  var queryfocus = 0;
+  var query = [[]];
   var imagesInView = [];
   var selection = [];
   var editTags = [];
@@ -104,7 +105,8 @@ function Laxaelv() {
   };
 
   self.getImages = function(){
-    imagesInView = db.getImages(query);
+    console.log('HELLO '+query[queryfocus]);
+    imagesInView = db.getImages(query[queryfocus]);
     tagcache = undefined;
     return imagesInView;
   };
@@ -112,7 +114,7 @@ function Laxaelv() {
   self.getTags = function() {
     if(!tagcache) tagcache = db.getCommonTags(imagesInView);
     var tags = tagcache.slice();
-    if(query.length > 0) tags = db.difference(tags, query);
+    if(query[queryfocus].length > 0) tags = db.difference(tags, query[queryfocus]);
 
     return weights(filterTags(tags));
   };
@@ -150,7 +152,19 @@ function Laxaelv() {
   };
 
   self.getQueryTags = function(){
+    return query[queryfocus];
+  };
+
+  self.getQuery = function() {
     return query;
+  }
+
+  self.setQueryFocus = function(index) {
+    queryfocus = index;
+  };
+
+  self.getSubqueryCount = function() {
+    return query.length;
   };
 
   self.renameTag = function(oldTag, newTag){
@@ -260,28 +274,32 @@ function Laxaelv() {
   */
   self.addTagToQuery = function(tag){
     var tag = tag.toLocaleLowerCase().valueOf();
-    query.push(tag);
+    query[queryfocus].push(tag);
     self.searchString = "";
     self.trigger("querychange");
   };
 
-  self.addTagsToQuery = function(tags){
+  self.addTagsToQuery = function(queries){
     query = [];
-    tags.forEach(function(tag){
-      var tag = tag.toLocaleLowerCase().valueOf();
-      query.push(tag);
+    queries.forEach(function(subquery, index) {
+      queryfocus = index;
+      query[queryfocus] = [];
+      subquery.forEach(function(tag) {
+        var tag = tag.toLocaleLowerCase().valueOf();
+        query[queryfocus].push(tag);
+      });
     });
     self.searchString = "";
     self.trigger("querychange");
   };
 
   self.removeTagFromQuery = function(tag){
-    query.splice(query.indexOf(tag), 1);
+    query[queryfocus].splice(query[queryfocus].indexOf(tag), 1);
     self.trigger("querychange");
   };
 
   self.resetQuery = function(){
-    query = [];
+    query[queryfocus] = [];
     self.trigger("querychange");
   };
 

@@ -62,7 +62,7 @@
     } else {
       $("body").removeClass('editmode');
       filterView.render();
-      filterView.controlListeners();
+      //filterView.controlListeners();
     }
   };
 

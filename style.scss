@@ -330,37 +330,52 @@ div#searchswitch {
 	}
 }
 
-#querybox{
+.querybox{
 	& > div{
 		float:left;
-		width: 350px;
+		width: 315px;
 		min-height: 30px;
 	}
 
-	#querycontrol{
-		width: 34px;
+	.querycontrol{
+		width: 55px;
 		float:left;
-		& > button{
-			position: absolute;
-			right: 0;
+		& > button {
+			margin: 2px;
+			padding: 3px;
+		}
+		& > div {
+			float:right;
+			width:20px;
+		}
+		button {
 			background-color: transparent;
 			cursor: pointer;
 			border-radius:15px;
 			color: rgb(170,170,170);
-			margin: 2px;
-			padding: 3px;
-			//display:none;
 		}
-		& > button:hover {
+		button:hover {
 			color: rgb(150,150,150);
 		}
-		& > button:active {
+		button:active {
 			color: rgb(140,140,140);
 		}
-		& > button:before{
+		button:before {
 			font-family: 'fontello';
+		}
+		button.clear:before {
 			font-size: 18pt;
 			content: '\e82b';
+		}
+		button.plus:before {
+			line-height: 8pt;
+			font-size: 12pt;
+			content: '\e81a';
+		}
+		button.minus:before {
+			line-height: 8pt;
+			font-size: 12pt;
+			content: '\e81d';
 		}
 	}
 
@@ -371,7 +386,7 @@ div#searchswitch {
 }
 
 
-#querybox,
+.querybox,
 #tagselection{
 	float:left;
 	margin-bottom: 5px;
@@ -419,7 +434,7 @@ div#searchswitch {
 }
 
 
-#searchfield{
+.searchfield{
 	padding: 5px;
 	min-width: 20px;
 	text-align: center;

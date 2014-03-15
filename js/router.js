@@ -2,7 +2,7 @@ function Router(){
 
     this.parse = function(path){
         if(!path){
-            this.searchTags([]);
+            this.searchTags([[]]);
             return;
         }
         var method = path.split("?")[0];
@@ -14,22 +14,26 @@ function Router(){
 
     this.parseSearch = function(path){
         if(path.split("?").length<2){
-            this.searchTags([]);
+            this.searchTags([[]]);
             return;
         }
-
         path.split("?").slice(1).forEach(function(element){
-            kv = element.split("=");
-
+            var kv = element.split("=");
             if(kv.length != 2){
-                this.searchTags([]);
+                this.searchTags([[]]);
                 return;
             }
-
-            key = kv[0];
-            values = kv[1].split(",");
-            if(key==="q") this.searchTags(values);
-            if(values.length===0) searchTags([]);
+            var key = kv[0];
+            var subqueries = kv[1].split(';');
+            subqueries.forEach(function(query, index){
+                subqueries[index] = query.split(",");
+            }); 
+            console.log(subqueries);
+            if(key==="q") {
+                this.searchTags(subqueries);
+                return;
+            }
+            this.searchTags([[]]);
         }.bind(this));
     };
 
@@ -50,13 +54,29 @@ function Router(){
     };
 
     this.updateSearchURL = function(){
-        var tags = lax.getQueryTags();
+        var queries = lax.getQuery();
+        var makeQuery = true;
         path = "index.html#search";
-        if(tags.length>0) path += "?q=";
-        tags.forEach(function(tag){
-            path += tag + ",";
+
+        queries.forEach(function(subquery, index) {
+            if(subquery.length>0) {
+                if(!makeQuery) {
+                    path += ";";
+                }
+                if(makeQuery) {
+                  path += "?q=";
+                  makeQuery = false;  
+                } 
+                subquery.forEach(function(tag, index) {
+                    if(index === 0) {
+                        path += tag;
+                    } else {
+                        path += "," + tag;
+                    }
+                });
+            }
         });
-        if(tags.length>0) path = path.substring(0, path.length -1);
+        //if(tags.length>0) path = path.substring(0, path.length -1);
         $.route(path);
     };
 

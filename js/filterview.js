@@ -3,50 +3,27 @@
 var FilterView = function(){
     // Templates
     var filtertemplate = $("[type='html/filter']").html();
+    var cloudtemplate = $("[type='html/filtercloud']").html();
+    var querytemplate = $("[type='html/querybox']").html();
     var rhsview = $("section#filter");
 
     //var filterTagcloud = new FilterTagcloud();
-    var querybox = new Querybox();
+    //var querybox = new Querybox();
 
     // Functions
     this.render =function(){
-        var filterTagcloud = new FilterTagcloud();
         rhsview.empty();
-
         $($.render(filtertemplate)).appendTo(rhsview);
-        filterTagcloud.render();
-        //var querybox = new Querybox();
+        var id = 0;
+        var querybox = new Querybox(id);
+        $($.render(querytemplate)).appendTo(rhsview);
         querybox.render();
         querybox.searchBoxListeners();
-    };
-    
-    this.controlListeners = function(){
-        $("button#deselect").click(function(e){
-            e.stopImmediatePropagation();
-            $("figure").removeClass("marked");
-            lax.deselectAll();
-        });
-        $("button#select").click(function(e){
-            e.stopImmediatePropagation();
-            $("figure").addClass("marked");
-            lax.selectAll();
-        });
 
-        $(".tab").click(function(){
-            var type = $(this).text();
-            lax.setTypeMode(type);
-        });
-
-        $(".tab").droppable({
-            hoverClass: "drophover",
-            activeClass: "droptarget",
-            drop: function( event, ui ) {
-                var tagtext = ui.draggable.children().first().text();
-                var typetext = $(this).text();
-                if(typetext==="all") return;
-                lax.changeTagType(tagtext, typetext);
-            }
-        });
+        var filterTagcloud = new FilterTagcloud();
+        $($.render(cloudtemplate)).appendTo(rhsview);
+        filterTagcloud.render();
+        filterTagcloud.controlListeners();
     };
 
     return this;

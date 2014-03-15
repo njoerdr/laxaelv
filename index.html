@@ -47,17 +47,23 @@
 		<span class="tag {size} {type}"><span>{tag}</span><button class="x">X</button></span>
 	</script>
 	-->
-	<script type="html/filter">
-		<h2>Search</h2>
-		<div id="querybox">
+	<script type="html/querybox">
+		<div id="0" class="querybox">
 			<div>
-				<div id="query"></div>
-				<span contenteditable="true" id="searchfield" class="tag small"></span>
+				<div class="query"></div>
+				<span contenteditable="true" class="searchfield tag small"></span>
 			</div>
-			<div id="querycontrol">
-				<button></button>
+			<div class="querycontrol">
+				<button class="clear" title="clear query"></button>
+				<div>
+					<button class="plus"></button>
+					<button class="minus"></button>
+				</div>
 			</div>
 		</div>
+	</script>
+
+	<script type="html/filtercloud">
 		<div id="tagcloud"></div>
 		<div id="tabs">
 			<button class="tab all">all</button>
@@ -78,6 +84,21 @@
 		</div>
 	</script>
 
+	<script type="html/filter">
+		<h2>Search</h2>
+		<!--
+		<div id="querybox">
+			<div>
+				<div id="query"></div>
+				<span contenteditable="true" id="searchfield" class="tag small"></span>
+			</div>
+			<div id="querycontrol">
+				<button></button>
+			</div>
+		</div>
+		-->
+	</script>
+
 	<script type="html/edit">
 		<div id="searchswitch">
 			<h2>Search</h2>
@@ -86,7 +107,7 @@
 		<h2>Editor</h2>
 		<div id="tagselection">
 			<div id="selection"></div>
-			<span contenteditable="true" id="searchfield" class="tag small">+</span>
+			<span contenteditable="true" class="searchfield tag small">+</span>
 		</div>
 		<div id="tagcloud">
 		</div>
