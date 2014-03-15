@@ -162,6 +162,18 @@ var DataBase = function() {
       // intersection
       return intersect(arrays);
     },
+    getCommonImages: function(queries) {
+      var images = queries.map(function(subquery) {
+        if(subquery.length === 0) 
+          return image2tagIndex.list();
+        if(subquery.length === 1) 
+          return tag2imageIndex.lookup(subquery[0]);
+        return intersect(subquery.map(function(tag) {
+          return tag2imageIndex.lookup(tag);
+        }));
+      });
+      return union(images);
+    },
     // Tags for selection passed as list
     getCommonTags: function(/*array or nothing*/ selection, /*intersection or union=default*/ operation) {
       // trivial cases

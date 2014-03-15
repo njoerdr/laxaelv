@@ -336,6 +336,9 @@ div#searchswitch {
 		width: 315px;
 		min-height: 30px;
 	}
+	&.focus {
+		border:thin solid #666666;
+	}
 
 	.querycontrol{
 		width: 55px;

@@ -20,7 +20,7 @@ function Laxaelv() {
   var iterator = 0;
   var tagcache;
 
-  var db;
+  var db = new DataBase();
 
   var weights = function(taglist){
     var imagecount = db.getTotalImageCount();
@@ -63,11 +63,13 @@ function Laxaelv() {
     return tmp;
   };
 
+  // DEPRECATED
+  /*
   self.initDB = function(){
     db = new DataBase();
-    self.trigger("change");
+    //self.trigger("change");
   };
-
+  */
   self.getDetailImage = function(){
     return imagesInView[iterator];
   };
@@ -105,14 +107,14 @@ function Laxaelv() {
   };
 
   self.getImages = function(){
-    console.log('HELLO '+query[queryfocus]);
-    imagesInView = db.getImages(query[queryfocus]);
-    tagcache = undefined;
+    imagesInView = db.getCommonImages(query);
+    //imagesInView = db.getImages(query[queryfocus]);
+    //tagcache = undefined;
     return imagesInView;
   };
 
   self.getTags = function() {
-    if(!tagcache) tagcache = db.getCommonTags(imagesInView);
+    if(!tagcache) tagcache = db.getCommonTags(db.getImages(query[queryfocus]));
     var tags = tagcache.slice();
     if(query[queryfocus].length > 0) tags = db.difference(tags, query[queryfocus]);
 
@@ -159,8 +161,26 @@ function Laxaelv() {
     return query;
   }
 
+  self.getSubquery = function(index) {
+    return query[index];
+  }
+
+  self.addSubquery = function() {
+    queryfocus = query.length;
+    query.push([]);
+    tagcache = undefined;
+    self.trigger("typechange");
+    return queryfocus;
+  };
+
   self.setQueryFocus = function(index) {
     queryfocus = index;
+    tagcache = undefined;
+    self.trigger("typechange");
+  };
+
+  self.hasQueryFocus = function(index) {
+    return queryfocus === index;
   };
 
   self.getSubqueryCount = function() {
@@ -169,7 +189,7 @@ function Laxaelv() {
 
   self.renameTag = function(oldTag, newTag){
     db.rename(oldTag, newTag);
-    self.trigger("change");
+    //self.trigger("change");
   };
 
   self.getSelectionCount = function(){
@@ -256,7 +276,10 @@ function Laxaelv() {
   */
   self.changeTagType = function(tag, type){
     db.changeTagType(tag, type);
-    self.trigger("change");
+
+    //REVIEW
+    //self.trigger("change");
+    self.trigger("typechange");
   };
   /*
   self.addTagToEdit = function(tag){
@@ -293,8 +316,22 @@ function Laxaelv() {
     self.trigger("querychange");
   };
 
-  self.removeTagFromQuery = function(tag){
-    query[queryfocus].splice(query[queryfocus].indexOf(tag), 1);
+  self.triggerSearch = function(queries){
+    query = [];
+    queries.forEach(function(subquery, index) {
+      queryfocus = index;
+      query[queryfocus] = [];
+      subquery.forEach(function(tag) {
+        var tag = tag.toLocaleLowerCase().valueOf();
+        query[queryfocus].push(tag);
+      });
+    });
+    self.searchString = "";
+    self.trigger("searchrendering");
+  };
+
+  self.removeTagFromQuery = function(tag, queryId){
+    query[queryfocus].splice(query[queryId].indexOf(tag), 1);
     self.trigger("querychange");
   };
 

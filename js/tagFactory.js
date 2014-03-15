@@ -34,10 +34,10 @@ var TagFactory = {
 	        lax.saveTag(tagtext);
 	    };
 	},
-	addRemoveFromQueryListener:function(tag) {
+	addRemoveFromQueryListener:function(tag, queryId) {
 	    tag.lastChild.onclick = function(e) {
 	        var tagtext = $(this).parent().children().first().text();
-	        lax.removeTagFromQuery(tagtext);
+	        lax.removeTagFromQuery(tagtext, queryId);
 	    };
 	},
 	addDeleteTagListener:function(tag) {

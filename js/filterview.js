@@ -14,17 +14,22 @@ var FilterView = function(){
     this.render =function(){
         rhsview.empty();
         $($.render(filtertemplate)).appendTo(rhsview);
-        var id = 0;
-        var querybox = new Querybox(id);
-        $($.render(querytemplate)).appendTo(rhsview);
-        querybox.render();
-        querybox.searchBoxListeners();
+        lax.getQuery().forEach(function(subquery, index) {
+            $($.render(querytemplate, {id:index})).appendTo(rhsview);
+            var querybox = new Querybox(index);
+            querybox.render();
+            querybox.searchBoxListeners();
+        });
 
         var filterTagcloud = new FilterTagcloud();
         $($.render(cloudtemplate)).appendTo(rhsview);
         filterTagcloud.render();
         filterTagcloud.controlListeners();
     };
+
+    lax.on("querychange", function(){
+        this.render();
+    }.bind(this));
 
     return this;
 };

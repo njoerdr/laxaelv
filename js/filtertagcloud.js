@@ -50,11 +50,11 @@ function FilterTagcloud(){
     lax.on("typechange", function(){
         this.render();
     }.bind(this));
-
+    /*
     lax.on("querychange", function(){
         this.render();
     }.bind(this));
-
+    */
     return this;
 }
 
@@ -62,24 +62,31 @@ function FilterTagcloud(){
 
 function Querybox(queryboxId){
 
+    var self = this;
     var id = queryboxId.toString();
 
     this.render = function(){
         var querybox = $('#'+id+' .query');
         querybox.empty();
-        var taglist = lax.getQueryTags();
+        var taglist = lax.getSubquery(queryboxId);
         taglist.forEach(function(element){
             var tagdata = {size: "small", tag: element};
             var tag = TagFactory.createTag(tagdata, querybox);
-            TagFactory.addRemoveFromQueryListener(tag);
+            TagFactory.addRemoveFromQueryListener(tag, queryboxId);
         });
-        $('#'+id+ ' .searchfield').focus();
+
+        if(lax.hasQueryFocus(queryboxId)){
+            $('#'+id+ ' .searchfield').focus();
+            $('#'+id).addClass('focus');
+        } else {
+            $('#'+id+ ' .searchfield').hide();
+        }
     };
 
     this.searchBoxListeners = function(){
         $('#'+id+ ' .searchfield').unbind('keyup');
         $('#'+id+ ' .searchfield').keyup(function(e){
-            if(e.which===13){
+            if(e.which===13) {
                 var tagtext = $("#tagcloud").children().first().children().first().text();
                 if (tagtext){
                     lax.addTagToQuery(tagtext);
@@ -98,12 +105,15 @@ function Querybox(queryboxId){
             e.stopImmediatePropagation();
             $('#'+id+ ' .searchfield').show();
             $('#'+id+ ' .searchfield').focus();
+            $('#'+id).addClass('focus');
+            lax.setQueryFocus(queryboxId);
         });
 
         $('#'+id+ ' .searchfield').focusout(function(e){
             e.stopImmediatePropagation();
             $(this).html("");
             $(this).hide();
+            $('#'+id).removeClass('focus');
         });
 
         $('#'+id+ ' button.clear').click(function(){
@@ -111,19 +121,20 @@ function Querybox(queryboxId){
         });
 
         $('#'+id+ ' button.plus').click(function(){
+            var newId = lax.addSubquery();
             var querytemplate = $("[type='html/querybox']").html();
-            var querybox = new Querybox(id);
-            $($.render(querytemplate)).insertBefore($('#tagcloud'));
+            $($.render(querytemplate, {id:newId})).insertBefore($('#tagcloud'));
+            var querybox = new Querybox(newId);
             querybox.render();
             querybox.searchBoxListeners();
         });
 
     };
-
+    /*
     lax.on("querychange", function(){
         this.render();
     }.bind(this));
-
+    */
     return this;
 }
 

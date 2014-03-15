@@ -4,6 +4,7 @@
 (function() { 'use strict';
 
   window.lax = new Laxaelv();
+  //lax.initDB();
   window.router = new Router();
 
   var resultView = new ResultView();
@@ -96,13 +97,18 @@
   });
 
   lax.on("detailrendering", function(){
-    console.log('detailchange event');
+    console.log('detailrendering event');
     //DetailOverlay.render();
     renderDetailView();
     renderRHS();
     //updateCounter();
   });
 
-  lax.initDB();
+  lax.on("searchrendering", function(){
+    console.log('searchrendering event');
+    renderImages();
+    renderRHS();
+    updateCounter();
+  });
 
 })();

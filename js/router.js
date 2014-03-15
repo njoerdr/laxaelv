@@ -44,7 +44,8 @@ function Router(){
     this.searchTags = function(values){
         //lax.deactivateEditMode();
         //lax.deactivateDetailMode();
-        lax.addTagsToQuery(values);
+        lax.triggerSearch(values);
+        //lax.addTagsToQuery(values);
     };
 
 
@@ -77,6 +78,7 @@ function Router(){
             }
         });
         //if(tags.length>0) path = path.substring(0, path.length -1);
+        console.log('our new path '+path);
         $.route(path);
     };
 
