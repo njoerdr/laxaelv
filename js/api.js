@@ -311,6 +311,7 @@ function Laxaelv() {
     var tag = tag.toLocaleLowerCase().valueOf();
     query[0].push(tag);
     self.setQueryFocus(0);
+    detailMode = false;
     self.searchString = "";
     self.trigger("querychange");
   };

@@ -57,7 +57,7 @@ var TagFactory = {
 			var tagtext = $(this).text();
 			tagtext = tagtext.slice(0, tagtext.length-1);
 			lax.setTagAsQuery(tagtext);
-			lax.deactivateDetailMode();
+			//lax.deactivateDetailMode();
 		};
 	},
 	addDraggabillity:function(tag) {
