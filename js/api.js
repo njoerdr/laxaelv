@@ -116,6 +116,8 @@ function Laxaelv() {
   };
 
   self.getTags = function() {
+    if(!query[queryfocus])
+      queryfocus = query.length - 1;
     if(!tagcache[queryfocus]) 
       tagcache[queryfocus] = db.getCommonTags(db.getImages(query[queryfocus]));
     var tags = tagcache[queryfocus].slice();
