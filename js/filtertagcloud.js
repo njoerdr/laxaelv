@@ -2,6 +2,8 @@
 
 function FilterTagcloud(){
 
+    var template = $("[type='html/empty']").html();
+
     this.render = function(){
         var tagcloudview = $("#tagcloud");
         tagcloudview.empty();
@@ -11,6 +13,10 @@ function FilterTagcloud(){
             //TagFactory.unbindAll(tag);
             TagFactory.addToQueryListener(tag);
         });
+        
+        if(tags.length === 0) {
+            $($.render(template)).appendTo(tagcloudview);
+        }
 
         var type = lax.getTypeMode();
         $('.tab').each(function(){

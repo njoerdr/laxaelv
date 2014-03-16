@@ -444,6 +444,17 @@ div#searchswitch {
 	width: 100%;
 }
 
+.info {
+	text-align: center;
+	opacity: 0.7;
+}
+
+.info:before {
+	font-family: 'fontello';
+	content: '\e81e';
+	padding-right: 0.5em;
+}
+
 .tab{
 	z-index: 99;
 	margin-top: -1px;
@@ -550,7 +561,7 @@ $dark_bg_edit: #444;
 .editmode{
 	background-color: $bright_bg_edit;
 	color: #ffffff;
-	span{
+	span {
 		background-color: #000000;
 		color: #FFFFFF;
 	}
