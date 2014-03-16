@@ -76,8 +76,6 @@ function Router(){
                 });
             }
         });
-        //if(tags.length>0) path = path.substring(0, path.length -1);
-        console.log('our new path '+path);
         $.route(path);
     };
 

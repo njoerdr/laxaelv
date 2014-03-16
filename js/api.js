@@ -171,7 +171,7 @@ function Laxaelv() {
   self.addSubquery = function() {
     queryfocus = query.length;
     query.push([]);
-    tagcache[queryfocus] = undefined;
+    self.resetTagCache[queryfocus];
     self.trigger("typechange");
     return queryfocus;
   };
@@ -300,14 +300,17 @@ function Laxaelv() {
   self.addTagToQuery = function(tag){
     var tag = tag.toLocaleLowerCase().valueOf();
     query[queryfocus].push(tag);
+    self.resetTagCache(queryfocus);
     self.searchString = "";
     self.trigger("querychange");
   };
 
   self.setTagAsQuery = function(tag){
     query = [[]];
+    self.hardResetTagCache();
     var tag = tag.toLocaleLowerCase().valueOf();
     query[0].push(tag);
+    self.setQueryFocus(0);
     self.searchString = "";
     self.trigger("querychange");
   };
@@ -326,13 +329,20 @@ function Laxaelv() {
     self.trigger("searchrendering");
   };
 
-  self.removeTagFromQuery = function(tag, queryId){
-    query[queryfocus].splice(query[queryId].indexOf(tag), 1);
+  self.removeTagFromQuery = function(tag, queryId) {
+    if(query[queryId].length === 1) {
+      self.resetQuery(queryId);
+      return;
+    }
+    query[queryId].splice(query[queryId].indexOf(tag), 1);
+    self.resetTagCache(queryId);
     self.trigger("querychange");
   };
 
-  self.resetQuery = function(){
-    query[queryfocus] = [];
+  self.resetQuery = function(index){
+    query.splice(index, 1);
+    tagcache.splice(index, 1);
+    queryfocus = Math.max(index - 1, 0);
     self.trigger("querychange");
   };
 

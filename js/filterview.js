@@ -26,10 +26,10 @@ var FilterView = function(){
         filterTagcloud.render();
         filterTagcloud.controlListeners();
     };
-    /*
+    
     lax.on("querychange", function(){
         this.render();
     }.bind(this));
-    */
+    
     return this;
 };

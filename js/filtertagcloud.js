@@ -74,7 +74,7 @@ function Querybox(queryboxId){
             var tag = TagFactory.createTag(tagdata, querybox);
             TagFactory.addRemoveFromQueryListener(tag, queryboxId);
         });
-
+        $('.querybox').removeClass('focus');
         if(lax.hasQueryFocus(queryboxId)){
             $('#'+id+ ' .searchfield').focus();
             $('#'+id).addClass('focus');
@@ -105,6 +105,7 @@ function Querybox(queryboxId){
             e.stopImmediatePropagation();
             $('#'+id+ ' .searchfield').show();
             $('#'+id+ ' .searchfield').focus();
+            $('.querybox').removeClass('focus');
             $('#'+id).addClass('focus');
             lax.setQueryFocus(queryboxId);
         });
@@ -113,11 +114,11 @@ function Querybox(queryboxId){
             e.stopImmediatePropagation();
             $(this).html("");
             $(this).hide();
-            $('#'+id).removeClass('focus');
+            //$('#'+id).removeClass('focus');
         });
 
         $('#'+id+ ' button.clear').click(function(){
-            lax.resetQuery();
+            lax.resetQuery(queryboxId);
         });
 
         $('#'+id+ ' button.plus').click(function(){

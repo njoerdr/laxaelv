@@ -17,12 +17,15 @@ var TagFactory = {
 
 		return tag;
 	},
+	/*
 	unbindAll:function(tag) {
 		$(tag).unbind();
 		$(tag).children().first().unbind('click');
 	},
+	*/
 	addToQueryListener:function(tag) {
 	    tag.onclick = function(e) {
+	    	e.stopImmediatePropagation();
 	        var tagtext = $(this).children().first().text();
 	        lax.addTagToQuery(tagtext);
 	    };
@@ -36,6 +39,7 @@ var TagFactory = {
 	},
 	addRemoveFromQueryListener:function(tag, queryId) {
 	    tag.lastChild.onclick = function(e) {
+	    	e.stopImmediatePropagation();
 	        var tagtext = $(this).parent().children().first().text();
 	        lax.removeTagFromQuery(tagtext, queryId);
 	    };
@@ -49,6 +53,7 @@ var TagFactory = {
 	},
 	addSearchListener:function(tag) {
 		tag.onclick = function(e) {
+			e.stopImmediatePropagation();
 			var tagtext = $(this).text();
 			tagtext = tagtext.slice(0, tagtext.length-1);
 			lax.setTagAsQuery(tagtext);
