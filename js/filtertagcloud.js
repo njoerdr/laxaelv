@@ -81,6 +81,10 @@ function Querybox(queryboxId){
         } else {
             $('#'+id+ ' .searchfield').hide();
         }
+        $('button.plus').hide();
+        $('button.plus').last().show();
+        $('.querybox').removeClass('last');
+        $('.querybox').last().addClass('last');
     };
 
     this.searchBoxListeners = function(){

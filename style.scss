@@ -332,30 +332,35 @@ div#searchswitch {
 
 .querybox{
 	& > div{
+		position: relative;
 		float:left;
-		width: 315px;
+		width: 350px;
 		min-height: 30px;
+	}
+	&.last > div:first-child {
+		min-height: 60px;
 	}
 	&.focus {
 		border:thin solid #666666;
 	}
-
+	button {
+		display: inline;
+	}
 	.querycontrol{
-		width: 55px;
-		float:left;
-		& > button {
-			margin: 2px;
-			padding: 3px;
-		}
-		& > div {
-			float:right;
-			width:20px;
-		}
+		width: 30px;
 		button {
 			background-color: transparent;
 			cursor: pointer;
-			border-radius:15px;
+			border-radius: 15px;
 			color: rgb(170,170,170);
+			margin: 0;
+			padding: 2pt;
+		}
+		button.plus {
+			padding-left: 7pt;
+		}
+		button.plus:last-of-type {
+	
 		}
 		button:hover {
 			color: rgb(150,150,150);
@@ -371,21 +376,10 @@ div#searchswitch {
 			content: '\e82b';
 		}
 		button.plus:before {
-			line-height: 8pt;
-			font-size: 12pt;
+			font-size: 16pt;
 			content: '\e81a';
 		}
-		button.minus:before {
-			line-height: 8pt;
-			font-size: 12pt;
-			content: '\e81d';
-		}
 	}
-
-	button{
-		display: inline;
-	}
-
 }
 
 
