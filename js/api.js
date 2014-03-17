@@ -345,6 +345,7 @@ function Laxaelv() {
 
   self.resetQuery = function(index){
     query.splice(index, 1);
+    if(query.length === 0) query.push([]);
     tagcache.splice(index, 1);
     queryfocus = Math.max(index - 1, 0);
     self.trigger("querychange");
