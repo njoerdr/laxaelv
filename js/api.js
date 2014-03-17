@@ -283,7 +283,8 @@ function Laxaelv() {
 
     //REVIEW
     //self.trigger("change");
-    self.trigger("typechange");
+    self.trigger("querychange");
+    //self.trigger("typechange");
   };
   /*
   self.addTagToEdit = function(tag){
